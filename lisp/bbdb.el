@@ -35,7 +35,7 @@
 ;;; |  information plus state information about how you have BBDB set up.    |
 ;;;  ------------------------------------------------------------------------
 ;;;
-;;; $Id: bbdb.el,v 1.179 2002/01/06 22:07:20 waider Exp $
+;;; $Id: bbdb.el,v 1.180 2002/01/10 21:03:15 waider Exp $
 
 (require 'timezone)
 (require 'cl)
@@ -59,7 +59,7 @@
  )
 
 (defconst bbdb-version "2.33")
-(defconst bbdb-version-date "$Date: 2002/01/06 22:07:20 $")
+(defconst bbdb-version-date "$Date: 2002/01/10 21:03:15 $")
 
 ;; File format
 (defconst bbdb-file-format 6)
@@ -94,10 +94,9 @@ prompt the users on how to merge records when duplicates are detected.")
 (defmacro string> (a b) (list 'not (list 'or (list 'string= a b)
                                          (list 'string< a b))))
 
-(eval-when-compile
-  (if (fboundp 'set-keymap-prompt)
-      ()
-    (defmacro set-keymap-prompt(&rest args)())))
+(eval-and-compile
+  (or (fboundp 'set-keymap-prompt)
+      (fset 'set-keymap-prompt 'ignore)))
 
 ;; this should really be in bbdb-com
 ;;;###autoload
