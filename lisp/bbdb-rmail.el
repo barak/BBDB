@@ -19,7 +19,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-rmail.el,v 1.58 2001/03/25 20:45:57 fenk Exp $
+;; $Id: bbdb-rmail.el,v 1.59 2001/05/17 17:15:46 fenk Exp $
 ;;
 
 (eval-and-compile
@@ -125,7 +125,9 @@ displaying the record corresponding to the sender of the current message."
           (b (current-buffer)))
       (if records
           (bbdb-display-records records)
-        (bbdb-undisplay-records))
+        (bbdb-undisplay-records)
+        (if (get-buffer-window bbdb-buffer-name)
+            (delete-window (get-buffer-window bbdb-buffer-name))))
       (set-buffer b)
       records)))
 
