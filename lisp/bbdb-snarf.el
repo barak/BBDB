@@ -2,7 +2,7 @@
 
 ;;;
 ;;; Copyright (C) 1997 by John Heidemann <johnh@isi.edu>.
-;;; $Id: bbdb-snarf.el,v 1.32 2002/01/06 22:05:49 waider Exp $
+;;; $Id: bbdb-snarf.el,v 1.33 2002/01/10 21:45:59 waider Exp $
 ;;;
 ;;; This file is free software; you can redistribute it and/or modify
 ;;; it under the terms of the GNU General Public License as published
@@ -408,7 +408,7 @@ more details."
 
 
 (defcustom bbdb-extract-address-components-func
-  'bbdb-extract-address-components
+  'bbdb-rfc822-addresses
   "Function called to parse one or more email addresses.
 See bbdb-extract-address-components for an example."
   :group 'bbdb-noticing-records
@@ -615,41 +615,5 @@ version doesn't support multiple addresses."
                 addrline (substring addrline comma)
                 start 0))))
     addrs))
-
-(defun bbdb-test/bbdb-extract-address-components ()
-  "Test suite for BBDB developers internal use."
-  (let ((extr-functions '(bbdb-rfc822-addresses
-                          bbdb-extract-address-components))
-        (test-cases '(("Robert Fenk <fenk@users.sourceforge.net>"
-                       "Robert Fenk" "fenk@users.sourceforge.net")
-                      ("\"Robert Fenk, Jr\" <fenk@users.sourceforge.net>"
-                       "Robert Fenk, Jr." "fenk@users.sourceforge.net")
-                      ("\"Fenk, Robert\" <fenk@users.sourceforge.net>"
-                       "Robert Fenk" "fenk@users.sourceforge.net")
-                      ("fenk@users.sourceforge.net (Robert Fenk)"
-                       "Robert Fenk" "fenk@users.sourceforge.net")
-                      ("fenk@users.sourceforge.net (Robert Fenk, Jr)"
-                       "Robert Fenk, Jr." "fenk@users.sourceforge.net")
-                      ("Robert.Fenk@users.sourceforge.net"
-                       "Robert Fenk" "Robert.Fenk@users.sourceforge.net")))
-        (errors 0)
-        parsed)
-    (while extr-functions
-      (let ((test-cases test-cases)
-            (extr-fun (car extr-functions)))
-        (while test-cases
-          (setq parsed (funcall extr-fun (caar test-cases) t))
-          (when (not (and parsed (equal (cdar test-cases) (car parsed))))
-            (message "ERROR:%s: parsing `%S' got `%S' expected `%S'"
-                     extr-fun (caar test-cases) (car parsed) (cdar test-cases))
-            (setq errors (1+ errors)))
-          (setq test-cases (cdr test-cases))))
-      (setq extr-functions (cdr extr-functions)))
-
-    (if (> errors 0)
-        (error "There have been %d errors in bbdb-extract-address-components."
-               errors)
-      (message "There have been no errors in bbdb-extract-address-components."
-               errors))))
 
 (provide 'bbdb-snarf)
