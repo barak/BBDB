@@ -19,7 +19,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-gnus.el,v 1.74 2001/03/18 18:22:31 waider Exp $
+;; $Id: bbdb-gnus.el,v 1.75 2001/03/20 13:17:45 waider Exp $
 ;;
 
 (require 'bbdb)
@@ -145,9 +145,6 @@ the user confirms the creation."
         records cache)
     (save-excursion
       (set-buffer (get-buffer gnus-article-buffer))
-      (message ">>%s<<<<<< flags"
-               (gnus-summary-article-mark
-                (gnus-summary-article-number)))
       (if (and msg-id (not bbdb/gnus-offer-to-create))
           (setq cache (bbdb-message-cache-lookup msg-id)))
       (if cache
