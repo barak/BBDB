@@ -5,9 +5,13 @@
 @c %**end of header
 
 @c
-@c $Id: bbdb.texinfo,v 1.21 2000/03/30 11:13:59 bbdb-writer Exp $
+@c $Id: bbdb.texinfo,v 1.22 2000/04/16 12:47:00 kuepper Exp $
 @c
 @c $Log: bbdb.texinfo,v $
+@c Revision 1.22  2000/04/16 12:47:00  kuepper
+@c bbdb-print documentation
+@c Fix \bigbf
+@c
 @c Revision 1.21  2000/03/30 11:13:59  bbdb-writer
 @c Fixed xref entries per mail from gareth rees.
 @c
@@ -57,7 +61,7 @@
 @ifinfo
 This file documents the Insidious Big Brother Database
 
-This is edition $Revision: 1.21 $ of the BBDB User Manual for BBDB version 2.00.03.
+This is edition $Revision: 1.22 $ of the BBDB User Manual for BBDB version 2.00.03.
 
 Copyright (c) 1991-1994 Jamie Zawinski <jwz@@netscape.com>
 Copyright (c) 1997-1998 Matt Simmons <simmonmt@@acm.org>
@@ -66,7 +70,7 @@ Copyright (c) 1997-1998 Matt Simmons <simmonmt@@acm.org>
 @titlepage
 @title BBDB User Manual
 @subtitle A phone number and address database program for Emacs
-@subtitle Edition $Revision: 1.21 $, $Date: 2000/03/30 11:13:59 $
+@subtitle Edition $Revision: 1.22 $, $Date: 2000/04/16 12:47:00 $
 
 @author by Jamie Zawinski and Matt Simmons
 @page
@@ -75,8 +79,8 @@ Copyright @copyright{} 1991-1994 Jamie Zawinski <jwz@@netscape.com>
 Copyright @copyright{} 1997-1998 Matt Simmons <simmonmt@@acm.org>
 
 @sp 2
-This is edition $Revision: 1.21 $ of the @cite{BBDB User Manual} for BBDB
-version 2.00, $Date: 2000/03/30 11:13:59 $.@refill
+This is edition $Revision: 1.22 $ of the @cite{BBDB User Manual} for BBDB
+version 2.00, $Date: 2000/04/16 12:47:00 $.@refill
 
 @sp 2
 
@@ -2701,8 +2705,9 @@ List of TeX files to @code{\input}.  If the filenames are not absolute, the
 files must be located somewhere in the TeX input path.
 
 @item ps-fonts
-Postscript fonts will be used if the value is non-@code{nil}.  Standard TeX
-fonts will be used otherwise.  
+Postscript fonts (TimesNewRoman and Courier) will be used if the value
+is non-@code{nil}.  Standard TeX fonts (ec-fonts) will be used
+otherwise.
 
 @item font-size
 The integer point size of the font to be used.
