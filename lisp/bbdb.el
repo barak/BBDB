@@ -34,13 +34,13 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.134 2001/02/08 16:29:40 sds Exp $
+;; $Id: bbdb.el,v 1.135 2001/02/10 14:26:15 waider Exp $
 ;;
 
 (require 'timezone)
 
 (defconst bbdb-version "2.3")
-(defconst bbdb-version-date "$Date: 2001/02/08 16:29:40 $")
+(defconst bbdb-version-date "$Date: 2001/02/10 14:26:15 $")
 
 ;; File format
 (defconst bbdb-file-format 6)
@@ -1424,16 +1424,17 @@ the raw field content and return a string."
     (set-buffer b)))
 
 (defun bbdb-undisplay-records ()
-  (if (bufferp bbdb-buffer-name)
-      (save-excursion
-        (set-buffer bbdb-buffer-name)
-        (setq bbdb-showing-changed-ones nil
-              mode-line-modified nil
-              bbdb-records nil
-              buffer-read-only nil)
-        (erase-buffer)
-        (setq buffer-read-only t)
-        (set-buffer-modified-p nil))))
+  (let ((bbdb-display-buffer (get-buffer bbdb-buffer-name)))
+    (if (bufferp bbdb-display-buffer)
+        (save-excursion
+          (set-buffer bbdb-display-buffer)
+          (setq bbdb-showing-changed-ones nil
+                mode-line-modified nil
+                bbdb-records nil
+                buffer-read-only nil)
+          (erase-buffer)
+          (setq buffer-read-only t)
+          (set-buffer-modified-p nil)))))
 
 ;;; Electric display stuff
 
