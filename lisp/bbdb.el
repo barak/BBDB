@@ -35,7 +35,7 @@
 ;;; |  information plus state information about how you have BBDB set up.    |
 ;;;  ------------------------------------------------------------------------
 ;;;
-;;; $Id: bbdb.el,v 1.185 2002/01/22 12:32:36 fenk Exp $
+;;; $Id: bbdb.el,v 1.186 2002/01/22 12:53:21 fenk Exp $
 
 (require 'timezone)
 (require 'cl)
@@ -51,6 +51,7 @@
  (autoload 'bbdb-unmigrate-record "bbdb-migrate")
  (autoload 'bbdb-redisplay-records "bbdb-com")
  (autoload 'bbdb-create-internal "bbdb-com")
+ (autoload 'bbdb-append-records-p "bbdb-com")
  (autoload 'y-or-n-p-with-timeout "timer")
  (autoload 'mail-position-on-field "sendmail")
  ;; autoload doesn't work for these
@@ -59,7 +60,7 @@
  )
 
 (defconst bbdb-version "2.35")
-(defconst bbdb-version-date "$Date: 2002/01/22 12:32:36 $")
+(defconst bbdb-version-date "$Date: 2002/01/22 12:53:21 $")
 
 (defcustom bbdb-gui (not (null window-system))
   "*Should the *BBDB* buffer be fontified?
