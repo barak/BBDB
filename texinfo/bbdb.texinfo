@@ -5,9 +5,12 @@
 @c %**end of header
 
 @c
-@c $Id: bbdb.texinfo,v 1.31 2000/09/12 10:43:00 waider Exp $
+@c $Id: bbdb.texinfo,v 1.32 2000/11/07 12:55:39 waider Exp $
 @c
 @c $Log: bbdb.texinfo,v $
+@c Revision 1.32  2000/11/07 12:55:39  waider
+@c Doc fix (Martin Buchholz)
+@c
 @c Revision 1.31  2000/09/12 10:43:00  waider
 @c Added "BBDB Development Team" to the list at the start.
 @c Fixed 'missing node' problem with older versions of makeinfo.
@@ -70,7 +73,7 @@
 
 This file documents the Insidious Big Brother Database
 
-This is edition $Revision: 1.31 $ of the BBDB User Manual for BBDB 
+This is edition $Revision: 1.32 $ of the BBDB User Manual for BBDB 
 version 2.2.
 
 Copyright (c) 1991-1994 Jamie Zawinski <jwz@@netscape.com>
@@ -83,7 +86,7 @@ Copyright (c) 2000 The BBDB Development Team
 @titlepage
 @title BBDB User Manual
 @subtitle A phone number and address database program for Emacs
-@subtitle Edition $Revision: 1.31 $, $Date: 2000/09/12 10:43:00 $
+@subtitle Edition $Revision: 1.32 $, $Date: 2000/11/07 12:55:39 $
 
 @author by Jamie Zawinski and Matt Simmons
 @page
@@ -94,8 +97,8 @@ Copyright @copyright{} 1997-1999 Matt Simmons <simmonmt@@acm.org>
 Copyright @copyright{} 2000 The BBDB Development Team
 
 @sp 2
-This is edition $Revision: 1.31 $ of the @cite{BBDB User Manual} for BBDB
-version 2.2, $Date: 2000/09/12 10:43:00 $.@refill
+This is edition $Revision: 1.32 $ of the @cite{BBDB User Manual} for BBDB
+version 2.2, $Date: 2000/11/07 12:55:39 $.@refill
 
 @sp 2
 
@@ -1090,7 +1093,7 @@ in the Gnus Summary Buffer.  For usage details, see @ref{Gnus Summary Buffer}.
 The value of this field is used in place of the @code{name} field when
 printing the database using @code{bbdb-print}.  @xref{bbdb-print}.
 @item www
-This field contains the URL assocated with the @b{BBDB} record.  Common uses
+This field contains the URL associated with the @b{BBDB} record.  Common uses
 are with @code{bbdb-snarf} (@pxref{bbdb-snarf}) and the @b{BBDB}/Web Browser
 functionality (for initialization details, see @ref{Web Browser Prep}.  For
 usage details, see @ref{Using Web Browsers}).
