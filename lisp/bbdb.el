@@ -35,7 +35,7 @@
 ;;; |  information plus state information about how you have BBDB set up.    |
 ;;;  ------------------------------------------------------------------------
 ;;;
-;;; $Id: bbdb.el,v 1.202 2003/03/07 22:13:57 fenk Exp $
+;;; $Id: bbdb.el,v 1.203 2003/03/07 23:25:51 fenk Exp $
 
 (require 'timezone)
 (eval-when-compile (require 'cl))
@@ -62,7 +62,7 @@
  )
 
 (defconst bbdb-version "2.35")
-(defconst bbdb-version-date "$Date: 2003/03/07 22:13:57 $")
+(defconst bbdb-version-date "$Date: 2003/03/07 23:25:51 $")
 
 (defcustom bbdb-gui (if (fboundp 'display-color-p) ; Emacs 21
             (display-color-p)
@@ -1763,6 +1763,7 @@ multi-line layout."
   (let ((first (car (car records))))
     (save-excursion
       (display-buffer (get-buffer-create bbdb-buffer-name))
+      (bbdb-pop-up-bbdb-buffer)
       (set-buffer bbdb-buffer-name)
 
       ;; If append is unset, clear the buffer.
@@ -3046,8 +3047,8 @@ return them."
   ;; Now, do the hook run. Note, if you mess up, it's possible that
   ;; BBDB will get stuck here oscillating between various definitions
   ;; of the canonical address.
-  (while (not (eq net (setq net (run-hook-with-args
-                                 'bbdb-canonicalize-net-hook net)))))
+  (while (not (equal net (setq net (run-hook-with-args
+                                    'bbdb-canonicalize-net-hook net)))))
 
   net)
 
