@@ -32,7 +32,7 @@
 ;;; Read the docstrings; read the texinfo file.
 
 ;;
-;; $Id: bbdb-hooks.el,v 1.74 2003/03/13 21:55:58 fenk Exp $
+;; $Id: bbdb-hooks.el,v 1.75 2003/03/13 22:31:49 fenk Exp $
 ;;
 
 (require 'bbdb)
@@ -104,10 +104,6 @@ message.  This will not necessarily be in the current buffer."
         ((memq major-mode '(rmail-mode rmail-summary-mode))
          (if (and (boundp 'rmail-buffer) rmail-buffer)
              (set-buffer rmail-buffer))
-         (point-min-marker))
-        ((memq major-mode
-               '(gnus-Group-mode gnus-Subject-mode gnus-Article-mode))
-         (set-buffer gnus-article-buffer)
          (point-min-marker))
         ;; MH-E clause added by knabe.
         ((eq major-mode 'mh-folder-mode)
