@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.95 2001/02/07 12:14:16 fenk Exp $
+;; $Id: bbdb-com.el,v 1.96 2001/02/07 21:41:40 waider Exp $
 ;;
 
 (require 'bbdb)
@@ -2032,7 +2032,7 @@ Completion behaviour can be controlled with `bbdb-completion-type'."
      ((null completion)
       (bbdb-complete-name-cleanup)
       (if bbdb-expand-mail-aliases ;; maybe check for mail alias
-          (expand-abbrev)
+          (or (expand-abbrev) (ding))
         (ding)))
 
       ;; Perfect match...
