@@ -1,7 +1,7 @@
 # Makefile for the Insidious Big Brother Database.
 # Original Author: Jamie Zawinski (jwz@netscape.com)
 #
-# $Id: Makefile,v 1.11 2000/08/03 11:29:49 waider Exp $
+# $Id: Makefile,v 1.12 2000/08/28 15:55:12 waider Exp $
 
 # this is lovely, isn't it?  Surprisingly enough, it seems to work...
 VM	= -eval '(progn (if (not (string-match "$(VMDIR)" ""))            \
@@ -68,6 +68,7 @@ bbdb-autoloads.el: $(DEPSRCS)
 	@echo "" > $@;
 	$(EMACS) -batch -q -l autoload \
 		--eval '(setq generated-autoload-file "'`pwd`'/$@")' \
+		--eval "(if (featurep 'xemacs) (delete-file generated-autoload-file))" \
 		--eval '(setq make-backup-files nil)' \
 		--eval '(setq autoload-package-name "bbdb")' \
 		-f batch-update-autoloads `pwd`
