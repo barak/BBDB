@@ -19,7 +19,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-vm.el,v 1.77 2001/02/01 12:03:25 fenk Exp $
+;; $Id: bbdb-vm.el,v 1.78 2001/02/07 21:35:36 waider Exp $
 ;;
 
 (require 'cl)
@@ -342,7 +342,7 @@ configuration of what is being displayed."
         ;; Always update the records; if there are no records, empty the
         ;; BBDB window. This should be generic, not VM-specific.
         (bbdb-display-records records))
-      (when (not records) 
+      (when (not records)
         (bbdb-undisplay-records)
         (if (get-buffer-window bbdb-buffer-name)
             (delete-window (get-buffer-window bbdb-buffer-name))))
@@ -350,7 +350,7 @@ configuration of what is being displayed."
       ;; Without the following, VM's summary buffer tends to get upset
       ;; and stuck in a loop. This may well be an Emacs bug; it goes
       ;; away if you try to (debug) it.
-      (sit-for 0)
+      (if (vm-fsfemacs-p) (sit-for 0))
       )))
 
 
