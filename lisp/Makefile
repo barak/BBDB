@@ -1,7 +1,7 @@
 # Makefile for the Insidious Big Brother Database.
 # Original Author: Jamie Zawinski (jwz@netscape.com)
 #
-# $Id: Makefile,v 1.12 2000/08/28 15:55:12 waider Exp $
+# $Id: Makefile,v 1.13 2000/10/15 17:22:22 waider Exp $
 
 # this is lovely, isn't it?  Surprisingly enough, it seems to work...
 VM	= -eval '(progn (if (not (string-match "$(VMDIR)" ""))            \
@@ -107,7 +107,7 @@ bbdb-vm.elc:	bbdb.elc bbdb-vm.el
 		-f batch-byte-compile $(@:.elc=.el)
 
 bbdb-srv.elc:   bbdb.elc bbdb-srv.el
-	$(EMACS) -batch -q $(PUSHPATH) -l ./bbdb.elc -eval '(if (and (locate-library "gnuserv") (locate-library "itimer")) (byte-compile-file "bbdb-srv.el") (message "Optional package bbdb-srv skipped - gnuserv not found"))'
+	$(EMACS) -batch -q $(PUSHPATH) -l ./bbdb.elc -eval '(or (fboundp (quote define-obsolete-variable-alias)) (if (locate-library "gnuserv-compat") (load-library "gnuserv-compat"))) (if (and (locate-library "gnuserv") (locate-library "itimer")) (byte-compile-file "bbdb-srv.el") (message "Optional package bbdb-srv skipped - gnuserv not found"))'
 
 bbdb-reportmail.elc: bbdb.elc bbdb-reportmail.el
 	$(EMACS) -batch -q $(PUSHPATH) -l ./bbdb.elc -eval '(if (locate-library "reportmail") (byte-compile-file "bbdb-reportmail.el") (message "Optional package bbdb-reportmail skipped - reportmail not found"))'
