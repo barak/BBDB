@@ -5,9 +5,12 @@
 @c %**end of header
 
 @c
-@c $Id: bbdb.texinfo,v 1.19 1998/11/02 07:08:41 simmonmt Exp $
+@c $Id: bbdb.texinfo,v 1.20 1998/11/02 07:17:36 simmonmt Exp $
 @c
 @c $Log: bbdb.texinfo,v $
+@c Revision 1.20  1998/11/02 07:17:36  simmonmt
+@c Correct escaping of mailing list address
+@c
 @c Revision 1.19  1998/11/02 07:08:41  simmonmt
 @c Change mailing list address
 @c
@@ -51,7 +54,7 @@
 @ifinfo
 This file documents the Insidious Big Brother Database
 
-This is edition $Revision: 1.19 $ of the BBDB User Manual for BBDB version 2.00.03.
+This is edition $Revision: 1.20 $ of the BBDB User Manual for BBDB version 2.00.03.
 
 Copyright (c) 1991-1994 Jamie Zawinski <jwz@@netscape.com>
 Copyright (c) 1997-1998 Matt Simmons <simmonmt@@acm.org>
@@ -60,7 +63,7 @@ Copyright (c) 1997-1998 Matt Simmons <simmonmt@@acm.org>
 @titlepage
 @title BBDB User Manual
 @subtitle A phone number and address database program for Emacs
-@subtitle Edition $Revision: 1.19 $, $Date: 1998/11/02 07:08:41 $
+@subtitle Edition $Revision: 1.20 $, $Date: 1998/11/02 07:17:36 $
 
 @author by Jamie Zawinski and Matt Simmons
 @page
@@ -69,8 +72,8 @@ Copyright @copyright{} 1991-1994 Jamie Zawinski <jwz@@netscape.com>
 Copyright @copyright{} 1997-1998 Matt Simmons <simmonmt@@acm.org>
 
 @sp 2
-This is edition $Revision: 1.19 $ of the @cite{BBDB User Manual} for BBDB
-version 2.00, $Date: 1998/11/02 07:08:41 $.@refill
+This is edition $Revision: 1.20 $ of the @cite{BBDB User Manual} for BBDB
+version 2.00, $Date: 1998/11/02 07:17:36 $.@refill
 
 @sp 2
 
@@ -3223,11 +3226,11 @@ where @var{NAME} is the symbol for the name of the note, and
 @section Mailing Lists
 
 There are two mailing lists for the @b{BBDB}.  The first is
-@code{bbdb-announce@xemacs.org}, and is used for new release announcements, and as a
-result has very low traffic.  To subscribe to @code{bbdb-announce@xemacs.org}, send mail
-to @code{bbdb-announce-request@xemacs.org} with @samp{subscribe} as the subject.
+@code{bbdb-announce@@xemacs.org}, and is used for new release announcements, and as a
+result has very low traffic.  To subscribe to @code{bbdb-announce@@xemacs.org}, send mail
+to @code{bbdb-announce-request@@xemacs.org} with @samp{subscribe} as the subject.
 
-The second mailing list, @code{bbdb-info@xemacs.org}, is gets moderate traffic, and is
+The second mailing list, @code{bbdb-info@@xemacs.org}, is gets moderate traffic, and is
 intended for the discussion and distribution of development versions of the
 @b{BBDB}.  Users of development versions of the @b{BBDB} should be subscribed
 to this list.  It is to this list that bugs should be reported.  @xref{Known
