@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.139 2002/01/29 09:37:42 fenk Exp $
+;; $Id: bbdb-com.el,v 1.140 2002/01/29 10:01:33 fenk Exp $
 ;;
 
 (require 'bbdb)
@@ -2518,9 +2518,10 @@ of all of those people."
                                               bbdb-define-all-aliases-field)
                          ","))
         (if (not bbdb-silent-running)
-            (bbdb-warn (concat "record \"" (bbdb-record-name record)
-                               " (" (mapconcat 'identidy aliases ", ")
-                               ")\" unhas network addresses, but an alias!")))
+            (bbdb-warn "record %S has no network address, but the aliases: %s"
+                        (bbdb-record-name record)
+                        (bbdb-record-getprop record
+                                             bbdb-define-all-aliases-field)))
         (setq aliases nil))
       
       (while aliases
