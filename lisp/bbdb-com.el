@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.77 2000/07/20 21:40:40 sds Exp $
+;; $Id: bbdb-com.el,v 1.78 2000/07/24 16:16:13 sds Exp $
 ;;
 
 (require 'bbdb)
@@ -1519,6 +1519,7 @@ weights more than 100 will be in the end."
   :group 'bbdb-noticing-records
   :type 'list)
 
+;;;###autoload
 (defun bbdb-sort-notes (rec)
   "Sort the notes in the record according to `bbdb-notes-sort-order'.
 Can be used in `bbdb-change-hook'."
@@ -1527,6 +1528,7 @@ Can be used in `bbdb-change-hook'."
      rec (sort (bbdb-record-raw-notes rec)
 	       (lambda (aa bb) (< (kk aa) (kk bb)))))))
 
+;;;###autoload
 (defun bbdb-sort-phones (rec)
   "Sort the phones in the record according to the location.
 Can be used in `bbdb-change-hook'."
@@ -1534,6 +1536,7 @@ Can be used in `bbdb-change-hook'."
    rec (sort (bbdb-record-phones rec)
 	     (lambda (xx yy) (string< (aref xx 0) (aref yy 0))))))
 
+;;;###autoload
 (defun bbdb-sort-addresses (rec)
   "Sort the addresses in the record according to the location.
 Can be used in `bbdb-change-hook'."
