@@ -2,7 +2,7 @@
 
 ;;;
 ;;; Copyright (C) 1997 by John Heidemann <johnh@isi.edu>.
-;;; $Id: bbdb-snarf.el,v 1.40 2004/03/22 15:51:55 waider Exp $
+;;; $Id: bbdb-snarf.el,v 1.41 2004/03/22 21:05:48 waider Exp $
 ;;;
 ;;; This file is free software; you can redistribute it and/or modify
 ;;; it under the terms of the GNU General Public License as published
@@ -48,8 +48,8 @@
 (defvar bbdb-snarf-zip-regexp
   (concat
    "\\<"
-   digit digit digit digit digit
-   "\\(-" digit digit digit digit "\\)?"
+   bbdb-digit bbdb-digit bbdb-digit bbdb-digit bbdb-digit
+   "\\(-" bbdb-digit bbdb-digit bbdb-digit bbdb-digit "\\)?"
    "\\>$")
   "regexp matching zip.")
 
