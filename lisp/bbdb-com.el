@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.144 2002/03/11 20:55:58 waider Exp $
+;; $Id: bbdb-com.el,v 1.145 2002/03/12 17:40:08 fenk Exp $
 ;;
 
 (require 'bbdb)
@@ -1137,7 +1137,9 @@ function in `bbdb-address-editing-function'."
                                                 (bbdb-label-completion-list
                                                  "addresses"))))))
     (bbdb-address-set-location addr loc))
-  (funcall bbdb-address-editing-function addr))
+  (if current-prefix-arg
+      (bbdb-address-edit-default addr)
+    (funcall bbdb-address-editing-function addr)))
 
 (defun bbdb-record-edit-phone (phone-number &optional location)
   (let ((newl (or location
@@ -2433,7 +2435,8 @@ Completion behaviour can be controlled with `bbdb-completion-type'."
                                        '(primary primary-or-name))
                                (member (intern-soft (downcase net) ht)
                                        all-the-completions))
-                          (setq nets nil))
+                          (setq nets nil)
+                          t)
                          ;; name
                          ((and name (member bbdb-completion-type
                                             '(nil name primary-or-name))
@@ -2453,7 +2456,8 @@ Completion behaviour can be controlled with `bbdb-completion-type'."
                                (let ((cname (symbol-name sym)))
                                  (or (string= cname name)
                                      (member cname akas))))
-                          (setq nets nil))
+                          (setq nets nil)
+                          t)
                          )
                     (setq dwim-completions
                           (cons (bbdb-dwim-net-address rec net)
