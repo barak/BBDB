@@ -34,13 +34,13 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.145 2001/02/21 11:40:42 waider Exp $
+;; $Id: bbdb.el,v 1.146 2001/02/21 16:42:51 sds Exp $
 ;;
 
 (require 'timezone)
 
 (defconst bbdb-version "2.3")
-(defconst bbdb-version-date "$Date: 2001/02/21 11:40:42 $")
+(defconst bbdb-version-date "$Date: 2001/02/21 16:42:51 $")
 
 ;; File format
 (defconst bbdb-file-format 6)
@@ -3116,9 +3116,16 @@ passed as arguments to initiate the appropriate insinuations.
   (beep 1)
   (apply 'message args))
 
-;; Hook in GUI hacks
-(or (eq window-system nil)
-    (add-hook 'bbdb-list-hook 'bbdb-fontify-buffer))
+(defcustom bbdb-gui (not (null window-system))
+  "*Should the *BBDB* buffer be fontified?
+This variable has no effect if set outside of customize."
+  :group 'bbdb
+  :type 'boolean
+  :set (lambda (symb val)
+         (set symb val)
+         (if val
+             (add-hook 'bbdb-list-hook 'bbdb-fontify-buffer)
+             (remove-hook 'bbdb-list-hook 'bbdb-fontify-buffer))))
 
 (provide 'bbdb)  ; provide before loading things which might require
 
