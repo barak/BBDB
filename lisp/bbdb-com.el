@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.109 2001/05/21 10:34:00 fenk Exp $
+;; $Id: bbdb-com.el,v 1.110 2001/05/21 11:34:25 fenk Exp $
 ;;
 
 (require 'bbdb)
@@ -2916,7 +2916,7 @@ C-g again it will stop scanning."
   
   (let ((bbdb-records (bbdb-records))
         (processed-addresses 0)
-        (bbdb-offer-to-create (or offer-to-create (eq 'promt auto-create-p)))
+        (bbdb-offer-to-create (or offer-to-create (eq 'prompt auto-create-p)))
         (bbdb-update-records-mode 
          (if offer-to-create 'annotating
            (if (listp bbdb-update-records-mode)
