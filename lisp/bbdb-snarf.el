@@ -2,7 +2,7 @@
 
 ;;;
 ;;; Copyright (C) 1997 by John Heidemann <johnh@isi.edu>.
-;;; $Id: bbdb-snarf.el,v 1.39 2004/02/01 11:30:48 waider Exp $
+;;; $Id: bbdb-snarf.el,v 1.40 2004/03/22 15:51:55 waider Exp $
 ;;;
 ;;; This file is free software; you can redistribute it and/or modify
 ;;; it under the terms of the GNU General Public License as published
@@ -37,7 +37,7 @@
 (require 'rfc822)
 (require 'mail-extr)
 
-(defconst digit "[0-9]")
+(defconst bbdb-digit "[0-9]")
 (defvar bbdb-snarf-phone-regexp
   (concat
    "\\(([2-9][0-9][0-9])[-. ]?\\|[2-9][0-9][0-9][-. ]\\)?"
