@@ -1,6 +1,11 @@
-$Id: TODO,v 1.57 1997/12/01 05:24:06 simmonmt Exp $
+$Id: TODO,v 1.58 1998/01/06 06:55:54 simmonmt Exp $
 
-Fix gnus scoring so it rebuilds when gnus-score disappears
+* Fix gnus scoring so it rebuilds when gnus-score disappears
+* Rewrite bbdb-compare-records with backquote
+* Keyword arguments for bbdb-initialize
+* Trim auto-autoloads (only need bbdb-initialize?)
+* Multiline note fields
+* Rewrite bbdb-ftp
 
 Features
 ========
