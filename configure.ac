@@ -3,7 +3,7 @@ dnl configure.ac --- configuration setup for BBDB
 dnl Author:        Didier Verna <didier@xemacs.org>
 dnl Maintainer:    Didier Verna <didier@xemacs.org>, Waider <waider@waider.ie>
 dnl Created:       Tue Nov 14 18:28:52 2000
-dnl Last Revision: $Date: 2002/06/30 12:01:06 $
+dnl Last Revision: $Date: 2003/08/05 11:54:01 $
 
 dnl Copyright (C) 2000-2001 Didier Verna
 
@@ -30,7 +30,7 @@ BBDB_PRE_INIT
 AC_INIT([BBDB], [BBDB_VERSION], [bbdb-info@lists.sourceforge.net])
 
 AC_COPYRIGHT([Copyright (C) 2000-2001 Didier Verna <didier@xemacs.org>.])
-AC_REVISION([$Revision: 2.6 $])
+AC_REVISION([$Revision: 2.7 $])
 
 AC_CONFIG_SRCDIR([configure.ac])
 dnl We only have install-sh right now, so it's not worth adding an aux
@@ -56,6 +56,7 @@ AC_PROG_MAKE_SET
 AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PATH_PROG(RM, rm, /bin/rm)
+AC_PATH_PROG(GREP, grep, /bin/grep)
 
 dnl ah ah ah.
 AC_MSG_CHECKING([for my keys])
@@ -131,6 +132,17 @@ dnl then make it 'quiet'.
 if test "${RM}" = "/bin/rm" -o "${RM}" = "/usr/bin/rm"; then
   RM="${RM} -f"
 fi
+
+dnl More Hacky. Figure out the correct way to get contextual grep.
+dnl FIXME this should only be switched on for developers since it's
+dnl only required by the test stuff.
+if ${GREP} -C foo configure.ac > /dev/null 2>&1; then
+   GREPCONTEXT="-C"
+else
+   GREPCONTEXT="-C5"
+fi
+
+AC_SUBST(GREPCONTEXT)
 
 AC_OUTPUT
 
