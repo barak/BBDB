@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.171 2004/10/13 13:17:34 waider Exp $
+;; $Id: bbdb-com.el,v 1.172 2004/11/09 11:17:28 waider Exp $
 ;;
 
 (require 'bbdb)
@@ -2218,8 +2218,11 @@ completion with."
   (if bbdb-complete-name-saved-window-config
       (progn
         (if (get-buffer-window "*Completions*")
-            (set-window-configuration
-             bbdb-complete-name-saved-window-config))
+            (progn
+              (set-window-configuration
+               bbdb-complete-name-saved-window-config)
+              (bury-buffer "*Completions*"))
+          )
         (setq bbdb-complete-name-saved-window-config nil))))
 
 (defun bbdb-display-completion-list (list &optional callback data)
