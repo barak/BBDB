@@ -19,7 +19,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-gnus.el,v 1.80 2001/03/30 07:46:14 waider Exp $
+;; $Id: bbdb-gnus.el,v 1.81 2001/05/17 17:12:55 fenk Exp $
 ;;
 
 (require 'bbdb)
@@ -107,9 +107,9 @@ the right net.
 The default is to annotate only new messages."
   :group 'bbdb-mua-specific-gnus
   :type '(choice (const :tag "annotating all messages"
-                        'annotating)
+                        annotating)
                  (const :tag "annotating no messages"
-                        'searching)
+                        searching)
                  (const :tag "annotating only new messages"
                         (if (equal ""
                                    (gnus-summary-article-mark
@@ -133,9 +133,16 @@ the user confirms the creation."
 (defun bbdb/gnus-update-records (&optional offer-to-create)
   "Return the records corresponding to the current GNUS message, creating
 or modifying it as necessary.  A record will be created if
-bbdb/news-auto-create-p is non-nil, or if OFFER-TO-CREATE is true and
-the user confirms the creation."
-  (let ((bbdb-update-records-mode (or bbdb/gnus-update-records-mode
+bbdb/news-auto-create-p is non-nil or if OFFER-TO-CREATE is true
+and the user confirms the creation.
+
+The variable `bbdb/gnus-update-records-mode' controls what actions 
+are performed and it might override `bbdb-update-records-mode'.
+
+When hitting C-g once you will not be asked anymore for new people listed
+in this message, but it will search only for existing records.  When hitting
+C-g again it will stop scanning."
+(let ((bbdb-update-records-mode (or bbdb/gnus-update-records-mode
                                       bbdb-update-records-mode))
         (bbdb/gnus-offer-to-create offer-to-create)
         ;; here we may distiguish between different type of messages
