@@ -1,3 +1,221 @@
+Mon Dec  1 09:00:12 1997  Matt Simmons  <simmonmt@acm.org>
+
+	* lisp/bbdb.el: BBDB 1.57Aunoff released
+	* texinfo/bbdb.texinfo: Documented new startup procedure
+	* INSTALL: Documented new startup procedure
+
+Sun Nov 30 23:26:21 1997  Matt Simmons  <simmonmt@acm.org>
+
+	* lisp/bbdb.el: BBDB 1.57unoff released
+
+Sun Nov 30 22:47:04 1997  <sshteingold@cctrading.com>
+
+	* lisp/bbdb-hooks.el (bbdb-time-string): Uses format string now
+	* lisp/bbdb-com.el (bbdb-display-some): Added
+	* lisp/bbdb-com.el (bbdb-kill-older): Created
+	* lisp/bbdb-com.el (bbdb-timestamp-older): Created
+	* lisp/bbdb-com.el (bbdb-timestamp-newer): Created
+	* lisp/bbdb-com.el (bbdb-creation-older): Created
+	* lisp/bbdb-com.el (bbdb-creation-newer): Created
+
+Sun Nov 30 22:44:42 1997  Matt Simmons  <simmonmt@acm.org>
+
+	* lisp/auto-autoloads.el: Autoloads for date functions
+	* lisp/bbdb-com.el (bbdb-complete-clicked-name): Make 19.34 happy
+	* lisp/bbdb-com.el (bbdb-compare-records): Created
+	* lisp/bbdb-com.el: Customized variables
+	* lisp/bbdb-gnus.el: Customized variables
+	* lisp/bbdb-hooks.el: Customized variables
+	* lisp/bbdb.el: Customized variables
+	* lisp/bbdb.el: Added timezone require to support date functions
+	* lisp/bbdb.el: Added migration functions, changed database version
+	* lisp/bbdb.el: Added definitions for utility functions that don't 
+	                appear in all Emacsen (in the case of string>, in none)
+	* lisp/bbdb.el (defstruct): Added documentation
+	* lisp/bbdb.el (bbdb-format-record): Can now define printing
+	                                     functions for each note field
+		                             (bbdb-format-record-fieldname)
+	* lisp/bbdb.el (bbdb-copy-thing): Created
+	* lisp/bbdb.el (bbdb-initialize): Created - Use it to initialize
+	* texinfo/Makefile (clean): Changed since we now distribute *.info*
+	* texinfo/Makefile (reallyclean): clean + removes *.info*
+	* texinfo/bbdb.texinfo: Removed `BBDB database' per jwz, added
+	                        prereq section, more special fields, some
+				internals.
+	* INSTALL: Created
+				
+Thu Oct 30 07:06:15 1997  Hrvoje Niksic <hniksic@srce.hr>
+
+	* lisp/bbdb.el: Custom blob to make defcustom and defgroup
+	  transparent in non-customized Emacsen
+
+Sun Nov 30 12:03:41 1997  Soren Dayton <csdayton@cs.uchicago.edu>
+
+	* lisp/bbdb-print.el (bbdb-print-tex-quote): Escape tildes properly
+
+Tue Nov 10 20:10:53 1997 Jens-Ulrik Holger Petersen <petersen@kurims.kyoto-u.ac.jp>
+
+	* lisp/bbdb-gnus.el (bbdb-insinuate-gnus): Improve output of
+	  warning messages.
+	* lisp/bbdb-gnus.el (bbdb/gnus-summary-known-poster-mark): Correct 
+	  docstring. 
+
+Sat Nov  8 17:00:21 1997  Matt Simmons  <simmonmt@acm.org>
+
+	* lisp/bbdb.el (bbdb-string-trim): Just remove 'face property.
+	* lisp/bbdb.el: Define `defvaralias' as empty function if it's not 
+	  defined.  (GNU Emacs doesn't have it)
+
+Sun Nov  2 01:32:23 1997  Matt Simmons  <simmonmt@acm.org>
+
+	* lisp/bbdb.el: BBDB 1.56unoff released 
+	* lisp/bbdb-sc.el: Added
+	* lisp/bbdb-gnus.el (bbdb-insinuate-gnus): Commented back in score 
+	  hook addition, can now set up format functions one at a time
+	  (latter based on function from Christoph Wedler)
+	* lisp/bbdb-gnus.el (bbdb/gnus-score-default-internal): Added to
+	  automagically catch changes to `bbdb/gnus-score-default'.
+	* lisp/bbdb-gnus.el (bbdb/gnus-annotate-sender): Now takes REPLACE 
+	  argument.
+	* lisp/bbdb-vm.el (bbdb/vm-annotate-sender): Ditto
+	* lisp/bbdb-mhe.el (bbdb/mh-annotate-sender): Ditto
+	* lisp/bbdb-rmail.el (bbdb/rmail-annotate-sender): Ditto
+	* lisp/auto-autoloads.el: Support for bbdb-sc, housekeeping for others.
+	* Makefile (install-pkg): Bug fix.
+	* texinfo/bbdb.texinfo: More rewriting, documentation for the
+	  Summary Buffer stuff in bbdb-gnus.el
+
+Tue Oct 28 16:08:54 1997  Christoph Wedler  <wedler@fmi.uni-passau.de>
+
+	* lisp/bbdb-gnus.el (bbdb/gnus-define-format-functions): New
+ 	  variable.
+	* lisp/bbdb-gnus.el (bbdb-insinuate-gnus): Use it.  Only define user
+	  functions the first time.  Use `bbdb-warn' instead `error'.
+	* lisp/bbdb.el (bbdb-warn): New function.  Use it.
+
+Sun Oct 26 20:47:20 1997  Matt Simmons  <simmonmt@acm.org>
+
+	* lisp/auto-autoloads.el: Remove summary buffer autoloads
+	* lisp/bbdb-gnus.el: Variable aliases for backward compatibility
+	* lisp/bbdb-gnus.el (bbdb/gnus-summary-user-format-letter): Add
+	  more descriptive documentation.
+	* lisp/bbdb-gnus.el (bbdb/gnus-summary-in-bbdb-format-letter): Added
+	* lisp/bbdb-gnus.el (bbdb/gnus-lines-and-from): Variable name change
+	* lisp/bbdb-gnus.el (bbdb/gnus-summary-author-in-bbdb): Added
+	* lisp/bbdb-gnus.el (bbdb-insinuate-gnus): Commented out score
+	  insinuation, add %ub summary line code creation
+	* lisp/bbdb.el: Remove summary buffer autoloads
+
+Sun Oct 26 00:14:36 1997  Matt Simmons  <simmonmt@acm.org>
+
+	* lisp/bbdb.el: BBDB 1.55unoff released
+	* texinfo/bbdb.texinfo: Partial rewrite
+	* lisp/bbdb.el: new autoloads.  Override bbdb-display-completion-list
+	  for XEmacs users.
+	* lisp/bbdb-w3.el (bbdb-www): Uses browse-url-browser-function
+	  instead of a manual funcall 
+	* lisp/bbdb-snarf.el (bbdb-snarf-region): Toss trailing space too
+
+Sat Oct 25 23:47:40 1997  Brian Edmonds  <edmonds@cs.ubc.ca>
+Sat Oct 25 23:47:40 1997  Matt Simmons  <simmonmt@acm.org>
+
+	* lisp/bbdb-gnus.el: Changed *everything* beginning with
+          `gnus-bbdb' to `bbdb/gnus'
+	* lisp/bbdb-gnus.el (bbdb/gnus-summary-get-author): Integrated (along
+	  with associated variables and functions)
+	* lisp/bbdb-gnus.el (bbdb/gnus-score): Integrated (along with
+	  associated variables and functions)
+	* lisp/bbdb-gnus.el (bbdb-insinuate-gnus): Activate above new
+	  features
+
+Sat Oct 25 17:54:26 1997  Marco Walther  <Marco.Walther@mch.sni.de>
+Sat Oct 25 17:54:26 1997  Matt Simmons  <simmonmt@acm.org>
+
+	* lisp/bbdb-com.el (bbdb-complete-name): Clicking on name in
+	  completion buffer now restores configuration (uses callback below)
+	* lisp/bbdb-com.el (bbdb-complete-clicked-name): Created.  See above
+	* lisp/bbdb-com.el (bbdb-display-completion-list): Wrapper 
+	* lisp/bbdb-xemacs.el (bbdb-xemacs-display-completion-list):
+	  XEmacs version of bbdb-display-completion-list, allows callbacks
+	* lisp/auto-autoloads.el: autoload for XEmacs version of
+	  bbdb-display-completion-list
+
+Mon Oct 20 18:38:28 1997  Colin Rafferty  <craffert@ml.com>
+
+	* Makefile (install-pkg): Made it install the el before the .elc.
+
+Mon Oct 20 12:15:15 1997  Christoph Wedler  <wedler@fmi.uni-passau.de>
+
+	* lisp/bbdb-xemacs.el (global-bbdb-menu-commands): Bug fix "Finger
+ 	  All Records".
+	* lisp/bbdb-xemacs.el (build-bbdb-finger-menu): Use
+	  `bbdb-record-finger-host'.
+	* lisp/bbdb-com.el (bbdb-finger): Doc string extension.
+	* texinfo/bbdb.texinfo (BBDB Mode): Add documentation for
+	  `bbdb-finger'.
+
+Tue Oct 14 20:06:38 1997  david carlton <carlton@math.mit.edu>
+
+	* Makefile (install-pkg): Fix info linking - use texinfo, not info
+
+Mon Oct 13 16:41:27 1997  Soren Dayton <csdayton@cs.uchicago.edu>
+
+	* lisp/bbdb-w3.el (bbdb-www): Use browse-url instead of funcalling
+	  contents of browse-url-browser-function.
+
+Sat Oct 11 19:19:27 1997  Matt Simmons  <simmonmt@acm.org>
+
+	* bbdb.el: BBDB 1.54unoff released
+	* lisp/Makefile: Changed VM, GNUS, and MHE definitions so they can 
+	  be blank if the packages are in load-path.  Added bbdb-snarf and 
+	  bbdb-w3.  Made bbdb-srv and bbdb-reportmail skipping messages more
+	  informative.  Added check for itimer for bbdb-srv.
+	* lisp/bbdb-w3.el (bbdb-insinuate-w3): Created from bare add-hook
+	  statement found in David's version.  Add this to w3-mode-hook
+	  (yes, that's singular, not plural)
+	* lisp/bbdb-w3.el (bbdb-www): Modified to use
+	  browse-url-browser-function instead of having two functions, one 
+	  for netscape and one for w3.
+	* lisp/bbdb-snarf.el: Fixed area code pattern to use [2-9] instead 
+	  of [0-9] for first digit.
+	* lisp/auto-autoloads.el: Autoloads for bbdb-snarf, bbdb-www,
+	  changed package dir from `bbdb-1.52' to `bbdb', autoload for
+	  bbdb-insinuate-message.
+	* lisp/bbdb.el: Added autoloads for bbdb-insinuate-message,
+	  bbdb-www, bbdb-www-grab-homepage, bbdb-insinuate-w3, bbdb-snarf.
+	* lisp/bbdb.el (bbdb-mode): Documentation for bbdb-www `w' keystroke
+	* lisp/bbdb.el (bbdb-mode-map): bbdb-www invocation
+	* lisp/bbdb.el (bbdb-split): Documented.
+	* lisp/bbdb-gnus.el (bbdb-insinuate-message): Use it.  Sets the
+	  M-t binding for message-mode.  This isn't in bbdb-insinuate-gnus 
+	  because some like to use message-mode before loading gnus.  Add
+	  it to `message-setup-hook', _not_ `message-load-hook'.
+
+Sat Oct 11 19:01:00 1997  David Carlton <carlton@math.mit.edu>
+
+	* lisp/bbdb-w3.el: Added to bbdb distribution.  I don't know who
+	  the original author is, but David mailed it to me.
+	  
+Sat Oct 11 19:00:00 1997  John Heidemann <johnh@isi.edu>
+
+	* lisp/bbdb-snarf.el: Added to bbdb distribution.  Grabs text from 
+	  paragraph around point and makes a bbdb record out of it.  See
+	  the source for docs until I get around to adding to the texinfo
+	  file.
+
+Sat Oct 11 18:50:52 1997  Kees de Bruin <kees_de_bruin@tasking.nl>
+
+	* lisp/bbdb-vm.el (bbdb/vm-alternate-full-name): make VM use the
+	  canonicalized net address instead of the default address.
+	* lisp/bbdb-com.el (bbdb-sendmail-internal): Still more
+ 	  message-mode fixes.  Default to message-mode if neither mh-e nor
+ 	  vm are in `features'.  If message-mode is to be used and it's not
+ 	  loaded, autoload it.
+
+Thu Oct  9 06:37:00 1997  Matt Simmons <simmonmt@acm.org>
+        * lisp/Makefile: Check for itimer before building bbdb-srv.
+          Complain nicely when check fails.
+
 Sun Oct  5 20:16:00 1997  Matt Simmons <simmonmt@acm.org>
 	* bbdb.el: BBDB 1.53unoff released
 
@@ -16,7 +234,7 @@ Sun Oct  5 19:51:21 1997  Jamie Zawinski <jwz@netscape.com>
 	* lisp/bbdb-srv.el (bbdb/srv-handle-headers): Make sure *BBDB* is
 	  bottommost buffer
 
-Sun Oct  5 19:51:20 1997  Christopher Kline <ckline@media.mit.edu>
+Sun Oct  5 19:51:20 1997  Seth Golub  <seth@cs.wustl.edu>
 	* utils/bbdb-areacode-split.pl: New utility
 	
 Sun Oct  5 19:51:19 1997  Matt Simmons  <simmonmt@acm.org>
@@ -46,6 +264,10 @@ Sun Sep 28 00:50:07 1997  Matt Simmons  <simmonmt@acm.org>
 	* Makefile: renamed it, removed mail-extr and mail-abbrev, did
 		  some reformatting
 
+Sun Sep 28 00:49:00 1997  Colin Rafferty <craffert@ml.com>
+
+        * auto-autoloads.el, Makefile: Use BBDB as an XEmacs package
+
 Sun Sep 28 00:03:31 1997  Jens-Ulrik Hoger Petersen <petersen@kurims.kyoto-u.ac.jp>
 
 	* bbdb-gnus.el (bbdb/gnus-update-record): Changed method for
@@ -60,7 +282,7 @@ Sat Sep 27 23:56:35 1997  Christopher Kline <ckline@mitre.org>
 Sat Sep 27 23:47:01 1997  Soren Dayton <csdayton+bbdb@cs.uchicago.edu>
 
 	* bbdb-com.el (bbdb-send-mail-internal): Allow use of message-mail
-	* bbdb.el (bbdb-send-mail-styly): Documentation change.  See above.
+	* bbdb.el (bbdb-send-mail-style): Documentation change.  See above.
 
 Sat Sep 27 23:44:43 1997  Colin Rafferty <craffert@ml.com>
 
