@@ -19,7 +19,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-vm.el,v 1.69 2000/10/27 18:38:10 fenk Exp $
+;; $Id: bbdb-vm.el,v 1.70 2000/10/30 15:09:47 fenk Exp $
 ;;
 
 (require 'cl)
@@ -178,10 +178,11 @@ C-g again it will stop scanning."
 				 processed-addresses (+ processed-addresses 1))
 			   (when (and (not (eq bbdb/vm-offer-to-create 'quit))
 				      (= 0 (% processed-addresses 5)))
-			     (display-message 'progress
-			       (format "Hit C-g to stop BBDB from %s.  %d of %d addresses processed." bbdb/vm-update-records-mode processed-addresses (length addrs)))
-			     (sit-for 0))
-			   )
+			     (let ((mess (format "Hit C-g to stop BBDB from %s.  %d of %d addresses processed." bbdb/vm-update-records-mode processed-addresses (length addrs))))
+			       (if vm-xemacs-p
+				   (display-message 'progress mess)
+				 (message mess))
+			       (sit-for 0))))
 		       (quit (cond ((eq bbdb/vm-update-records-mode
 					'annotating)
 				    (setq bbdb/vm-update-records-mode
