@@ -2,7 +2,7 @@
 
 ;;;
 ;;; Copyright (C) 1997 by John Heidemann <johnh@isi.edu>.
-;;; $Id: bbdb-snarf.el,v 1.18 2000/08/19 09:46:12 waider Exp $
+;;; $Id: bbdb-snarf.el,v 1.19 2000/09/07 16:12:24 waider Exp $
 ;;;
 ;;; This file is free software; you can redistribute it and/or modify
 ;;; it under the terms of the GNU General Public License as published
@@ -405,6 +405,7 @@ a space."
   :group 'bbdb-noticing-records
   :type 'string)
 
+;;;###autoload
 (defun bbdb-snarf-nice-real-name (str)
   "Removes unwanted characters form STR in order to get a nice full name.
 Remove any unwanted characters specifyed by `bbdb-snarf-nice-real-name-regexp',
