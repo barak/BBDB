@@ -2,7 +2,7 @@
 
 ;;;
 ;;; Copyright (C) 1997 by John Heidemann <johnh@isi.edu>.
-;;; $Id: bbdb-snarf.el,v 1.11 1999/01/25 06:20:28 simmonmt Exp $
+;;; $Id: bbdb-snarf.el,v 1.12 2000/04/05 17:00:42 bbdb-writer Exp $
 ;;;
 ;;; This file is free software; you can redistribute it and/or modify
 ;;; it under the terms of the GNU General Public License as published
@@ -136,7 +136,7 @@ more details."
     (let
 	((buf (get-buffer-create " *BBDB snarf*"))
 	 (text (buffer-substring begin end))
-	 phones nets web city state zip name address-lines 
+	 phones nets web city state zip country name address-lines 
 	 address-vector notes)
       (set-buffer buf)
       (erase-buffer)
