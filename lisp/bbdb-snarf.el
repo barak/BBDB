@@ -2,7 +2,7 @@
 
 ;;;
 ;;; Copyright (C) 1997 by John Heidemann <johnh@isi.edu>.
-;;; $Id: bbdb-snarf.el,v 1.21 2000/11/16 12:00:04 fenk Exp $
+;;; $Id: bbdb-snarf.el,v 1.22 2001/01/24 21:00:29 sds Exp $
 ;;;
 ;;; This file is free software; you can redistribute it and/or modify
 ;;; it under the terms of the GNU General Public License as published
@@ -386,18 +386,21 @@ more details."
 
 ;;----------------------------------------------------------------------------
 ;; Emacs 20.3 seems to miss the function replace-in-string?
-(unless (boundp 'replace-in-string)
-  ;; actually this is `dired-replace-in-string' slightly modified
-  (defun replace-in-string (string regexp newtext &optional literal)
-    ;; Replace REGEXP with NEWTEXT everywhere in STRING and return result.
-    ;; NEWTEXT is taken literally---no \\DIGIT escapes will be recognized.
-    (let ((result "") (start 0) mb me)
-      (while (string-match regexp string start)
-        (setq mb (match-beginning 0)
-              me (match-end 0)
-              result (concat result (substring string start mb) newtext)
-              start me))
-      (concat result (substring string start)))))
+(unless (fboundp 'replace-in-string)
+  (if (fboundp 'replace-regexp-in-string) ; defined in e21
+      (defun replace-in-string (string regexp newtext &optional literal)
+        (replace-regexp-in-string string regexp newtext nil literal))
+      ;; actually this is `dired-replace-in-string' slightly modified
+      (defun replace-in-string (string regexp newtext &optional literal)
+        ;; Replace REGEXP with NEWTEXT everywhere in STRING and return result.
+        ;; NEWTEXT is taken literally---no \\DIGIT escapes will be recognized.
+        (let ((result "") (start 0) mb me)
+          (while (string-match regexp string start)
+            (setq mb (match-beginning 0)
+                  me (match-end 0)
+                  result (concat result (substring string start mb) newtext)
+                  start me))
+          (concat result (substring string start))))))
 
 (defcustom bbdb-snarf-nice-real-name-regexp "[._,\t\n ]+"
   "*Regexp matching string which `bbdb-snarf-nice-real-name' will replace by
