@@ -35,7 +35,7 @@
 ;;; |  information plus state information about how you have BBDB set up.    |
 ;;;  ------------------------------------------------------------------------
 ;;;
-;;; $Id: bbdb.el,v 1.190 2002/03/03 22:24:02 waider Exp $
+;;; $Id: bbdb.el,v 1.191 2002/03/11 20:48:59 waider Exp $
 
 (require 'timezone)
 (require 'cl)
@@ -62,7 +62,7 @@
  )
 
 (defconst bbdb-version "2.35")
-(defconst bbdb-version-date "$Date: 2002/03/03 22:24:02 $")
+(defconst bbdb-version-date "$Date: 2002/03/11 20:48:59 $")
 
 (defcustom bbdb-gui (not (null window-system))
   "*Should the *BBDB* buffer be fontified?
@@ -3258,10 +3258,15 @@ before the record is created, otherwise it is created without confirmation
 
         (if created-p
             (bbdb-invoke-hook 'bbdb-create-hook record))
+
         (if change-p
             (bbdb-change-record record (eq change-p 'sort)))
-        (let ((inside-bbdb-notice-hook t))
-          (bbdb-invoke-hook 'bbdb-notice-hook record))
+
+        ;; only invoke bbdb-notice-hook if we actually noticed something
+        (if record
+            (let ((inside-bbdb-notice-hook t))
+              (bbdb-invoke-hook 'bbdb-notice-hook record)))
+
         record))))
 
 
