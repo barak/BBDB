@@ -19,7 +19,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-vm.el,v 1.90 2001/06/28 22:42:44 waider Exp $
+;; $Id: bbdb-vm.el,v 1.91 2001/07/07 23:19:32 waider Exp $
 ;;
 
 (eval-and-compile
@@ -51,7 +51,7 @@ The headers to search can be configured by `bbdb/vm-get-addresses-headers'."
     (while headers
       (setq header (vm-get-header-contents msg (concat (car headers) ":")))
       (when header
-        (setq adlist (bbdb-extract-address-components
+        (setq adlist (funcall bbdb-extract-address-components-func
                       (vm-decode-mime-encoded-words-in-string header)))
         (while adlist
           (setq fn (caar adlist)
