@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.64 1999/01/25 06:03:10 simmonmt Exp $
+;; $Id: bbdb-com.el,v 1.65 1999/01/25 06:08:39 simmonmt Exp $
 ;;
 
 (require 'bbdb)
@@ -220,7 +220,7 @@ be returned."
   "Regrinds the contents of the *BBDB* buffer, without scrolling.
 If possible, you should call bbdb-redisplay-one-record instead."
   (let ((p (point))
-	(m (mark)))
+	(m (condition-case condition (mark) (error nil))))
     (goto-char (window-start))
     (let ((p2 (point)))
       (bbdb-display-records-1 bbdb-records)
