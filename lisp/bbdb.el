@@ -34,13 +34,13 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.109 2000/08/11 20:53:23 sds Exp $
+;; $Id: bbdb.el,v 1.110 2000/08/18 14:06:02 fenk Exp $
 ;;
 
 (require 'timezone)
 
 (defconst bbdb-version "2.2")
-(defconst bbdb-version-date "$Date: 2000/08/11 20:53:23 $")
+(defconst bbdb-version-date "$Date: 2000/08/18 14:06:02 $")
 
 ;; File format
 (defconst bbdb-file-format 5)
@@ -2648,7 +2648,7 @@ before the record is created, otherwise it is created without confirmation
                     t)
                    (bbdb-always-add-addresses ; non-t and non-nil = never
                     nil)
-                   (t
+                   (create-p
                     (and
                      (not (equal net "???"))
                      (let ((the-first-bit
