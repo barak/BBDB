@@ -26,8 +26,8 @@
 ;;; for improvements and to Michael D. Carney  <carney@ltx-tr.com>
 ;;; for testing and feedback.
 
-;;; $Date: 2002/01/18 09:40:42 $ by $Author: waider $
-;;; $Revision: 1.14 $
+;;; $Date: 2002/01/29 09:38:26 $ by $Author: fenk $
+;;; $Revision: 1.15 $
 
 ;;; This file adds the ability to define attributions for Supercite in
 ;;; a BBDB, enables you to retrieve your standard attribution from
@@ -102,15 +102,16 @@ used to compare against citation selected by the user."
 (defun bbdb/sc-consult-attr (from)
   "Extract citing information from BBDB using sc-consult where
 FROM is user e-mail address to look for in BBDB."
-    ;; if logged in user sent this, use recipients.
-    (let ((check (if (or (null from)
-             (string-match (bbdb-user-mail-names) from))
-             (car (cdr (mail-extract-address-components
-                (or (sc-mail-field "to") from))))
-           from)))
-      (if from
-      (let ((record (bbdb-search-simple nil from)))
-        (and record (bbdb-record-getprop record bbdb/sc-attribution-field))))))
+  ;; if logged in user sent this, use recipients.
+  (let ((from (if (or (null from)
+                      (string-match (bbdb-user-mail-names) from))
+                  (car (cdr (mail-extract-address-components
+                             (or (sc-mail-field "to") from))))
+                from)))
+    (if from
+        (let ((record (bbdb-search-simple nil from)))
+          (and record
+               (bbdb-record-getprop record bbdb/sc-attribution-field))))))
 
 (defun bbdb/sc-set-attr ()
   "Add attribute to BBDB."
