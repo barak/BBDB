@@ -34,13 +34,13 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.67 1998/12/31 06:36:49 simmonmt Exp $
+;; $Id: bbdb.el,v 1.68 1998/12/31 06:39:52 simmonmt Exp $
 ;;
 
 (require 'timezone)
 
 (defconst bbdb-version "2.00.04")
-(defconst bbdb-version-date "$Date: 1998/12/31 06:36:49 $")
+(defconst bbdb-version-date "$Date: 1998/12/31 06:39:52 $")
 
 ;; File format
 (defconst bbdb-file-format 3)
@@ -2815,8 +2815,6 @@ passed as arguments to initiate the appropriate insinuations.
 (if (not (fboundp 'add-hook))
     (fset 'add-hook 'bbdb-add-hook))
 
-(run-hooks 'bbdb-load-hook)
-
 (defun bbdb-insinuate-sendmail ()
   "Call this function to hook BBDB into sendmail (that is, M-x mail)."
   (define-key mail-mode-map "\M-\t" 'bbdb-complete-name)
@@ -2824,6 +2822,8 @@ passed as arguments to initiate the appropriate insinuations.
 
 
 (provide 'bbdb)  ; provide before loading things which might require
+
+(run-hooks 'bbdb-load-hook)
 
 (defmacro safe-require (thing)
   (list 'condition-case nil (list 'require thing) '(file-error nil)))
