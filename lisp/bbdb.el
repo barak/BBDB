@@ -34,13 +34,13 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.113 2000/08/28 21:14:22 waider Exp $
+;; $Id: bbdb.el,v 1.114 2000/09/07 09:11:54 waider Exp $
 ;;
 
 (require 'timezone)
 
 (defconst bbdb-version "2.2")
-(defconst bbdb-version-date "$Date: 2000/08/28 21:14:22 $")
+(defconst bbdb-version-date "$Date: 2000/09/07 09:11:54 $")
 
 ;; File format
 (defconst bbdb-file-format 5)
@@ -84,11 +84,13 @@ prompt the users on how to merge records when duplicates are detected.")
 (eval-when-compile              ; pacify the compiler
  (defvar bbdb-address-print-formatting-alist) ; "bbdb-print"
  (defvar mail-mode-map)         ; "sendmail"
- (autoload 'widget-group-match "wid-edit")
- (autoload 'Electric-pop-up-window "electric")
- (autoload 'Electric-command-loop "electric")
- (autoload 'bbdb-snarf-nice-real-name "bbdb-snarf")
  )
+
+(autoload 'widget-group-match "wid-edit")
+(autoload 'Electric-pop-up-window "electric")
+(autoload 'Electric-command-loop "electric")
+(autoload 'bbdb-snarf-nice-real-name "bbdb-snarf")
+
 
 ;; Make custom stuff work even without customize
 ;;   Courtesy of Hrvoje Niksic <hniksic@srce.hr>
