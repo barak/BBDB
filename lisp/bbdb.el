@@ -34,13 +34,13 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.72 2000/03/30 12:17:33 bbdb-writer Exp $
+;; $Id: bbdb.el,v 1.73 2000/03/30 18:36:06 bbdb-writer Exp $
 ;;
 
 (require 'timezone)
 
 (defconst bbdb-version "2.00.06")
-(defconst bbdb-version-date "$Date: 2000/03/30 12:17:33 $")
+(defconst bbdb-version-date "$Date: 2000/03/30 18:36:06 $")
 
 ;; File format
 (defconst bbdb-file-format 3)
@@ -1994,10 +1994,10 @@ The keybindings, more precisely:
       (assoc (symbol-name fieldname) (bbdb-propnames))
       (bbdb-set-propnames (append (bbdb-propnames)
 				  (list (list (symbol-name fieldname))))))
-  (if (string= "" annotation)
-      nil
     (let ((notes (bbdb-string-trim
 		   (or (bbdb-record-getprop bbdb-record fieldname) ""))))
+    (if (or (string= "" annotation) (string-match annotation notes))
+        nil
       (bbdb-record-putprop bbdb-record fieldname
 			   (if (or replace (string= notes ""))
 			       annotation
