@@ -35,7 +35,7 @@
 ;;; |  information plus state information about how you have BBDB set up.    |
 ;;;  ------------------------------------------------------------------------
 ;;;
-;;; $Id: bbdb.el,v 1.199 2003/01/30 10:46:10 waider Exp $
+;;; $Id: bbdb.el,v 1.200 2003/01/31 03:46:39 kensanata Exp $
 
 (require 'timezone)
 (eval-when-compile (require 'cl))
@@ -62,7 +62,7 @@
  )
 
 (defconst bbdb-version "2.35")
-(defconst bbdb-version-date "$Date: 2003/01/30 10:46:10 $")
+(defconst bbdb-version-date "$Date: 2003/01/31 03:46:39 $")
 
 (defcustom bbdb-gui (if (fboundp 'display-color-p) ; Emacs 21
             (display-color-p)
@@ -3451,7 +3451,10 @@ When called interactively with a prefix argument, insert string at point."
   (bbdb-record-lessp record1 record2))
 
 (defun bbdb-resort-database ()
-  ;; only as a last resort, ha ha
+  "*Resort BBDB database as a last resort.
+This is not be needed when using BBDB itself.  It might be necessary
+after having used inferior software to add entries to the BBDB, however."
+  (interactive)
   (let* ((records (copy-sequence (bbdb-records))))
     (bbdb-with-db-buffer
      (setq bbdb-records (sort bbdb-records 'bbdb-record-lessp-fn))
