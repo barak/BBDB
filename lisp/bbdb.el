@@ -34,13 +34,13 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.131 2001/02/03 14:44:27 fenk Exp $
+;; $Id: bbdb.el,v 1.132 2001/02/05 11:18:14 fenk Exp $
 ;;
 
 (require 'timezone)
 
 (defconst bbdb-version "2.3")
-(defconst bbdb-version-date "$Date: 2001/02/03 14:44:27 $")
+(defconst bbdb-version-date "$Date: 2001/02/05 11:18:14 $")
 
 ;; File format
 (defconst bbdb-file-format 6)
@@ -1337,7 +1337,9 @@ the raw field content and return a string."
   (setq mode-line-buffer-identification
         (if (> n 0)
             (list 24
-                  (replace-in-string bbdb-buffer-name "^\\*\\|\\*$" "")
+                  (if (string-match "^\\*\\(.+\\)\\*$"  bbdb-buffer-name)
+                      (match-string 1 bbdb-buffer-name)
+                    "BBDB")
                   ": "
                   (list 10
                         (format "%d/%d" n (length (bbdb-records))))
