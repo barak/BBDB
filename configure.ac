@@ -3,7 +3,7 @@ dnl configure.ac --- configuration setup for BBDB
 dnl Author:        Didier Verna <didier@xemacs.org>
 dnl Maintainer:    Didier Verna <didier@xemacs.org>, Waider <waider@waider.ie>
 dnl Created:       Tue Nov 14 18:28:52 2000
-dnl Last Revision: $Date: 2001/11/19 23:40:19 $
+dnl Last Revision: $Date: 2002/01/18 18:11:31 $
 
 dnl Copyright (C) 2000-2001 Didier Verna
 
@@ -30,7 +30,7 @@ BBDB_PRE_INIT
 AC_INIT([BBDB], [BBDB_VERSION], [bbdb-info@lists.sourceforge.net])
 
 AC_COPYRIGHT([Copyright (C) 2000-2001 Didier Verna <didier@xemacs.org>.])
-AC_REVISION([$Revision: 2.2 $])
+AC_REVISION([$Revision: 2.3 $])
 
 AC_CONFIG_SRCDIR([configure.ac])
 dnl We only have install-sh right now, so it's not worth adding an aux
@@ -73,7 +73,6 @@ BBDB_ARG_SUBST([VMDIR],   [vm-dir],   [DIR], [set the location of VM   to DIR],
 
 # Various MTAs
 # Default RMAIL & Gnus to on
-enable_rmail=rmail
 enable_gnus=gnus
 AC_ARG_ENABLE([vm],
               AC_HELP_STRING([--enable-vm],
@@ -82,12 +81,12 @@ AC_ARG_ENABLE([vm],
 
 AC_ARG_ENABLE(rmail,
               AC_HELP_STRING([--enable-rmail],
-                             [enable RMAIL hooks [no]]),
+                             [enable RMAIL hooks [[no]]]),
               [BBDB_RMAIL=rmail], [BBDB_RMAIL=])
 
 AC_ARG_ENABLE(gnus,
 			  AC_HELP_STRING([--enable-gnus],
-                             [enable GNUS hooks [yes]]),
+                             [enable GNUS hooks [[yes]]]),
               [BBDB_GNUS=gnus], [BBDB_GNUS=])
 
 AC_ARG_ENABLE(mhe,
