@@ -5,7 +5,7 @@
 ;; Author: Kevin Davidson tkld@quadstone.com
 ;; Maintainer: Kevin Davidson tkld@quadstone.com
 ;; Created: 10 Nov 1997
-;; Version: $Revision: 1.1 $
+;; Version: $Revision: 1.2 $
 ;; Keywords: PGP BBDB message mailcrypt
 
  
@@ -27,7 +27,7 @@
 ;; LCD Archive Entry:
 ;; bbdb-pgp|Kevin Davidson|tkld@quadstone.com
 ;; |Use BBDB to store PGP preferences
-;; |$Date: 2001/01/24 21:19:08 $|$Revision: 1.1 $|~/packages/bbdb-pgp.el
+;; |$Date: 2002/10/18 10:54:34 $|$Revision: 1.2 $|~/packages/bbdb-pgp.el
 
 ;;; Commentary:
 ;;
@@ -69,6 +69,11 @@
 
 ;;; Change log:
 ;; $Log: bbdb-pgp.el,v $
+;; Revision 1.2  2002/10/18 10:54:34  waider
+;; allows bbdb-pgp.el to be configured to use message.el MML tags to perform
+;; the signing and encryption, instead of only plain Mailcrypt which is not
+;; MIME-aware. (Michael Shields)
+;;
 ;; Revision 1.1  2001/01/24 21:19:08  waider
 ;; Add-ons that didn't make it to the current release.
 ;;
@@ -95,8 +100,8 @@
 (require 'bbdb)
 (require 'mailcrypt)
 
-(defconst bbdb/pgp-version (substring "$Revision: 1.1 $" 11 -2)
-  "$Id: bbdb-pgp.el,v 1.1 2001/01/24 21:19:08 waider Exp $
+(defconst bbdb/pgp-version (substring "$Revision: 1.2 $" 11 -2)
+  "$Id: bbdb-pgp.el,v 1.2 2002/10/18 10:54:34 waider Exp $
 
 Report bugs to: Kevin Davidson tkld@quadstone.com")
 
@@ -104,6 +109,13 @@ Report bugs to: Kevin Davidson tkld@quadstone.com")
   "*Field to use in BBDB to store PGP preferences.
 If this field's value in a record is \"encrypt\" then messages are
 encrypted. If it is \"sign\" then messages are signed.")
+
+(defvar bbdb/pgp-method 'mailcrypt
+  "*How to sign or encrypt messages.
+'mailcrypt     means use Mailcrypt.
+'mml-pgp       means add MML tags for Message to use old PGP format
+'mml-pgpmime   means add MML tags for Message to use PGP/MIME
+'mml-smime     means add MML tags for Message to use S/MIME")
 
 (defvar bbdb/pgp-default-action nil
   "*Default action when sending a message and the recipient is not in BBDB.
@@ -117,6 +129,36 @@ nil         means do nothing.
 	 (pgp (and record
 		   (bbdb-record-getprop record bbdb/pgp-field))))
     pgp))
+
+(defun bbdb/pgp-sign ()
+  "Sign a message.
+bbdb/pgp-method controls the method used."
+  (cond
+   ((eq bbdb/pgp-method 'mailcrypt)
+    (mc-sign 0))
+   ((eq bbdb/pgp-method 'mml-pgp)
+    (mml-secure-message-sign-pgp))
+   ((eq bbdb/pgp-method 'mml-pgpmime)
+    (mml-secure-message-sign-pgpmime))
+   ((eq bbdb/pgp-method 'mml-smime)
+    (mml-secure-message-sign-smime))
+   (t
+    (error 'invalid-state "bbdb/pgp-method"))))
+
+(defun bbdb/pgp-encrypt ()
+  "Encrypt and sign a message.
+bbdb/pgp-method controls the method used."
+  (cond
+   ((eq bbdb/pgp-method 'mailcrypt)
+    (mc-encrypt 0))
+   ((eq bbdb/pgp-method 'mml-pgp)
+    (mml-secure-message-encrypt-pgp))
+   ((eq bbdb/pgp-method 'mml-pgpmime)
+    (mml-secure-message-encrypt-pgpmime))
+   ((eq bbdb/pgp-method 'mml-smime)
+    (mml-secure-message-encrypt-smime))
+   (t
+    (error 'invalid-state "bbdb/pgp-method"))))
 
 (defun bbdb/pgp-hook-fun ()
   "Function to be added to message-send-hook
@@ -137,19 +179,19 @@ The user is prompted before encryption or signing."
 	    (let ((pgp-p (bbdb/pgp-get-pgp (car address) (car (cdr address)))))
 	      (cond
 	       ((string= "encrypt" pgp-p) 
-		(and (y-or-n-p "Encrypt message ? ")
-		     (mc-encrypt 0)))
+		(and (y-or-n-p "Encrypt message? ")
+		     (bbdb/pgp-encrypt)))
 	       ((string= "sign" pgp-p)
-		(and (y-or-n-p "Sign message ? ")
-		     (mc-sign 0)))
+		(and (y-or-n-p "Sign message? ")
+		     (bbdb/pgp-sign)))
 	       (t
 		(cond
 		 ((eq bbdb/pgp-default-action 'encrypt)
-		  (and (y-or-n-p "Encrypt message ? ")
-		       (mc-encrypt 0)))
+		  (and (y-or-n-p "Encrypt message? ")
+		       (bbdb/pgp-encrypt)))
 		 ((eq bbdb/pgp-default-action 'sign)
-		  (and (y-or-n-p "Sign message ? ")
-		       (mc-sign 0)))
+		  (and (y-or-n-p "Sign message? ")
+		       (bbdb/pgp-sign)))
 		 (t
 		  nil))))))))))
 
