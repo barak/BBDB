@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.75 2000/07/13 17:07:00 sds Exp $
+;; $Id: bbdb-com.el,v 1.76 2000/07/18 18:44:08 sds Exp $
 ;;
 
 (require 'bbdb)
@@ -2151,12 +2151,14 @@ of all of those people."
             (expansion (mapconcat 'bbdb-dwim-net-address (cdr (car result))
                                   (if (boundp 'mail-alias-separator-string)
                                       mail-alias-separator-string
-                                      ", "))))
-        (if (fboundp 'define-mail-abbrev)
+                                      ", ")))
+            (use-abbrev-p (fboundp 'define-mail-abbrev)))
+        (if use-abbrev-p
             (define-mail-abbrev alias expansion)
             (define-mail-alias alias expansion))
         (setq alias (or (intern-soft alias
-                                     (if (boundp 'mail-abbrevs) mail-abbrevs mail-aliases))
+                                     (if use-abbrev-p
+                                         mail-abbrevs mail-aliases))
                         (error "couldn't find the alias we just defined!")))
         (or (eq (symbol-function alias) 'mail-abbrev-expand-hook)
             (error "mail-aliases contains unexpected hook %s"
