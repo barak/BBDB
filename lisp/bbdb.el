@@ -35,7 +35,7 @@
 ;;; |  information plus state information about how you have BBDB set up.    |
 ;;;  ------------------------------------------------------------------------
 ;;;
-;;; $Id: bbdb.el,v 1.216 2004/01/23 00:08:32 waider Exp $
+;;; $Id: bbdb.el,v 1.217 2004/03/22 15:23:33 waider Exp $
 
 (require 'timezone)
 (eval-when-compile (require 'cl))
@@ -62,7 +62,7 @@
  )
 
 (defconst bbdb-version "2.35")
-(defconst bbdb-version-date "$Date: 2004/01/23 00:08:32 $")
+(defconst bbdb-version-date "$Date: 2004/03/22 15:23:33 $")
 
 (defcustom bbdb-gui (if (fboundp 'display-color-p) ; Emacs 21
                         (display-color-p)
@@ -3028,14 +3028,14 @@ return them."
         (setq gubbish (substring str gubbish)
               str (substring string 0 (match-beginning 0))))
     (if (string-match
-	 (concat " +\\("
-		 ;; start recognize some prefixes to lastnames
-		 (if bbdb-lastname-prefixes
-		     (concat "\\("
-			     (regexp-opt bbdb-lastname-prefixes t)
-			     "[ ]+\\)?"))
-		 ;; end recognize some prefixes to lastnames
-		 "\\([^ ]+ *- *\\)?[^ ]+\\)\\'") str)
+     (concat " +\\("
+         ;; start recognize some prefixes to lastnames
+         (if bbdb-lastname-prefixes
+             (concat "\\("
+                 (regexp-opt bbdb-lastname-prefixes t)
+                 "[ ]+\\)?"))
+         ;; end recognize some prefixes to lastnames
+         "\\([^ ]+ *- *\\)?[^ ]+\\)\\'") str)
         (list (substring str 0 (match-beginning 0))
               (concat
                (substring str (match-beginning 1))
@@ -3172,6 +3172,7 @@ before the record is created, otherwise it is created without confirmation
             (if (string-match "^[^@]+" net)
                 (setq name (bbdb-clean-username (match-string 0 net)))))
         (setq record (if (or (null prompt-to-create-p)
+                             create-p
                              (if (functionp prompt-to-create-p)
                                  (bbdb-invoke-hook-for-value
                                   prompt-to-create-p)
