@@ -2,7 +2,7 @@
 
 ;;;
 ;;; Copyright (C) 1997 by John Heidemann <johnh@isi.edu>.
-;;; $Id: bbdb-snarf.el,v 1.8.1.1 1997/10/11 18:03:46 simmonmt Exp $
+;;; $Id: bbdb-snarf.el,v 1.8.1.2 1997/10/11 18:05:57 simmonmt Exp $
 ;;;
 ;;; This file is free software; you can redistribute it and/or modify
 ;;; it under the terms of the GNU General Public License as published
@@ -119,12 +119,20 @@ patches to internationalize these assumptions are welcome.
 
 \\[bbdb-snarf] is similar to \\[bbdb-whois-sentinel], but less specialized."
   (interactive "d")
+  (bbdb-snarf-region
+   (progn (goto-char where) (forward-paragraph -1) (point))
+   (progn (forward-paragraph 1) (point))))
+
+;;;###autoload
+(defun bbdb-snarf-region (begin end)
+  "snarf up a bbdb record in the current region.  See `bbdb-snarf' for
+more details."
+  (interactive "r")
+  
   (save-excursion
     (let
 	((buf (get-buffer-create " *BBDB snarf*"))
-	 (text (buffer-substring
-		(progn (goto-char where) (forward-paragraph -1) (point))
-		(progn (forward-paragraph 1) (point))))
+	 (text (buffer-substring begin end))
 	 phones nets web city state zip name address-lines 
 	 address-vector notes)
       (set-buffer buf)
