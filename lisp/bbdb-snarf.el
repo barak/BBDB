@@ -2,7 +2,7 @@
 
 ;;;
 ;;; Copyright (C) 1997 by John Heidemann <johnh@isi.edu>.
-;;; $Id: bbdb-snarf.el,v 1.8.1.6 1998/04/11 07:17:06 simmonmt Exp $
+;;; $Id: bbdb-snarf.el,v 1.8.1.7 1998/10/17 19:57:12 simmonmt Exp $
 ;;;
 ;;; This file is free software; you can redistribute it and/or modify
 ;;; it under the terms of the GNU General Public License as published
@@ -19,9 +19,12 @@
 ;;;
 
 ;;
-;; $Id: bbdb-snarf.el,v 1.8.1.6 1998/04/11 07:17:06 simmonmt Exp $
+;; $Id: bbdb-snarf.el,v 1.8.1.7 1998/10/17 19:57:12 simmonmt Exp $
 ;;
 ;; $Log: bbdb-snarf.el,v $
+;; Revision 1.8.1.7  1998/10/17 19:57:12  simmonmt
+;; Patch to treat bbdb-snarf-web-prop as symbol rather than string
+;;
 ;; Revision 1.8.1.6  1998/04/11 07:17:06  simmonmt
 ;; Colin Rafferty's patch adding autoload cookies back
 ;;
@@ -70,13 +73,14 @@
    "\\(-" digit digit digit digit "\\)?"
    "\\>$")
   "regexp matching zip.")
-(defcustom bbdb-snarf-web-prop "www"
+
+(defcustom bbdb-snarf-web-prop 'www
 ;  (if (member (list "www") (bbdb-propnames))
 ;      "www"
 ;    nil)
   "What property bbdb should use for the web, or nil to not detect web URLs."
   :group 'bbdb
-  :type 'string)
+  :type 'symbol)
 
 (defun bbdb-snarf-address-lines ()
   (let
