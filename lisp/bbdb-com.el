@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.91 2001/01/24 19:19:28 waider Exp $
+;; $Id: bbdb-com.el,v 1.92 2001/01/30 12:25:07 fenk Exp $
 ;;
 
 (require 'bbdb)
@@ -2000,7 +2000,7 @@ Completion behaviour can be controlled with `bbdb-completion-type'."
              (rec (car (symbol-value sym)))
              (pattern (buffer-substring beg end))
              name the-net nets)
-        (setq the-net (bbdb-extract-address-components pattern)
+        (setq the-net (bbdb-extract-address-components pattern t)
               the-net (car the-net)
               name (car the-net)
               the-net (cadr the-net))
