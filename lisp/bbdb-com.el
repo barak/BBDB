@@ -20,13 +20,17 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.114 2001/07/08 21:09:26 waider Exp $
+;; $Id: bbdb-com.el,v 1.115 2001/07/09 18:48:16 waider Exp $
 ;;
 
 (require 'bbdb)
 ;;(require 'bbdb-snarf) causes recursive compile!
 (require 'cl)
-(require 'mailabbrev)
+;; ARGH. fmh, dammit.
+(require
+ (if (locate-library "mailabbrev")
+     (quote mailabbrev)
+   (quote mail-abbrevs)))
 
 
 (defcustom bbdb-default-country
