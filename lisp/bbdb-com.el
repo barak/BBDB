@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.108 2001/05/17 17:12:11 fenk Exp $
+;; $Id: bbdb-com.el,v 1.109 2001/05/21 10:34:00 fenk Exp $
 ;;
 
 (require 'bbdb)
@@ -1982,6 +1982,14 @@ completions for a specific match is below that number."
   :group 'bbdb-mua-specific
   :type 'boolean)
 
+(defcustom bbdb-complete-name-hooks '(ding)
+  "Show full expanded completion rather than partial matches.
+If t then do it always, if a number then just is the number of
+completions for a specific match is below that number."
+  :group 'bbdb-mua-specific
+  :type 'boolean)
+
+
 ;;;###autoload
 (defun bbdb-complete-name (&optional start-pos)
   "Complete the user full-name or net-address before point (up to the
@@ -2095,9 +2103,12 @@ Completion behaviour can be controlled with `bbdb-completion-type'."
      ;; No match
      ((null completion)
       (bbdb-complete-name-cleanup)
-      (if bbdb-expand-mail-aliases;; maybe check for mail alias
-          (or (expand-abbrev) (ding))
-        (ding)))
+      (if bbdb-expand-mail-aliases ;; maybe check for mail alias
+          (or (expand-abbrev)
+              (if bbdb-complete-name-hooks
+                  (run-hooks (ding))))
+        (if bbdb-complete-name-hooks
+            (run-hooks (ding)))))
 
      ;; Perfect match...
      ((eq completion t)
