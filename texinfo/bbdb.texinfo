@@ -5,9 +5,12 @@
 @c %**end of header
 
 @c
-@c $Id: bbdb.texinfo,v 1.16 1998/03/10 07:46:43 simmonmt Exp $
+@c $Id: bbdb.texinfo,v 1.17 1998/03/13 10:17:18 simmonmt Exp $
 @c
 @c $Log: bbdb.texinfo,v $
+@c Revision 1.17  1998/03/13 10:17:18  simmonmt
+@c This is for version 2.00
+@c
 @c Revision 1.16  1998/03/10 07:46:43  simmonmt
 @c Finished revision
 @c
@@ -41,7 +44,7 @@
 @ifinfo
 This file documents the Insidious Big Brother Database
 
-This is edition $Revision: 1.16 $ of the BBDB User Manual for BBDB version 1.59unoff.
+This is edition $Revision: 1.17 $ of the BBDB User Manual for BBDB version 2.00.
 
 Copyright (c) 1991-1994 Jamie Zawinski <jwz@@netscape.com>
 Copyright (c) 1997-1998 Matt Simmons <simmonmt@@acm.org>
@@ -50,7 +53,7 @@ Copyright (c) 1997-1998 Matt Simmons <simmonmt@@acm.org>
 @titlepage
 @title BBDB User Manual
 @subtitle A phone number and address database program for Emacs
-@subtitle Edition $Revision: 1.16 $, $Date: 1998/03/10 07:46:43 $
+@subtitle Edition $Revision: 1.17 $, $Date: 1998/03/13 10:17:18 $
 
 @author by Jamie Zawinski and Matt Simmons
 @page
@@ -59,8 +62,8 @@ Copyright @copyright{} 1991-1994 Jamie Zawinski <jwz@@netscape.com>
 Copyright @copyright{} 1997-1998 Matt Simmons <simmonmt@@acm.org>
 
 @sp 2
-This is edition $Revision: 1.16 $ of the @cite{BBDB User Manual} for BBDB
-version 1.59unoff, $Date: 1998/03/10 07:46:43 $.@refill
+This is edition $Revision: 1.17 $ of the @cite{BBDB User Manual} for BBDB
+version 2.00, $Date: 1998/03/13 10:17:18 $.@refill
 
 @sp 2
 
