@@ -35,7 +35,7 @@
 ;;; |  information plus state information about how you have BBDB set up.    |
 ;;;  ------------------------------------------------------------------------
 ;;;
-;;; $Id: bbdb.el,v 1.205 2003/03/13 22:31:49 fenk Exp $
+;;; $Id: bbdb.el,v 1.206 2003/03/13 22:49:16 fenk Exp $
 
 (require 'timezone)
 (eval-when-compile (require 'cl))
@@ -62,7 +62,7 @@
  )
 
 (defconst bbdb-version "2.35")
-(defconst bbdb-version-date "$Date: 2003/03/13 22:31:49 $")
+(defconst bbdb-version-date "$Date: 2003/03/13 22:49:16 $")
 
 (defcustom bbdb-gui (if (fboundp 'display-color-p) ; Emacs 21
             (display-color-p)
@@ -3383,8 +3383,9 @@ not clutter the buffer-list."
         (new-bbdb-buffer-name bbdb-buffer-name))
 
     (when (and bbdb-multiple-buffers (not (eq major-mode 'bbdb-mode)))
-      (cond ((memq major-mode '(vm-presentation-mode vm-summary-mode
-                                                     vm-virtual-mode))  
+      (cond ((memq major-mode '(vm-mode vm-summary-mode
+                                        vm-presentation-mode
+                                        vm-virtual-mode))  
              (vm-select-folder-buffer))
             ((memq major-mode '(gnus-summary-mode gnus-group-mode))
              (set-buffer gnus-article-buffer)))
