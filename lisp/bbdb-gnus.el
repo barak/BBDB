@@ -19,7 +19,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-gnus.el,v 1.78 2001/03/26 14:35:43 fenk Exp $
+;; $Id: bbdb-gnus.el,v 1.79 2001/03/29 13:17:20 fenk Exp $
 ;;
 
 (require 'bbdb)
@@ -56,7 +56,7 @@ The headers to search can be configured by `bbdb-get-addresses-headers'."
     (narrow-to-region (point-min)
                       (if (search-forward "\n\n" nil 'force)
                           (- (point) 2)
-                        (point)))
+                        (1+ (point))))
 
     (let ((headers bbdb-get-addresses-headers)
           (uninteresting-senders (or (if (boundp 'gnus-ignored-from-addresses)
