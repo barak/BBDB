@@ -2,7 +2,7 @@
 
 ;;;
 ;;; Copyright (C) 1997 by John Heidemann <johnh@isi.edu>.
-;;; $Id: bbdb-snarf.el,v 1.33 2002/01/10 21:45:59 waider Exp $
+;;; $Id: bbdb-snarf.el,v 1.34 2002/01/18 11:52:21 fenk Exp $
 ;;;
 ;;; This file is free software; you can redistribute it and/or modify
 ;;; it under the terms of the GNU General Public License as published
@@ -405,8 +405,6 @@ more details."
     (defun bbdb-replace-in-string (string regexp newtext &optional literal)
       (bbdb-replace-regexp-in-string regexp newtext string nil literal))))
 
-
-
 (defcustom bbdb-extract-address-components-func
   'bbdb-rfc822-addresses
   "Function called to parse one or more email addresses.
@@ -424,7 +422,7 @@ See bbdb-extract-address-components for an example."
       ("\\([^<>,\t][^<>,]+[^<>, \t]\\)\\s-*<\\([^>]+\\)>"
        1 2)
       ;; <address>
-      ("<\\([^>]+\\)>" nil 2)
+      ("<\\([^>,]+\\)>" nil 1)
       ;; address (name)
       ("\\(\\b[^<\",()]+\\b\\)\\s-*(\\([^)]+\\))"
        (car (mail-extract-address-components
@@ -438,7 +436,7 @@ See bbdb-extract-address-components for an example."
       ;; user@host
       ("\\b\\(\\([^@ \t\n]+\\)@[^@ \t\n]+\\)\\b"
        nil 1)
-      ;; local address
+      ;; localaddress
       ("\\b\\([^@ \t\n]+\\)\\b"
        nil 1)
       )
@@ -511,9 +509,6 @@ If extracting fails one probably has to adjust the variable
         (let ((regexp (caar adcom-regexp))
               (fn (cadar adcom-regexp))
               (ad (caddar adcom-regexp)))
-;          (message "(string-match %S %S)"
-;                   (concat "^\\s-*" regexp "\\s-*\\(,\\|$\\)")
-;                   adstring)
           (cond ((string-match
                   (concat "^[^,]*\\("
                           bbdb-extract-address-component-ignore-regexp
@@ -524,7 +519,6 @@ If extracting fails one probably has to adjust the variable
                        nomatch nil))
                 ((string-match (concat "^\\s-*" regexp "\\s-*\\(,\\|$\\)")
                                adstring)
-
                  (add-to-list 'fnadlist
                               (list (let ((n
                                            (cond ((numberp fn)
@@ -550,6 +544,9 @@ If extracting fails one probably has to adjust the variable
                                       (if (string= a "")
                                           nil
                                         a))))
+;                 (save-match-data
+;                   (message "%S Match on %S to\n\t%S"
+;                            regexp adstring fnadlist))
                  (setq adstring (substring adstring (match-end 0))
                        adcom-regexp nil
                        nomatch nil)))
@@ -586,7 +583,7 @@ See `bbdb-extract-address-component-handler' for more information."
     (delete '(nil nil) (nreverse fnadlist))))
 
 ;;; alternative name parser
-;;; ###autoload
+;;;###autoload
 (defun bbdb-rfc822-addresses ( addrline &optional ignore-errors)
   "Split ADDRLINE into a list of parsed addresses.
 
