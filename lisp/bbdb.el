@@ -35,7 +35,7 @@
 ;;; |  information plus state information about how you have BBDB set up.    |
 ;;;  ------------------------------------------------------------------------
 ;;;
-;;; $Id: bbdb.el,v 1.178 2002/01/04 16:43:26 fenk Exp $
+;;; $Id: bbdb.el,v 1.179 2002/01/06 22:07:20 waider Exp $
 
 (require 'timezone)
 (require 'cl)
@@ -59,7 +59,7 @@
  )
 
 (defconst bbdb-version "2.33")
-(defconst bbdb-version-date "$Date: 2002/01/04 16:43:26 $")
+(defconst bbdb-version-date "$Date: 2002/01/06 22:07:20 $")
 
 ;; File format
 (defconst bbdb-file-format 6)
@@ -1012,6 +1012,12 @@ If the note is absent, returns a zero length string."
               (list 'match-beginning match-number)
               (list 'match-end match-number))))
 
+(eval-and-compile
+  (if (fboundp 'display-error)
+      (fset 'bbdb-display-error 'display-error)
+    (defun bbdb-display-error(msg stream)
+      (message "Error: %s" (nth 1 msg)))))
+
 (defmacro bbdb-error-retry (form)
   (list 'catch ''--bbdb-error-retry--
         (list 'while ''t
@@ -1020,9 +1026,7 @@ If the note is absent, returns a zero length string."
                     '(error
                       (ding)
                       (let ((cursor-in-echo-area t))
-                        (if (fboundp 'display-error) ; lemacs 19.8+
-                            (display-error --c-- nil)
-                          (message "Error: %s" (nth 1 --c--)))
+                        (bbdb-display-error --c-- nil)
                         (sit-for 2)))))))
 
 ;;; Completion on labels and field data
