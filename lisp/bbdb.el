@@ -35,13 +35,13 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.83 2000/07/05 18:24:07 sds Exp $
+;; $Id: bbdb.el,v 1.84 2000/07/09 09:20:11 waider Exp $
 ;;
 
 (require 'timezone)
 
 (defconst bbdb-version "2.2")
-(defconst bbdb-version-date "$Date: 2000/07/05 18:24:07 $")
+(defconst bbdb-version-date "$Date: 2000/07/09 09:20:11 $")
 
 ;; File format
 (defconst bbdb-file-format 5)
@@ -1009,7 +1009,7 @@ This is a possible identifying function for
   "Insert street subfields of address ADDR in current buffer.
 This may be used by formatting functions listed in
 `bbdb-address-formatting-alist'."
-  (mapc (lambda(str)
+  (mapcar (lambda(str)
           (indent-to 17)
           (insert str "\n"))
         (bbdb-address-streets addr)))
