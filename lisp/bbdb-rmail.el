@@ -19,7 +19,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-rmail.el,v 1.61 2001/08/31 15:07:47 fenk Exp $
+;; $Id: bbdb-rmail.el,v 1.62 2002/03/12 17:40:28 fenk Exp $
 ;;
 
 (eval-and-compile
@@ -141,10 +141,10 @@ Leaves original message, deleted, before the undigestified messages."
   (setq bbdb-message-cache nil)
   (bbdb-orig-undigestify-rmail-message))
 
-(defun bbdb-orig-rmail-expunge ()
-  "This becomes the original rmail-expunge function.")
-(defun bbdb-orig-undigestify-rmail-message ()
-  "This becomes the original rmail-expunge function.")
+;(defun bbdb-orig-rmail-expunge ()
+;  "This becomes the original rmail-expunge function.")
+;(defun bbdb-orig-undigestify-rmail-message ()
+;  "This becomes the original rmail-expunge function.")
 
 ;;;###autoload
 (defun bbdb-insinuate-rmail ()
