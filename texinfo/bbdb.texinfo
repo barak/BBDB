@@ -5,7 +5,7 @@
 @c %**end of header
 
 @c
-@c $Id: bbdb.texinfo,v 1.48 2002/03/20 20:41:16 waider Exp $
+@c $Id: bbdb.texinfo,v 1.49 2002/07/03 21:29:47 waider Exp $
 @c
 
 @ifinfo
@@ -15,7 +15,7 @@
 
 This file documents the Insidious Big Brother Database
 
-This is edition $Revision: 1.48 $ of the BBDB User Manual for BBDB
+This is edition $Revision: 1.49 $ of the BBDB User Manual for BBDB
 version 2.34.
 
 Copyright (c) 1991-1994 Jamie Zawinski <jwz@@netscape.com>
@@ -28,7 +28,7 @@ Copyright (c) 2000-2002 The BBDB Development Team
 @titlepage
 @title BBDB User Manual
 @subtitle A phone number and address database program for Emacs
-@subtitle Edition $Revision: 1.48 $, $Date: 2002/03/20 20:41:16 $
+@subtitle Edition $Revision: 1.49 $, $Date: 2002/07/03 21:29:47 $
 
 @author by Jamie Zawinski, Matt Simmons and the BBDB Development Team
 @page
@@ -39,8 +39,8 @@ Copyright @copyright{} 1997-1999 Matt Simmons <simmonmt@@acm.org>
 Copyright @copyright{} 2000-2002 The BBDB Development Team
 
 @sp 2
-This is edition $Revision: 1.48 $ of the @cite{BBDB User Manual} for BBDB
-version 2.34, $Date: 2002/03/20 20:41:16 $.@refill
+This is edition $Revision: 1.49 $ of the @cite{BBDB User Manual} for BBDB
+version 2.34, $Date: 2002/07/03 21:29:47 $.@refill
 
 @sp 2
 
@@ -2356,9 +2356,8 @@ If non-nil, expand mail aliases in `bbdb-complete-name'.
 @cindex Name completion
 @cindex Mail address completion
 @cindex Address completion
-Wheater to allow cycling of email addresses when calling
+Whether to allow cycling of email addresses when calling
 `bbdb-complete-name' on a completed address in a composition buffer."
-THIS CURRENTLY DOES NOT WORK FOR GNU EMACS!
 @refill
 
 @item bbdb-complete-name-full-completion
