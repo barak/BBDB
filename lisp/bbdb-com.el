@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.84 2000/10/20 09:36:05 fenk Exp $
+;; $Id: bbdb-com.el,v 1.85 2000/10/20 14:30:17 fenk Exp $
 ;;
 
 (require 'bbdb)
@@ -2015,7 +2015,7 @@ Completion behaviour can be controlled with `bbdb-completion-type'."
 		 (setq rec (bbdb-search-simple name the-net))
 		 (setq nets (bbdb-record-net rec))
 		 (setq the-net (member the-net nets)))
-	(setq the-net (if (cdr the-net) (cadr nets) (car nets)))
+	(setq the-net (if (cdr the-net) (cadr the-net) (car nets)))
 	(delete-region beg end)
 	(insert (bbdb-dwim-net-address rec the-net))
 	(setq completion 'done)))
