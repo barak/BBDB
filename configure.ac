@@ -3,7 +3,7 @@ dnl configure.ac --- configuration setup for BBDB
 dnl Author:        Didier Verna <didier@xemacs.org>
 dnl Maintainer:    Didier Verna <didier@xemacs.org>, Waider <waider@waider.ie>
 dnl Created:       Tue Nov 14 18:28:52 2000
-dnl Last Revision: $Date: 2002/06/29 23:24:21 $
+dnl Last Revision: $Date: 2002/06/30 12:01:06 $
 
 dnl Copyright (C) 2000-2001 Didier Verna
 
@@ -30,7 +30,7 @@ BBDB_PRE_INIT
 AC_INIT([BBDB], [BBDB_VERSION], [bbdb-info@lists.sourceforge.net])
 
 AC_COPYRIGHT([Copyright (C) 2000-2001 Didier Verna <didier@xemacs.org>.])
-AC_REVISION([$Revision: 2.5 $])
+AC_REVISION([$Revision: 2.6 $])
 
 AC_CONFIG_SRCDIR([configure.ac])
 dnl We only have install-sh right now, so it's not worth adding an aux
@@ -38,22 +38,17 @@ dnl directory just for that file.
 dnl AC_ CONFIG_AUX_DIR
 dnl The following macro is incompatible with the current Automake, but we
 dnl don't use it for now.
+AC_CONFIG_FILES([Makefile
+                 lisp/Makefile
+                 texinfo/Makefile
+                 tex/Makefile
+                 utils/Makefile])
+
 dnl Make sure we don't accidentally try to configure a testing directory if
 dnl one doesn't exist.
 if [[ -d testing ]]
 then
-  AC_CONFIG_FILES([Makefile
-                   lisp/Makefile
-                   texinfo/Makefile
-                   tex/Makefile
-                   utils/Makefile
-                   testing/Makefile])
-else
-  AC_CONFIG_FILES([Makefile
-                   lisp/Makefile
-                   texinfo/Makefile
-                   tex/Makefile
-                   utils/Makefile])
+  AC_CONFIG_FILES([testing/Makefile])
 fi
 
 dnl Common system utilities checking:
