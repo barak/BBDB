@@ -35,7 +35,7 @@
 ;;; |  information plus state information about how you have BBDB set up.    |
 ;;;  ------------------------------------------------------------------------
 ;;;
-;;; $Id: bbdb.el,v 1.200 2003/01/31 03:46:39 kensanata Exp $
+;;; $Id: bbdb.el,v 1.201 2003/01/31 13:00:56 kensanata Exp $
 
 (require 'timezone)
 (eval-when-compile (require 'cl))
@@ -62,7 +62,7 @@
  )
 
 (defconst bbdb-version "2.35")
-(defconst bbdb-version-date "$Date: 2003/01/31 03:46:39 $")
+(defconst bbdb-version-date "$Date: 2003/01/31 13:00:56 $")
 
 (defcustom bbdb-gui (if (fboundp 'display-color-p) ; Emacs 21
             (display-color-p)
@@ -2698,7 +2698,7 @@ displayed record, respectively.
 \\[bbdb-create]\t Create a new record.
 \\[bbdb-toggle-records-display-layout]\t Toggle whether the current record is displayed in a \
 one-line\n\t listing, or a full multi-line listing.
-\\[bbdb-apply-next-command-to-all-records]\\[bbdb-elide-record]\t Do that \
+\\[bbdb-apply-next-command-to-all-records]\\[bbdb-toggle-records-display-layout]\t Do that \
 for all displayed records.
 \\[bbdb-refile-record]\t Merge the contents of the current record with \
 some other, and then\n\t delete the current record.  See this command's \
