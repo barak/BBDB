@@ -34,13 +34,13 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.136 2001/02/13 21:55:45 fenk Exp $
+;; $Id: bbdb.el,v 1.137 2001/02/13 22:09:16 fenk Exp $
 ;;
 
 (require 'timezone)
 
 (defconst bbdb-version "2.3")
-(defconst bbdb-version-date "$Date: 2001/02/13 21:55:45 $")
+(defconst bbdb-version-date "$Date: 2001/02/13 22:09:16 $")
 
 ;; File format
 (defconst bbdb-file-format 6)
@@ -68,10 +68,6 @@ prompt the users on how to merge records when duplicates are detected.")
 (unless (fboundp 'with-current-buffer)
   (defmacro with-current-buffer (buf &rest body)
     `(save-current-buffer (set-buffer ,buf) ,@body)))
-
-(unless (fboundp 'display-message)
-  (defmacro display-message (type mess)
-    `(message ,mess)))
 
 (unless (fboundp 'defvaralias)
   (defun defvaralias (&rest args)))
@@ -1323,7 +1319,7 @@ them.  The formating functions should be named according to the following
 pattern bbdb-format-popup-<field>.  They should take one argument which is
 the raw field content and return a string."
   :group 'bbdb
-  :type 'list)
+  :type 'sexp)
 
 (defmacro bbdb-pop-up-elided-display ()
   '(if (boundp 'bbdb-pop-up-elided-display)
