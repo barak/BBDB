@@ -34,13 +34,13 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.66 1998/12/31 06:26:55 simmonmt Exp $
+;; $Id: bbdb.el,v 1.67 1998/12/31 06:36:49 simmonmt Exp $
 ;;
 
 (require 'timezone)
 
 (defconst bbdb-version "2.00.04")
-(defconst bbdb-version-date "$Date: 1998/12/31 06:26:55 $")
+(defconst bbdb-version-date "$Date: 1998/12/31 06:36:49 $")
 
 ;; File format
 (defconst bbdb-file-format 3)
@@ -1138,7 +1138,7 @@ bbdb-elided-display will be consulted instead by mail and news.")
 	  (setq records (cdr records))))
       (if (not bbdb-gag-messages) (message "Formatting...done.")))
     (set-buffer bbdb-buffer-name)
-    (if append
+    (if (and append first)
 	(let ((cons (assq first bbdb-records))
 	      (window (get-buffer-window (current-buffer))))
 	  (if window (set-window-start window (nth 2 cons)))
