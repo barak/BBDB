@@ -34,13 +34,13 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.125 2000/12/31 15:58:18 waider Exp $
+;; $Id: bbdb.el,v 1.126 2001/01/17 19:54:04 fenk Exp $
 ;;
 
 (require 'timezone)
 
 (defconst bbdb-version "2.2")
-(defconst bbdb-version-date "$Date: 2000/12/31 15:58:18 $")
+(defconst bbdb-version-date "$Date: 2001/01/17 19:54:04 $")
 
 ;; File format
 (defconst bbdb-file-format 6)
@@ -476,8 +476,8 @@ this is nil, it will default to the value of (user-login-name)."
 a new email address for a person, it will automatically add it to the list
 of addresses.  If it is nil, you will be asked whether to add it.  If it is
 the symbol 'never (really, if it is any non-t, non-nil value which is no
-function name) then new network addresses will never be automatically added,
-but the user gets asked wheather to add it or not.
+function name) then new network addresses will never be automatically added
+nor the user will be asked.
 
 When set to a function name the function should return one of these values.
 
