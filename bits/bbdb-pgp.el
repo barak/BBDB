@@ -5,10 +5,10 @@
 ;; Author: Kevin Davidson tkld@quadstone.com
 ;; Maintainer: Kevin Davidson tkld@quadstone.com
 ;; Created: 10 Nov 1997
-;; Version: $Revision: 1.3 $
+;; Version: $Revision: 1.4 $
 ;; Keywords: PGP BBDB message mailcrypt
 
- 
+
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
 ;; the Free Software Foundation; either version 2, or (at your option)
@@ -27,7 +27,7 @@
 ;; LCD Archive Entry:
 ;; bbdb-pgp|Kevin Davidson|tkld@quadstone.com
 ;; |Use BBDB to store PGP preferences
-;; |$Date: 2002/10/20 18:03:42 $|$Revision: 1.3 $|~/packages/bbdb-pgp.el
+;; |$Date: 2003/08/05 12:43:46 $|$Revision: 1.4 $|~/packages/bbdb-pgp.el
 
 ;;; Commentary:
 ;;
@@ -53,7 +53,7 @@
 ;;
 ;; and possibly (if you do not want the PGP field printed out)
 ;; (add-hook 'bbdb-print-elide bbdb-pgp-field)
-;; 
+;;
 ;; The variable bbdb/pgp-default-action defines what to do if the recipient
 ;; is not in the BBDB.
 
@@ -67,44 +67,14 @@
 ;; eg http://www.pgp.net/pgpnet/
 ;; Fingerprint: 1F A9 3F 3E 90 F7 85 64  55 35 32 C8 75 91 3A E3
 
-;;; Change log:
-;; $Log: bbdb-pgp.el,v $
-;; Revision 1.3  2002/10/20 18:03:42  waider
-;; *** empty log message ***
-;;
-;; Revision 1.2  2002/10/18 10:54:34  waider
-;; allows bbdb-pgp.el to be configured to use message.el MML tags to perform
-;; the signing and encryption, instead of only plain Mailcrypt which is not
-;; MIME-aware. (Michael Shields)
-;;
-;; Revision 1.1  2001/01/24 21:19:08  waider
-;; Add-ons that didn't make it to the current release.
-;;
-;; Revision 1.4  1999/01/05 13:17:00  tkld
-;; Update GPL version number and FSF snail mail address.
-;;
-;; Revision 1.3  1997/11/10 15:20:29  tkld
-;; Expand commentary. Support encrypt/sign. Support mail-mode
-;; (sendmail.el).
-;;
-;; Revision 1.3  1997/11/10 15:10:19  tkld
-;; Update commentary. Support sendmail.el. Support signing or encrypting.
-;;
-;; Revision 1.2  1997/11/10 14:27:07  tkld
-;; Remembered to widen buffer before encrypting.
-;;
-;; Revision 1.1  1997/11/10 14:22:06  tkld
-;; Initial revision
-;;
-
 ;;; Code:
 
 (require 'message)
 (require 'bbdb)
-(require 'mailcrypt)
+(condition-case nil (require 'mailcrypt) (error nil))
 
-(defconst bbdb/pgp-version (substring "$Revision: 1.3 $" 11 -2)
-  "$Id: bbdb-pgp.el,v 1.3 2002/10/20 18:03:42 waider Exp $
+(defconst bbdb/pgp-version (substring "$Revision: 1.4 $" 11 -2)
+  "$Id: bbdb-pgp.el,v 1.4 2003/08/05 12:43:46 waider Exp $
 
 Report bugs to: Kevin Davidson tkld@quadstone.com")
 
@@ -133,10 +103,10 @@ encrypted. If it is \"sign\" then messages are signed."
 'mml-pgpmime   means add MML tags for Message to use PGP/MIME
 'mml-smime     means add MML tags for Message to use S/MIME"
   :type '(choice
-	  (const :tag "Mailcrypt" mailcrypt :require 'mailcrypt)
-	  (const :tag "MML PGP" mml-pgp :require 'mml)
-	  (const :tag "MML PGP/MIME" mml-pgpmime :require 'mml)
-	  (const :tag "MML S/MIME" mml-smime :require 'mml))
+      (const :tag "Mailcrypt" mailcrypt :require 'mailcrypt)
+      (const :tag "MML PGP" mml-pgp :require 'mml)
+      (const :tag "MML PGP/MIME" mml-pgpmime :require 'mml)
+      (const :tag "MML S/MIME" mml-smime :require 'mml))
   :tag "Signing/Encryption Method"
   :group 'bbdb-utilities-pgp)
 
@@ -147,17 +117,19 @@ nil         means do nothing.
 'encrypt    means encrypt message.
 'sign       means sign message."
   :type '(choice
-	  (const :tag "Do Nothing")
-	  (const :tag "Encrypt" encrypt)
-	  (const :tag "Sign" sign))
+      (const :tag "Do Nothing")
+      (const :tag "Encrypt" encrypt)
+      (const :tag "Sign" sign))
   :tag "Default Action"
   :group 'bbdb-utilities-pgp)
 
+(defcustom bbdb/pgp-quiet nil
+  "*Do not ask for confirmation on pgp-action.
 (defun bbdb/pgp-get-pgp (name address)
   "Look up user NAME and ADDRESS in BBDB and return the PGP preference."
   (let* ((record (bbdb-search-simple name address))
-	 (pgp (and record
-		   (bbdb-record-getprop record bbdb/pgp-field))))
+     (pgp (and record
+           (bbdb-record-getprop record bbdb/pgp-field))))
     pgp))
 
 (defun bbdb/pgp-sign ()
@@ -199,31 +171,33 @@ The user is prompted before encryption or signing."
     (save-excursion
       (message-narrow-to-headers)
       (and (featurep 'mailalias)
-	   (not (featurep 'mailabbrev))
-	   mail-aliases
-	   (expand-mail-aliases (point-min) (point-max)))
+       (not (featurep 'mailabbrev))
+       mail-aliases
+       (expand-mail-aliases (point-min) (point-max)))
       (let* ((to-field (mail-fetch-field "To" nil t))
-	     (address (mail-extract-address-components (or to-field ""))))
-	(widen)
-	(if (not (equal address '(nil nil)))
-	    (let ((pgp-p (bbdb/pgp-get-pgp (car address) (car (cdr address)))))
-	      (cond
-	       ((string= "encrypt" pgp-p) 
-		(and (y-or-n-p "Encrypt message? ")
-		     (bbdb/pgp-encrypt)))
-	       ((string= "sign" pgp-p)
-		(and (y-or-n-p "Sign message? ")
-		     (bbdb/pgp-sign)))
-	       (t
-		(cond
-		 ((eq bbdb/pgp-default-action 'encrypt)
-		  (and (y-or-n-p "Encrypt message? ")
-		       (bbdb/pgp-encrypt)))
-		 ((eq bbdb/pgp-default-action 'sign)
-		  (and (y-or-n-p "Sign message? ")
-		       (bbdb/pgp-sign)))
-		 (t
-		  nil))))))))))
+         (address (mail-extract-address-components (or to-field ""))))
+    (widen)
+    (if (not (equal address '(nil nil)))
+        (let ((pgp-p (bbdb/pgp-get-pgp (car address) (car (cdr address)))))
+          (cond
+           ((string= "encrypt" pgp-p)
+                (and (or bbdb/pgp-quiet
+                         (y-or-n-p "Encrypt message? "))
+                     (bbdb/pgp-encrypt)))
+           ((string= "sign" pgp-p)
+        (and (or bbdb/pgp-quiet
+                         (y-or-n-p "Encrypt message? "))
+                     (bbdb/pgp-sign)))
+           (t
+        (cond
+         ((eq bbdb/pgp-default-action 'encrypt)
+          (and (y-or-n-p "Encrypt message? ")
+               (bbdb/pgp-encrypt)))
+         ((eq bbdb/pgp-default-action 'sign)
+          (and (y-or-n-p "Sign message? ")
+               (bbdb/pgp-sign)))
+         (t
+          nil))))))))))
 
 (add-hook 'message-send-hook 'bbdb/pgp-hook-fun)
 (add-hook 'mail-send-hook 'bbdb/pgp-hook-fun)
