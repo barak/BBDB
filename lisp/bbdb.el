@@ -34,13 +34,13 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.144 2001/02/21 10:43:23 waider Exp $
+;; $Id: bbdb.el,v 1.145 2001/02/21 11:40:42 waider Exp $
 ;;
 
 (require 'timezone)
 
 (defconst bbdb-version "2.3")
-(defconst bbdb-version-date "$Date: 2001/02/21 10:43:23 $")
+(defconst bbdb-version-date "$Date: 2001/02/21 11:40:42 $")
 
 ;; File format
 (defconst bbdb-file-format 6)
@@ -3117,9 +3117,8 @@ passed as arguments to initiate the appropriate insinuations.
   (apply 'message args))
 
 ;; Hook in GUI hacks
-;; Do not simply require this, as it needs bbdb.el to be loaded first.
 (or (eq window-system nil)
-    (add-hook 'bbdb-load-hook '(lambda()(require 'bbdb-gui))))
+    (add-hook 'bbdb-list-hook 'bbdb-fontify-buffer))
 
 (provide 'bbdb)  ; provide before loading things which might require
 
