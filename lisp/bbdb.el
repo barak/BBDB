@@ -35,13 +35,13 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.86 2000/07/13 16:48:10 sds Exp $
+;; $Id: bbdb.el,v 1.87 2000/07/13 19:39:50 sds Exp $
 ;;
 
 (require 'timezone)
 
 (defconst bbdb-version "2.2")
-(defconst bbdb-version-date "$Date: 2000/07/13 16:48:10 $")
+(defconst bbdb-version-date "$Date: 2000/07/13 19:39:50 $")
 
 ;; File format
 (defconst bbdb-file-format 5)
@@ -1647,8 +1647,9 @@ optional arg DONT-CHECK-DISK is non-nil (which is faster, but hazardous.)"
 	  (set (make-local-variable 'bbdb-propnames) nil)
 	  (set (make-local-variable 'revert-buffer-function)
 	       'bbdb-revert-buffer)
-          (mapc (lambda (ff) (bbdb-add-hook 'local-write-file-hooks (car ff)))
-                bbdb-write-file-hooks))
+          (mapc (lambda (ff) (bbdb-add-hook 'local-write-file-hooks ff))
+                bbdb-write-file-hooks)
+          (setq bbdb-hashtable (make-vector 1021 0)))
 	(setq bbdb-modified-p (buffer-modified-p)
 	      buffer-read-only bbdb-readonly-p)
 	(or bbdb-records
