@@ -5,7 +5,7 @@
 @c %**end of header
 
 @c
-@c $Id: bbdb.texinfo,v 1.52 2004/10/10 12:26:37 kensanata Exp $
+@c $Id: bbdb.texinfo,v 1.53 2004/10/13 13:49:05 waider Exp $
 @c
 
 @ifinfo
@@ -16,20 +16,20 @@
 
 This file documents the Insidious Big Brother Database
 
-This is edition $Revision: 1.52 $ of the BBDB User Manual for BBDB
+This is edition $Revision: 1.53 $ of the BBDB User Manual for BBDB
 version 2.34.
 
 Copyright (c) 1991-1994 Jamie Zawinski <jwz@@netscape.com>
 
 Copyright (c) 1997-1999 Matt Simmons <simmonmt@@acm.org>
 
-Copyright (c) 2000-2002 The BBDB Development Team
+Copyright (c) 2000-2004 The BBDB Development Team
 @end ifinfo
 
 @titlepage
 @title BBDB User Manual
 @subtitle A phone number and address database program for Emacs
-@subtitle Edition $Revision: 1.52 $, $Date: 2004/10/10 12:26:37 $
+@subtitle Edition $Revision: 1.53 $, $Date: 2004/10/13 13:49:05 $
 
 @author by Jamie Zawinski, Matt Simmons and the BBDB Development Team
 @page
@@ -37,11 +37,11 @@ Copyright @copyright{} 1991-1994 Jamie Zawinski <jwz@@netscape.com>
 
 Copyright @copyright{} 1997-1999 Matt Simmons <simmonmt@@acm.org>
 
-Copyright @copyright{} 2000-2002 The BBDB Development Team
+Copyright @copyright{} 2000-2004 The BBDB Development Team
 
 @sp 2
-This is edition $Revision: 1.52 $ of the @cite{BBDB User Manual} for BBDB
-version 2.34, $Date: 2004/10/10 12:26:37 $.@refill
+This is edition $Revision: 1.53 $ of the @cite{BBDB User Manual} for BBDB
+version 2.34, $Date: 2004/10/13 13:49:05 $.@refill
 
 @sp 2
 
@@ -2904,11 +2904,11 @@ The following variables govern the printing of records (and of the printing of
 the fields therein):
 
 @table @code
-@item bbdb-print-elide
-@vindex bbdb-print-elide
+@item bbdb-print-omit-fields
+@vindex bbdb-print-omit-fields
 This variable should be set to a list of the fields that are not to be printed
 by @code{bbdb-print}.  It defaults to:@*
-@center @code{(tex-name aka mail-alias)}
+@center @code{(omit tex-name aka mail-alias)}
 
 @item bbdb-print-file-name
 @vindex bbdb-print-file-name
