@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.76 2000/07/18 18:44:08 sds Exp $
+;; $Id: bbdb-com.el,v 1.77 2000/07/20 21:40:40 sds Exp $
 ;;
 
 (require 'bbdb)
@@ -2371,16 +2371,7 @@ at point.  The numeric prefix argument has the same interpretation.
 
 You can define a special network address to \"finger\" by defining a
 field `finger-host' (default value of `bbdb-finger-host-field')."
-  (interactive (list (if (string= bbdb-buffer-name (buffer-name))
-                         (if (bbdb-do-all-records-p)
-                             (mapcar 'car bbdb-records)
-                             (bbdb-current-record))
-                         (let (r (p "BBDB Finger: "))
-                           (while (not r)
-                             (setq r (bbdb-completing-read-record p))
-                             (if (not r) (ding))
-                             (setq p "Not in the BBDB!  Finger: "))
-                           r))
+  (interactive (list (bbdb-get-record "BBDB Finger: ")
                      current-prefix-arg))
   (if (not (consp record)) (setq record (list record)))
   (let ((addrs nil))
