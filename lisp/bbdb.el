@@ -34,9 +34,12 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.63 1998/04/11 07:26:05 simmonmt Exp $
+;; $Id: bbdb.el,v 1.64 1998/10/10 18:49:27 simmonmt Exp $
 ;;
 ;; $Log: bbdb.el,v $
+;; Revision 1.64  1998/10/10 18:49:27  simmonmt
+;; From slbaur - Switch from `screen' functions to `frame' functions
+;;
 ;; Revision 1.63  1998/04/11 07:26:05  simmonmt
 ;; Changed documentation for bbdb-load-hook, added bbdb-initialize hook.
 ;; Began to remove support for advertized-bbdb-delete-current-field-or-record.
@@ -102,8 +105,8 @@
 
 (require 'timezone)
 
-(defconst bbdb-version "2.00.01")
-(defconst bbdb-version-date "$Date: 1998/04/11 07:26:05 $")
+(defconst bbdb-version "2.00.02")
+(defconst bbdb-version-date "$Date: 1998/10/10 18:49:27 $")
 
 ;; File format
 (defconst bbdb-file-format 3)
@@ -637,9 +640,9 @@ Database initialization function `bbdb-initialize' is run."
   (prog1
       (cond ((and bbdb-force-dialog-boxes
 		  (fboundp 'yes-or-no-p-dialog-box))
-	     (if (and (fboundp 'raise-screen)
-		      (not (screen-visible-p (selected-screen))))
-		 (raise-screen (selected-screen)))
+	     (if (and (fboundp 'raise-frame)
+		      (not (frame-visible-p (selected-frame))))
+		 (raise-frame (selected-frame)))
 	     (yes-or-no-p-dialog-box prompt))
 	    (t
 	     (y-or-n-p prompt)))
@@ -2543,7 +2546,7 @@ the window will be split vertically rather than horizontally."
     nil)))
 
 (defun bbdb-pop-up-bbdb-buffer-horizontally (predicate)
-  (if (<= (screen-width) 112)
+  (if (<= (frame-width) 112)
       nil
     (let* ((first-window (selected-window))
 	   (got-it nil)
