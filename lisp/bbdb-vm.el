@@ -19,9 +19,12 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-vm.el,v 1.53 1997/11/02 07:40:18 simmonmt Exp $
+;; $Id: bbdb-vm.el,v 1.54 1998/02/23 07:14:01 simmonmt Exp $
 ;;
 ;; $Log: bbdb-vm.el,v $
+;; Revision 1.54  1998/02/23 07:14:01  simmonmt
+;; Use add-hook, not bbdb-add-hook
+;;
 ;; Revision 1.53  1997/11/02 07:40:18  simmonmt
 ;; bbdb/vm-annotate-sender now takes REPLACE argument
 ;;
@@ -202,9 +205,9 @@ Respects vm-summary-uninteresting-senders."
 (defun bbdb-insinuate-vm ()
   "Call this function to hook BBDB into VM."
   (cond ((boundp 'vm-select-message-hook) ; VM 5.36+
-	 (bbdb-add-hook 'vm-select-message-hook 'bbdb/vm-update-record))
+	 (add-hook 'vm-select-message-hook 'bbdb/vm-update-record))
 	((boundp 'vm-show-message-hook)	; VM 5.32.L+
-	 (bbdb-add-hook 'vm-show-message-hook 'bbdb/vm-update-record))
+	 (add-hook 'vm-show-message-hook 'bbdb/vm-update-record))
 	(t
 	 (error "vm versions older than 5.36 no longer supported")
 
