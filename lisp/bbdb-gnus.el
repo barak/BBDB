@@ -19,7 +19,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-gnus.el,v 1.82 2001/05/31 15:27:05 fenk Exp $
+;; $Id: bbdb-gnus.el,v 1.83 2001/06/01 08:13:20 fenk Exp $
 ;;
 
 (require 'bbdb)
@@ -157,7 +157,7 @@ C-g again it will stop scanning."
 
       (if cache
           (setq records (if bbdb-get-only-first-address-p
-                            (car cache)
+                            (list (car cache))
                           cache))
 
         (let ((bbdb-update-records-mode (or bbdb/gnus-update-records-mode
