@@ -35,7 +35,7 @@
 ;;; |  information plus state information about how you have BBDB set up.    |
 ;;;  ------------------------------------------------------------------------
 ;;;
-;;; $Id: bbdb.el,v 1.211 2003/06/25 15:57:37 fenk Exp $
+;;; $Id: bbdb.el,v 1.212 2003/07/23 16:18:47 fenk Exp $
 
 (require 'timezone)
 (eval-when-compile (require 'cl))
@@ -62,7 +62,7 @@
  )
 
 (defconst bbdb-version "2.35")
-(defconst bbdb-version-date "$Date: 2003/06/25 15:57:37 $")
+(defconst bbdb-version-date "$Date: 2003/07/23 16:18:47 $")
 
 (defcustom bbdb-gui (if (fboundp 'display-color-p) ; Emacs 21
                         (display-color-p)
@@ -3153,8 +3153,10 @@ before the record is created, otherwise it is created without confirmation
         (if (or (null name) (and (stringp name) (string= "" name)))
             (if (string-match "^[^@]+" net)
                 (setq name (bbdb-clean-username (match-string 0 net)))))
-        (setq record (if (or (null
-                              (bbdb-invoke-hook-for-value prompt-to-create-p))
+        (setq record (if (or (if prompt-to-create-p
+                                 (null
+                                  (bbdb-invoke-hook-for-value
+                                   prompt-to-create-p)))
                              (bbdb-y-or-n-p
                               (format "%s is not in the db.  Add? "
                                       (or name net))))
