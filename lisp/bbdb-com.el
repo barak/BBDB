@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.157 2003/01/02 15:16:57 waider Exp $
+;; $Id: bbdb-com.el,v 1.158 2003/01/02 15:52:31 waider Exp $
 ;;
 
 (require 'bbdb)
@@ -2372,8 +2372,9 @@ Completion behaviour can be controlled with `bbdb-completion-type'."
               (message "completion for \"%s\" unfound." pattern)
               (ding)))));; no matches, sorry!
 
-     ;; match for a single record
-     (only-one-p
+     ;; Match for a single record. If cycling is enabled then we don't
+     ;; care too much about the exact-match part.
+     ((and only-one-p (or exact-match bbdb-complete-name-allow-cycling))
       (let* ((sym (if exact-match (intern-soft pattern ht) (car all-the-completions)))
              (recs (symbol-value sym))
              the-net match-recs lst primary matched)
@@ -2382,13 +2383,13 @@ Completion behaviour can be controlled with `bbdb-completion-type'."
           (when (bbdb-record-net (car recs))
 
             ;; Did we match on name?
-            (if (string= pattern
-                         (substring (downcase (or (bbdb-record-name (car recs)) ""))
-                                    0 (if (bbdb-record-name (car
-                                                             recs))
-                                          (length pattern) 0)))
-                (setq match-recs (cons (car recs) match-recs)
-                      matched t))
+            (let ((b-r-name (or (bbdb-record-name (car recs)) "")))
+              (if (string= pattern
+                           (substring (downcase b-r-name) 0
+                                      (min (length b-r-name)
+                                           (length pattern))))
+                  (setq match-recs (cons (car recs) match-recs)
+                        matched t)))
 
             ;; Did we match on aka?
             (when (not matched)
