@@ -34,13 +34,13 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.138 2001/02/14 12:17:26 waider Exp $
+;; $Id: bbdb.el,v 1.139 2001/02/14 12:49:35 waider Exp $
 ;;
 
 (require 'timezone)
 
 (defconst bbdb-version "2.3")
-(defconst bbdb-version-date "$Date: 2001/02/14 12:17:26 $")
+(defconst bbdb-version-date "$Date: 2001/02/14 12:49:35 $")
 
 ;; File format
 (defconst bbdb-file-format 6)
@@ -1030,7 +1030,7 @@ This alist is used in `bbdb-format-address'.
 
 See also `bbdb-address-print-formatting-alist'."
   :group 'bbdb-record-display
-  :type '(repeat (cons function function))
+  :type '(repeat (cons function function)))
 
 (defun bbdb-address-is-continental (addr)
   "Return non-nil if the address ADDR is a continental address.
