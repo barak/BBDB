@@ -1,9 +1,12 @@
 # Makefile for the Insidious Big Brother Database.
 # Original Author: Jamie Zawinski (jwz@netscape.com)
 #
-# $Id: Makefile,v 1.61 2000/05/25 17:35:12 waider Exp $
+# $Id: Makefile,v 1.62 2000/06/14 14:34:57 waider Exp $
 #
 # $Log: Makefile,v $
+# Revision 1.62  2000/06/14 14:34:57  waider
+# * Added CVS revision discards to tarball exclude list.
+#
 # Revision 1.61  2000/05/25 17:35:12  waider
 # Updated some of the test targets
 #
@@ -333,7 +336,7 @@ tar: $(TARFILES)
   's/^(defconst bbdb-version "\([0-9]\.[0-9][0-9]*\).*/bbdb-\1/p' lisp/bbdb.el` ; \
   rm -f $$NAME ; ln -s . $$NAME ;					    \
   echo creating tar file $${NAME}.tar.$(COMPRESS_EXT)... ;		    \
-   $(TAR) --exclude=CVS -vchf - `echo $(TARFILES)				    	    \
+   $(TAR) --exclude=CVS  --exclude=".*" -vchf - `echo $(TARFILES)				    	    \
    | sed "s|^|$$NAME/|g; s| | $$NAME/|g" `				    \
    | $(COMPRESS) > $${NAME}.tar.$(COMPRESS_EXT) ;			    \
   rm $$NAME
