@@ -2,7 +2,7 @@
 
 ;;;
 ;;; Copyright (C) 1997 by John Heidemann <johnh@isi.edu>.
-;;; $Id: bbdb-snarf.el,v 1.8.1.4 1997/10/26 05:00:46 simmonmt Exp $
+;;; $Id: bbdb-snarf.el,v 1.8.1.5 1998/01/06 06:14:36 simmonmt Exp $
 ;;;
 ;;; This file is free software; you can redistribute it and/or modify
 ;;; it under the terms of the GNU General Public License as published
@@ -19,9 +19,12 @@
 ;;;
 
 ;;
-;; $Id: bbdb-snarf.el,v 1.8.1.4 1997/10/26 05:00:46 simmonmt Exp $
+;; $Id: bbdb-snarf.el,v 1.8.1.5 1998/01/06 06:14:36 simmonmt Exp $
 ;;
 ;; $Log: bbdb-snarf.el,v $
+;; Revision 1.8.1.5  1998/01/06 06:14:36  simmonmt
+;; Customized variables and removed autoloads
+;;
 ;; Revision 1.8.1.4  1997/10/26 05:00:46  simmonmt
 ;; Zip code is assumed to be at EOL, so we strip trailing whitespace too
 ;;
@@ -64,11 +67,13 @@
    "\\(-" digit digit digit digit "\\)?"
    "\\>$")
   "regexp matching zip.")
-(defvar bbdb-snarf-web-prop
-  (if (member (list "www") (bbdb-propnames))
-      "www"
-    nil)
-  "What property bbdb should use for the web, or nil to not detect web URLs.")
+(defcustom bbdb-snarf-web-prop "www"
+;  (if (member (list "www") (bbdb-propnames))
+;      "www"
+;    nil)
+  "What property bbdb should use for the web, or nil to not detect web URLs."
+  :group 'bbdb
+  :type 'string)
 
 (defun bbdb-snarf-address-lines ()
   (let
@@ -115,7 +120,6 @@ For (800) 555-1212 it returns a three element list."
 	(nconc try '(0)))
     try))
 
-;;;###autoload
 (defun bbdb-snarf (where)
   "snarf up a bbdb record WHERE the point is.
 We assume things are line-broken and paragraph-bounded.
@@ -138,7 +142,6 @@ patches to internationalize these assumptions are welcome.
    (progn (goto-char where) (forward-paragraph -1) (point))
    (progn (forward-paragraph 1) (point))))
 
-;;;###autoload
 (defun bbdb-snarf-region (begin end)
   "snarf up a bbdb record in the current region.  See `bbdb-snarf' for
 more details."
