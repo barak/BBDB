@@ -32,7 +32,7 @@
 ;;; Read the docstrings; read the texinfo file.
 
 ;;
-;; $Id: bbdb-hooks.el,v 1.75 2003/03/13 22:31:49 fenk Exp $
+;; $Id: bbdb-hooks.el,v 1.76 2003/07/23 07:38:33 fenk Exp $
 ;;
 
 (require 'bbdb)
@@ -698,8 +698,8 @@ get records added for those people you reply to."
              (bbdb/gnus-pop-up-bbdb-buffer))
             ((member major-mode '(rmail-mode rmail-summary-mode))
              (bbdb/rmail-pop-up-bbdb-buffer))
-            ((member major-mode '(mhe-mode mhe-summary-mode))
-             (bbdb/gnus-pop-up-bbdb-buffer))
+            ((member major-mode '(mhe-mode mhe-summary-mode mh-folder-mode))
+             (bbdb/mh-pop-up-bbdb-buffer))
             ))))
 
 (provide 'bbdb-hooks)
