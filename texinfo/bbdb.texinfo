@@ -5,7 +5,7 @@
 @c %**end of header
 
 @c
-@c $Id: bbdb.texinfo,v 1.53 2004/10/13 13:49:05 waider Exp $
+@c $Id: bbdb.texinfo,v 1.54 2005/02/13 14:30:05 waider Exp $
 @c
 
 @ifinfo
@@ -16,20 +16,20 @@
 
 This file documents the Insidious Big Brother Database
 
-This is edition $Revision: 1.53 $ of the BBDB User Manual for BBDB
+This is edition $Revision: 1.54 $ of the BBDB User Manual for BBDB
 version 2.34.
 
 Copyright (c) 1991-1994 Jamie Zawinski <jwz@@netscape.com>
 
 Copyright (c) 1997-1999 Matt Simmons <simmonmt@@acm.org>
 
-Copyright (c) 2000-2004 The BBDB Development Team
+Copyright (c) 2000-present The BBDB Development Team
 @end ifinfo
 
 @titlepage
 @title BBDB User Manual
 @subtitle A phone number and address database program for Emacs
-@subtitle Edition $Revision: 1.53 $, $Date: 2004/10/13 13:49:05 $
+@subtitle Edition $Revision: 1.54 $, $Date: 2005/02/13 14:30:05 $
 
 @author by Jamie Zawinski, Matt Simmons and the BBDB Development Team
 @page
@@ -37,11 +37,11 @@ Copyright @copyright{} 1991-1994 Jamie Zawinski <jwz@@netscape.com>
 
 Copyright @copyright{} 1997-1999 Matt Simmons <simmonmt@@acm.org>
 
-Copyright @copyright{} 2000-2004 The BBDB Development Team
+Copyright @copyright{} 2000-present The BBDB Development Team
 
 @sp 2
-This is edition $Revision: 1.53 $ of the @cite{BBDB User Manual} for BBDB
-version 2.34, $Date: 2004/10/13 13:49:05 $.@refill
+This is edition $Revision: 1.54 $ of the @cite{BBDB User Manual} for BBDB
+version 2.34, $Date: 2005/02/13 14:30:05 $.@refill
 
 @sp 2
 
@@ -1157,6 +1157,10 @@ mail or news-reading interfaces (@xref{Interfaces}.). @refill
 
 @cindex Creating new records
 @cindex Adding new records
+
+There is als @w{@kbd{bbdb-snarf}} (@xref{bbdb-snarf}), which will
+attempt to create a record from a text block. Note that this depends
+on particular formatting and may not do exactly what you want.
 
 @node BBDB Mode, Interfaces, The BBDB, Top
 @section BBDB Mode
