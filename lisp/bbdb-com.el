@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.153 2002/06/30 00:20:41 waider Exp $
+;; $Id: bbdb-com.el,v 1.154 2002/08/19 23:23:34 waider Exp $
 ;;
 
 (require 'bbdb)
@@ -2452,7 +2452,7 @@ Completion behaviour can be controlled with `bbdb-completion-type'."
               (when (not (member rec uniq))
                 (setq uniq (cons rec uniq)
                       nets (bbdb-record-net rec)
-                      name (downcase (bbdb-record-name rec))
+                      name (downcase (or (bbdb-record-name rec) ""))
                       akas (mapcar 'downcase (bbdb-record-aka rec)))
                 (while nets
                   (setq net (car nets))
