@@ -20,9 +20,12 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-srv.el,v 1.54 1998/03/10 07:38:23 simmonmt Exp $
+;; $Id: bbdb-srv.el,v 1.55 1998/04/11 07:07:01 simmonmt Exp $
 ;;
 ;; $Log: bbdb-srv.el,v $
+;; Revision 1.55  1998/04/11 07:07:01  simmonmt
+;; Colin Rafferty's patch adding autoload cookies back
+;;
 ;; Revision 1.54  1998/03/10 07:38:23  simmonmt
 ;; buffer-disable-undo doesn't always return the argument
 ;;
@@ -216,10 +219,12 @@ requested for a couple of seconds."
       (start-itimer name 'bbdb/srv-itimer bbdb/srv-display-delay nil))
     nil))
 
+;;;###autoload
 (fset 'bbdb-srv 'bbdb/srv-handle-headers-with-delay)
 
 (autoload 'bbdb-header-start "bbdb-hooks")
 
+;;;###autoload
 (defun bbdb/srv-auto-create-mail-news-dispatcher ()
   "For use as the value of bbdb/srv-auto-create-p.
 This will try to decide if this is a mail message or a news message, and then
