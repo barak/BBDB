@@ -19,7 +19,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-vm.el,v 1.78 2001/02/07 21:35:36 waider Exp $
+;; $Id: bbdb-vm.el,v 1.79 2001/02/10 14:35:40 waider Exp $
 ;;
 
 (require 'cl)
@@ -345,13 +345,7 @@ configuration of what is being displayed."
       (when (not records)
         (bbdb-undisplay-records)
         (if (get-buffer-window bbdb-buffer-name)
-            (delete-window (get-buffer-window bbdb-buffer-name))))
-
-      ;; Without the following, VM's summary buffer tends to get upset
-      ;; and stuck in a loop. This may well be an Emacs bug; it goes
-      ;; away if you try to (debug) it.
-      (if (vm-fsfemacs-p) (sit-for 0))
-      )))
+            (delete-window (get-buffer-window bbdb-buffer-name)))))))
 
 
 ;; By Alastair Burt <burt@dfki.uni-kl.de>
