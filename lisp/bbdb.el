@@ -34,13 +34,13 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.148 2001/03/01 19:33:54 fenk Exp $
+;; $Id: bbdb.el,v 1.149 2001/03/03 14:23:22 waider Exp $
 ;;
 
 (require 'timezone)
 
 (defconst bbdb-version "2.3")
-(defconst bbdb-version-date "$Date: 2001/03/01 19:33:54 $")
+(defconst bbdb-version-date "$Date: 2001/03/03 14:23:22 $")
 
 ;; File format
 (defconst bbdb-file-format 6)
@@ -119,7 +119,7 @@ prompt the users on how to merge records when duplicates are detected.")
     '(bbdb-version-date
       bbdb-file-format
       bbdb-no-duplicates-p)
-    ;; user variables 
+    ;; user variables
     (sort (apropos-internal "^bbdb"
                             (lambda (symbol) (user-variable-p symbol)))
           (lambda (v1 v2) (string-lessp (format "%s" v1) (format "%s" v2))))
@@ -1630,8 +1630,16 @@ the raw field content and return a string."
   (if (eq 0 (length name)) (setq name nil))
   (if (eq 0 (length net)) (setq net nil))
   (bbdb-records t) ; make sure db is parsed; don't check disk (faster)
-  (let ((name-recs (and name
-                        (bbdb-gethash (downcase name))))
+  (let ((name-recs (if name ;; filter out companies from hash
+                       (let ((recs (bbdb-gethash (downcase name)))
+                             answer)
+                         (while recs
+                           (let ((n-rec (car recs)))
+                             (if (string= (downcase name)
+                                          (downcase (bbdb-record-name n-rec)))
+                                 (setq answer (append recs n-rec)))
+                             (setq recs (cdr recs))))
+                         answer)))
         (net-recs  (if (stringp net) (bbdb-gethash (downcase net))
                      (let (answer)
                        (while (and net (null answer))
@@ -1653,7 +1661,7 @@ the raw field content and return a string."
                       ret name-rec)
               (setq nets (cdr nets))))
           (if name-recs (setq name-recs (cdr name-recs))
-            name-rec)))
+              name-rec)))
       ret)))
 
 (defun bbdb-net-convert (record)
