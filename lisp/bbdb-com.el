@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.155 2002/12/24 00:27:05 kensanata Exp $
+;; $Id: bbdb-com.el,v 1.156 2002/12/24 03:38:26 kensanata Exp $
 ;;
 
 (require 'bbdb)
@@ -2399,11 +2399,14 @@ Completion behaviour can be controlled with `bbdb-completion-type'."
                           (if primary (cons (car recs) match-recs)
                             (append match-recs (list (car recs))))))
                 (setq lst     (cdr lst)
-                      primary nil)))
+                      primary nil))))
 
-            ;; loop to next rec
-            (setq recs    (cdr recs)
-                  matched nil)))
+	  ;; loop to next rec
+	  (setq recs    (cdr recs)
+		matched nil))
+
+	(unless match-recs
+	  (error "only exact matching record unhas net field"))
 
         ;; now replace the text with the expansion
         (delete-region beg end)
