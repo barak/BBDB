@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.127 2002/01/01 23:07:16 waider Exp $
+;; $Id: bbdb-com.el,v 1.128 2002/01/03 10:07:46 fenk Exp $
 ;;
 
 (require 'bbdb)
@@ -2118,7 +2118,7 @@ Completion behaviour can be controlled with `bbdb-completion-type'."
               (or rec
                   (throw 'bbdb-cycling-exit nil))
 
-              (let* ((addrs (bbdb-record-net rec))
+              (let* ((addrs (mapcar 'downcase (bbdb-record-net rec)))
                      (this-addr (or (cadr (member (cadar addr) addrs))
                                     (nth 0 addrs))))
                 (if (= (length addrs) 1)
