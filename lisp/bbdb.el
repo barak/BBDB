@@ -34,7 +34,7 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.169 2001/09/20 16:54:49 fenk Exp $
+;; $Id: bbdb.el,v 1.170 2001/10/06 22:55:46 waider Exp $
 ;;
 
 (require 'timezone)
@@ -58,7 +58,7 @@
  )
 
 (defconst bbdb-version "2.33")
-(defconst bbdb-version-date "$Date: 2001/09/20 16:54:49 $")
+(defconst bbdb-version-date "$Date: 2001/10/06 22:55:46 $")
 
 ;; File format
 (defconst bbdb-file-format 6)
@@ -3363,8 +3363,7 @@ When called interactively with a prefix argument, insert string at point."
     (vm-old                     ; the alternative mail reader
      (add-hook 'vm-load-hook 'bbdb-insinuate-vm))
     (vm                        ; newer versions don't have vm-load-hook
-     (progn (eval-after-load "vm" '(bbdb-insinuate-vm))
-            (error "foo!")))
+     (progn (eval-after-load "vm" '(bbdb-insinuate-vm))))
     (message                    ; the gnus mail user agent
      (add-hook 'message-setup-hook 'bbdb-insinuate-message))
     (reportmail                 ; mail notification
