@@ -5,7 +5,7 @@
 @c %**end of header
 
 @c
-@c $Id: bbdb.texinfo,v 1.51 2003/08/05 12:11:05 waider Exp $
+@c $Id: bbdb.texinfo,v 1.52 2004/10/10 12:26:37 kensanata Exp $
 @c
 
 @ifinfo
@@ -16,7 +16,7 @@
 
 This file documents the Insidious Big Brother Database
 
-This is edition $Revision: 1.51 $ of the BBDB User Manual for BBDB
+This is edition $Revision: 1.52 $ of the BBDB User Manual for BBDB
 version 2.34.
 
 Copyright (c) 1991-1994 Jamie Zawinski <jwz@@netscape.com>
@@ -29,7 +29,7 @@ Copyright (c) 2000-2002 The BBDB Development Team
 @titlepage
 @title BBDB User Manual
 @subtitle A phone number and address database program for Emacs
-@subtitle Edition $Revision: 1.51 $, $Date: 2003/08/05 12:11:05 $
+@subtitle Edition $Revision: 1.52 $, $Date: 2004/10/10 12:26:37 $
 
 @author by Jamie Zawinski, Matt Simmons and the BBDB Development Team
 @page
@@ -40,8 +40,8 @@ Copyright @copyright{} 1997-1999 Matt Simmons <simmonmt@@acm.org>
 Copyright @copyright{} 2000-2002 The BBDB Development Team
 
 @sp 2
-This is edition $Revision: 1.51 $ of the @cite{BBDB User Manual} for BBDB
-version 2.34, $Date: 2003/08/05 12:11:05 $.@refill
+This is edition $Revision: 1.52 $ of the @cite{BBDB User Manual} for BBDB
+version 2.34, $Date: 2004/10/10 12:26:37 $.@refill
 
 @sp 2
 
@@ -1046,6 +1046,7 @@ changing the value of @code{bbdb-finger-host-field}.
 @ref{Gnus Prep}.  For usage details, see @ref{Gnus Features}. The field used
 can be changed by changing the value of @code{bbdb/gnus-score-field}.
 @item mail-alias
+@cindex mail-alias definition
 Value used instead of @code{name} for completion.  @xref{Mail Sending
 Interfaces}.
 @item mail-name
@@ -1659,8 +1660,11 @@ You can use one of the @kbd{M-x bbdb} commands to display the set of
 people that you want to CC the message to, and then execute this command
 to add them to the list.
 
+@unnumberedsubsec Mailing Lists and Mail Aliases
+
 @cindex Mailing lists
 @cindex Mail Aliases
+@cindex mail-alias usage
 @findex bbdb-define-all-aliases
 @findex bbdb-add-or-remove-mail-alias
 @findex define-mail-alias
@@ -3659,18 +3663,13 @@ name (@samp{John} in this example).
 
 @end enumerate
 
-It is commonly known that there are no bugs in the @b{BBDB}. Bugs found
-in defiance of this rule should be submitted to the @code{bbdb-info}
-mailing list (@pxref{Mailing Lists}).  To assist the developers, please
-include the version numbers of the various programs used when the bug
-occurred.  An example report follows.
-
-@example
-BBDB Version:
-Emacs/XEmacs Version:
-Mail/News reader (Gnus, VM, etc) used:
-Bug Description:
-@end example
+@cindex Bug Reports
+It is commonly known that there are no bugs in the @b{BBDB}. Bugs
+found in defiance of this rule should be submitted using @kbd{M-x
+bbdb-submit-bug-report}.  These bug reports will bbe sent to the
+@code{bbdb-info} mailing list (@pxref{Mailing Lists}) and are
+available from public archives.  Other big brothers may be reading
+your bug reports.
 
 @node TODO List, EOL Statements, Known Bugs, The Future
 @subsection TODO List
