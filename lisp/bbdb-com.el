@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.135 2002/01/20 12:51:05 fenk Exp $
+;; $Id: bbdb-com.el,v 1.136 2002/01/21 11:50:54 fenk Exp $
 ;;
 
 (require 'bbdb)
@@ -298,8 +298,7 @@ If possible, you should call `bbdb-redisplay-one-record' instead."
     (setq next-marker (or (nth 2 next-record-cons) (point-max)))
     (delete-region (point) next-marker)
     (if (< position next-marker)
-        (goto-char position)
-      (goto-char (- (point-max) 2)))
+        (goto-char position))
     
     (save-excursion
       (run-hooks 'bbdb-list-hook))
