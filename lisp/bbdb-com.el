@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.134 2002/01/18 17:46:33 fenk Exp $
+;; $Id: bbdb-com.el,v 1.135 2002/01/20 12:51:05 fenk Exp $
 ;;
 
 (require 'bbdb)
@@ -286,7 +286,7 @@ If possible, you should call `bbdb-redisplay-one-record' instead."
       (setq next-record-cons (car (cdr (memq record-cons bbdb-records)))))
   (let ((position (point))
         (marker (nth 2 record-cons))
-        (next-marker (nth 2 next-record-cons))
+        next-marker
         (buffer-read-only nil))
     (bbdb-debug
      (if (null record-cons) (error "doubleplus ungood: record unexists!"))
@@ -295,10 +295,11 @@ If possible, you should call `bbdb-redisplay-one-record' instead."
     (goto-char marker)
     (if delete-p nil
       (bbdb-format-record (car record-cons) (car (cdr record-cons))))
-    (delete-region (point) (or next-marker (point-max)))
-    (if (< position (or next-marker (point-max)))
+    (setq next-marker (or (nth 2 next-record-cons) (point-max)))
+    (delete-region (point) next-marker)
+    (if (< position next-marker)
         (goto-char position)
-      (goto-char (- (or next-marker (point-max)) 2)))
+      (goto-char (- (point-max) 2)))
     
     (save-excursion
       (run-hooks 'bbdb-list-hook))
