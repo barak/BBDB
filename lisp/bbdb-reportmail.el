@@ -51,9 +51,12 @@
 ;;       Initial release.
 
 ;;
-;; $Id: bbdb-reportmail.el,v 1.53 1998/01/06 06:10:06 simmonmt Exp $
+;; $Id: bbdb-reportmail.el,v 1.54 1998/04/11 07:18:55 simmonmt Exp $
 ;;
 ;; $Log: bbdb-reportmail.el,v $
+;; Revision 1.54  1998/04/11 07:18:55  simmonmt
+;; Colin Rafferty's patch adding autoload cookies back
+;;
 ;; Revision 1.53  1998/01/06 06:10:06  simmonmt
 ;; Changed setup documentation and added RCS ID and Log strings
 ;;
@@ -102,6 +105,7 @@ If no corresponding record can be found, the field value is left unaltered."
 	       ad-return-value)
 	      ))))
 
+;;;###autoload
 (defun bbdb-insinuate-reportmail ()
   "Call this function to hook BBDB into reportmail."
   (ad-enable-advice 'display-time-get-field 'around 
