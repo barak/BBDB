@@ -5,9 +5,12 @@
 @c %**end of header
 
 @c
-@c $Id: bbdb.texinfo,v 1.29 2000/08/18 13:34:26 fenk Exp $
+@c $Id: bbdb.texinfo,v 1.30 2000/08/21 08:35:15 waider Exp $
 @c
 @c $Log: bbdb.texinfo,v $
+@c Revision 1.30  2000/08/21 08:35:15  waider
+@c Fix an error in VM doco that prevented file from building
+@c
 @c Revision 1.29  2000/08/18 13:34:26  fenk
 @c * texinfo/bbdb.texinfo (VM Features): Documentation of new VM
 @c 	features.
@@ -62,7 +65,7 @@
 
 This file documents the Insidious Big Brother Database
 
-This is edition $Revision: 1.29 $ of the BBDB User Manual for BBDB 
+This is edition $Revision: 1.30 $ of the BBDB User Manual for BBDB 
 version 2.2.
 
 Copyright (c) 1991-1994 Jamie Zawinski <jwz@@netscape.com>
@@ -73,7 +76,7 @@ Copyright (c) 1997-1999 Matt Simmons <simmonmt@@acm.org>
 @titlepage
 @title BBDB User Manual
 @subtitle A phone number and address database program for Emacs
-@subtitle Edition $Revision: 1.29 $, $Date: 2000/08/18 13:34:26 $
+@subtitle Edition $Revision: 1.30 $, $Date: 2000/08/21 08:35:15 $
 
 @author by Jamie Zawinski and Matt Simmons
 @page
@@ -82,8 +85,8 @@ Copyright @copyright{} 1991-1994 Jamie Zawinski <jwz@@netscape.com>
 Copyright @copyright{} 1997-1999 Matt Simmons <simmonmt@@acm.org>
 
 @sp 2
-This is edition $Revision: 1.29 $ of the @cite{BBDB User Manual} for BBDB
-version 2.2, $Date: 2000/08/18 13:34:26 $.@refill
+This is edition $Revision: 1.30 $ of the @cite{BBDB User Manual} for BBDB
+version 2.2, $Date: 2000/08/21 08:35:15 $.@refill
 
 @sp 2
 
@@ -1895,7 +1898,7 @@ message summary.
 @menu
 * VM Message Summary::                  @b{BBDB} information in message summary
 * VM what records are displayed::
-* VM automatic setup of `vm-set-auto-folder-alist'::
+* VM automatic setup of @code{vm-set-auto-folder-alist}::
 * VM snarfing all email addresses::
 * VM automatic adding of labels::
 @end menu
