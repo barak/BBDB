@@ -19,7 +19,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-gnus.el,v 1.88 2001/10/14 19:55:09 waider Exp $
+;; $Id: bbdb-gnus.el,v 1.89 2002/01/18 11:52:01 fenk Exp $
 ;;
 
 (require 'bbdb)
@@ -32,7 +32,7 @@
 
 ;; Cater for older emacs (19.34) with default Gnus installation.
 (eval-and-compile
-  (condition-case error
+  (condition-case nil
       (progn
         (require 'gnus-win)
         (require 'gnus-sum)
@@ -340,17 +340,18 @@ documentation for the following variables for more details:
 This function is meant to be used with the user function defined in
   `bbdb/gnus-summary-user-format-letter'"
   (let* ((from (mail-header-from header))
-     (data (and bbdb/gnus-summary-show-bbdb-names
-            (condition-case ()
-            (mail-extract-address-components from)
-              (error nil))))
-     (name (car data))
-     (net (car (cdr data)))
-     (record (and data
-              (bbdb-search-simple name
-               (if (and net bbdb-canonicalize-net-hook)
-               (bbdb-canonicalize-address net)
-             net)))))
+         (data (and bbdb/gnus-summary-show-bbdb-names
+                    (condition-case nil
+                        (mail-extract-address-components from)
+                      (error nil))))
+         (name (car data))
+         (net (car (cdr data)))
+         (record (and data
+                      (bbdb-search-simple
+                       name
+                       (if (and net bbdb-canonicalize-net-hook)
+                           (bbdb-canonicalize-address net)
+                         net)))))
     (if (and record name (member (downcase name) (bbdb-record-net record)))
     ;; bogon!
     (setq record nil))
