@@ -26,8 +26,8 @@
 ;;; for improvements and to Michael D. Carney  <carney@ltx-tr.com>
 ;;; for testing and feedback.
 
-;;; $Date: 2001/03/04 19:38:08 $ by $Author: waider $
-;;; $Revision: 1.12 $
+;;; $Date: 2002/01/06 22:22:04 $ by $Author: waider $
+;;; $Revision: 1.13 $
 
 ;;; This file adds the ability to define attributions for Supercite in
 ;;; a BBDB, enables you to retrieve your standard attribution from
@@ -196,6 +196,7 @@ Custom."
 
 ;; insert our hooks - call me from your Emacs initialization file
 ;;;###autoload
+(defvar attribution nil) ;; dammit, supercite!
 (defun bbdb-insinuate-sc ()
   "Call this function to hook BBDB into Supercite."
 
