@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.145 2002/03/12 17:40:08 fenk Exp $
+;; $Id: bbdb-com.el,v 1.146 2002/03/13 11:08:12 fenk Exp $
 ;;
 
 (require 'bbdb)
@@ -2387,6 +2387,7 @@ Completion behaviour can be controlled with `bbdb-completion-type'."
         ;; Update the *BBDB* buffer if desired.
         (if bbdb-completion-display-record
             (let ((bbdb-gag-messages t))
+              (bbdb-pop-up-bbdb-buffer)
               (bbdb-display-records-1 match-recs t)))
         (bbdb-complete-name-cleanup)))
 
