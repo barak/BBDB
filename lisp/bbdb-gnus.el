@@ -19,7 +19,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-gnus.el,v 1.95 2003/03/13 22:31:48 fenk Exp $
+;; $Id: bbdb-gnus.el,v 1.96 2003/03/15 00:32:49 fenk Exp $
 ;;
 
 (require 'bbdb)
@@ -699,7 +699,7 @@ determine the group and spooling priority for a single address."
   (add-hook 'gnus-article-prepare-hook 'bbdb/gnus-pop-up-bbdb-buffer)
   (add-hook 'gnus-save-newsrc-hook 'bbdb-offer-save)
   (define-key gnus-summary-mode-map ":" 'bbdb/gnus-show-sender)
-  (define-key gnus-summary-mode-map ";" 'bbdb/gnus-edit-notes)))
+  (define-key gnus-summary-mode-map ";" 'bbdb/gnus-edit-notes)
 
   ;; Set up user field for use in gnus-summary-line-format
   (let ((get-author-user-fun (intern
