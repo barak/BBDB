@@ -2,7 +2,7 @@
 
 ;;;
 ;;; Copyright (C) 1997 by John Heidemann <johnh@isi.edu>.
-;;; $Id: bbdb-snarf.el,v 1.24 2001/02/19 00:20:20 waider Exp $
+;;; $Id: bbdb-snarf.el,v 1.25 2001/03/04 19:45:33 waider Exp $
 ;;;
 ;;; This file is free software; you can redistribute it and/or modify
 ;;; it under the terms of the GNU General Public License as published
@@ -33,6 +33,7 @@
 ;;;
 
 (require 'bbdb)
+(require 'bbdb-com) ;; for bbdb-parse-phone-number (and other things?)
 
 (defconst digit "[0-9]")
 (defvar bbdb-snarf-phone-regexp
@@ -50,10 +51,7 @@
    "\\>$")
   "regexp matching zip.")
 
-(defcustom bbdb-snarf-web-prop
-  (if (member (list "www") (bbdb-propnames))
-      'www
-    nil)
+(defcustom bbdb-snarf-web-prop 'www
   "What property bbdb should use for the web, or nil to not detect web URLs."
   :group 'bbdb
   :type 'symbol)
