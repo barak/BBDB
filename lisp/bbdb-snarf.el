@@ -2,7 +2,7 @@
 
 ;;;
 ;;; Copyright (C) 1997 by John Heidemann <johnh@isi.edu>.
-;;; $Id: bbdb-snarf.el,v 1.22 2001/01/24 21:00:29 sds Exp $
+;;; $Id: bbdb-snarf.el,v 1.23 2001/02/11 02:09:05 shenghuo Exp $
 ;;;
 ;;; This file is free software; you can redistribute it and/or modify
 ;;; it under the terms of the GNU General Public License as published
@@ -389,7 +389,7 @@ more details."
 (unless (fboundp 'replace-in-string)
   (if (fboundp 'replace-regexp-in-string) ; defined in e21
       (defun replace-in-string (string regexp newtext &optional literal)
-        (replace-regexp-in-string string regexp newtext nil literal))
+        (replace-regexp-in-string regexp newtext string nil literal))
       ;; actually this is `dired-replace-in-string' slightly modified
       (defun replace-in-string (string regexp newtext &optional literal)
         ;; Replace REGEXP with NEWTEXT everywhere in STRING and return result.
