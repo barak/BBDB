@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.106 2001/04/15 14:42:15 waider Exp $
+;; $Id: bbdb-com.el,v 1.107 2001/04/16 11:33:08 waider Exp $
 ;;
 
 (require 'bbdb)
@@ -709,7 +709,7 @@ it is a north american or european phone number by providing a prefix
 argument.  A prefix arg of ^U means it's to be a euronumber, and any
 other prefix arg means it's to be a a structured north american number.
 Otherwise, which style is used is controlled by the variable
-`bbdb-north-american-phone-numbers-p'."
+`bbdb-north-american-phone-numbers-p'.
 
 If you are inserting a new net address, you can have BBDB append a
 default domain to any net address that does not contain one.  Set
