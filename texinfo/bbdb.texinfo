@@ -5,7 +5,7 @@
 @c %**end of header
 
 @c
-@c $Id: bbdb.texinfo,v 1.50 2002/09/17 10:44:50 waider Exp $
+@c $Id: bbdb.texinfo,v 1.51 2003/08/05 12:11:05 waider Exp $
 @c
 
 @ifinfo
@@ -16,7 +16,7 @@
 
 This file documents the Insidious Big Brother Database
 
-This is edition $Revision: 1.50 $ of the BBDB User Manual for BBDB
+This is edition $Revision: 1.51 $ of the BBDB User Manual for BBDB
 version 2.34.
 
 Copyright (c) 1991-1994 Jamie Zawinski <jwz@@netscape.com>
@@ -29,7 +29,7 @@ Copyright (c) 2000-2002 The BBDB Development Team
 @titlepage
 @title BBDB User Manual
 @subtitle A phone number and address database program for Emacs
-@subtitle Edition $Revision: 1.50 $, $Date: 2002/09/17 10:44:50 $
+@subtitle Edition $Revision: 1.51 $, $Date: 2003/08/05 12:11:05 $
 
 @author by Jamie Zawinski, Matt Simmons and the BBDB Development Team
 @page
@@ -40,8 +40,8 @@ Copyright @copyright{} 1997-1999 Matt Simmons <simmonmt@@acm.org>
 Copyright @copyright{} 2000-2002 The BBDB Development Team
 
 @sp 2
-This is edition $Revision: 1.50 $ of the @cite{BBDB User Manual} for BBDB
-version 2.34, $Date: 2002/09/17 10:44:50 $.@refill
+This is edition $Revision: 1.51 $ of the @cite{BBDB User Manual} for BBDB
+version 2.34, $Date: 2003/08/05 12:11:05 $.@refill
 
 @sp 2
 
@@ -2200,10 +2200,11 @@ is part of @code{bbdb-address-formatting-alist}.
 @vindex bbdb-electric-p
 @cindex Electric display
 Whether bbdb mode should be @i{``electric''} like @code{electric-buffer-list}.
-Default: @code{t}.  Basically this means that when you type space after
-@w{@kbd{M-x bbdb}}, your window configuration will be restored to what it was
-before you invoked the db list.  (The @code{bbdb-mode} commands still work as
-well.) @refill
+Default: @code{t}.  What this means is that the BBDB buffer which pops
+up when you use it can be disposed of by pressing the space bar, at
+which point your window configuration will be restored to what it was
+before you invoked the db list.  (The @code{bbdb-mode} commands still
+work as well.) @refill
 
 There are some problems with electric modes; for example, keyboard
 macros and incremental search don't work.  (This is not a bug in BBDB,
