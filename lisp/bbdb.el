@@ -35,7 +35,7 @@
 ;;; |  information plus state information about how you have BBDB set up.    |
 ;;;  ------------------------------------------------------------------------
 ;;;
-;;; $Id: bbdb.el,v 1.218 2004/05/28 14:47:14 fenk Exp $
+;;; $Id: bbdb.el,v 1.219 2005/02/22 13:28:22 waider Exp $
 
 (require 'timezone)
 (eval-when-compile (require 'cl))
@@ -62,7 +62,7 @@
  )
 
 (defconst bbdb-version "2.35")
-(defconst bbdb-version-date "$Date: 2004/05/28 14:47:14 $")
+(defconst bbdb-version-date "$Date: 2005/02/22 13:28:22 $")
 
 (defcustom bbdb-gui (if (fboundp 'display-color-p) ; Emacs 21
                         (display-color-p)
@@ -3021,6 +3021,8 @@ return them."
   (concat "[-,. \t/\\]+\\("
           "[JjSs]r\\.?"
           "\\|V?\\(I\\.?\\)+V?"
+          (concat "\\|"
+                  (regexp-opt bbdb-lastname-prefixes))
           "\\)\\W*\\'"))
 
 (defun bbdb-divide-name (string)
@@ -3704,7 +3706,7 @@ passed as arguments to initiate the appropriate insinuations.
   (define-key bbdb-mode-map " "            'scroll-up)
   )
 
- 
+
 ;;; Support for the various Emacsen.  This is for features that the
 ;;; BBDB adds to itself for different Emacsen.  For definitions of
 ;;; functions that aren't present in various Emacsen (for example,
