@@ -35,13 +35,13 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.91 2000/07/21 10:25:30 waider Exp $
+;; $Id: bbdb.el,v 1.92 2000/07/21 15:18:47 waider Exp $
 ;;
 
 (require 'timezone)
 
 (defconst bbdb-version "2.2")
-(defconst bbdb-version-date "$Date: 2000/07/21 10:25:30 $")
+(defconst bbdb-version-date "$Date: 2000/07/21 15:18:47 $")
 
 ;; File format
 (defconst bbdb-file-format 5)
@@ -2495,7 +2495,6 @@ If CREATE-P is true, then a record may be created, otherwise it won't.
 If PROMPT-TO-CREATE-P is true, then the user will be asked for confirmation
 before the record is created, otherwise it is created without confirmation
 \(assuming that CREATE-P is true\).  "
-  (message "bbdb-annotate-message-sender")
   (let* ((data (if (consp from)
                    from ; if from is a cons, it's pre-parsed (hack hack)
                  (mail-extract-address-components from)))
