@@ -2,7 +2,7 @@
 
 ;;;
 ;;; Copyright (C) 1997 by John Heidemann <johnh@isi.edu>.
-;;; $Id: bbdb-snarf.el,v 1.26 2001/03/17 17:22:15 fenk Exp $
+;;; $Id: bbdb-snarf.el,v 1.27 2001/05/17 17:14:48 fenk Exp $
 ;;;
 ;;; This file is free software; you can redistribute it and/or modify
 ;;; it under the terms of the GNU General Public License as published
@@ -549,10 +549,7 @@ See `bbdb-extract-address-component-handler' for more information."
                  (let ((result
                         (funcall bbdb-extract-address-component-handler
                                  adstring)))
-                   (if (and (listp result) (= 3 (length result))
-                            (stringp (car result))
-                            (stringp (cadr result))
-                            (stringp (caddr result)))
+                   (if (and (listp result) (= 3 (length result)))
                        (progn (add-to-list 'fnadlist (cdr result))
                               (setq adstring (car result)
                                     nomatch nil)))))
