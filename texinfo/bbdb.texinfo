@@ -5,7 +5,7 @@
 @c %**end of header
 
 @c
-@c $Id: bbdb.texinfo,v 1.33 2001/01/03 14:07:56 waider Exp $
+@c $Id: bbdb.texinfo,v 1.34 2001/01/08 15:24:26 waider Exp $
 @c
 
 @ifinfo
@@ -15,7 +15,7 @@
 
 This file documents the Insidious Big Brother Database
 
-This is edition $Revision: 1.33 $ of the BBDB User Manual for BBDB 
+This is edition $Revision: 1.34 $ of the BBDB User Manual for BBDB 
 version 2.2.
 
 Copyright (c) 1991-1994 Jamie Zawinski <jwz@@netscape.com>
@@ -28,7 +28,7 @@ Copyright (c) 2000-2001 The BBDB Development Team
 @titlepage
 @title BBDB User Manual
 @subtitle A phone number and address database program for Emacs
-@subtitle Edition $Revision: 1.33 $, $Date: 2001/01/03 14:07:56 $
+@subtitle Edition $Revision: 1.34 $, $Date: 2001/01/08 15:24:26 $
 
 @author by Jamie Zawinski and Matt Simmons
 @page
@@ -39,8 +39,8 @@ Copyright @copyright{} 1997-1999 Matt Simmons <simmonmt@@acm.org>
 Copyright @copyright{} 2000-2001 The BBDB Development Team
 
 @sp 2
-This is edition $Revision: 1.33 $ of the @cite{BBDB User Manual} for BBDB
-version 2.2, $Date: 2001/01/03 14:07:56 $.@refill
+This is edition $Revision: 1.34 $ of the @cite{BBDB User Manual} for BBDB
+version 2.2, $Date: 2001/01/08 15:24:26 $.@refill
 
 @sp 2
 
@@ -3573,9 +3573,9 @@ Sorting individual types of fields - Sam Steingold's method.
 @item
 Button 3 menus (Mark Moll and Soren Dayton)
 
-@c@item
-@c@b{BBDB}-controlled mail splitting in Gnus.  Add hook for Soren to make
-@csplitting better.  Routine from Brian Edmonds.
+@c @item
+@c @b{BBDB}-controlled mail splitting in Gnus.  Add hook for Soren to make
+@c splitting better.  Routine from Brian Edmonds.
 @c Anyone have contact info for Soren Dayton?
 
 @item
@@ -3605,9 +3605,9 @@ because GNUS runs its exit-hooks too early.  This should be fixed.@refill
 String area codes (German area codes can begin with zeroes) patch from
 @code{Michael Sperber <sperber@@informatik.uni-tuebingen.de>}
 
-@c@item
-@cInternationalization of addresses.  Country code to control formats for
-@cprinting, etc.  Country->Format mapping.
+@c @item
+@c Internationalization of addresses.  Country code to control formats for
+@c printing, etc.  Country->Format mapping.
 
 @item
 Default country variable, similar to @code{bbdb-default-area-code}.
