@@ -19,7 +19,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-vm.el,v 1.86 2001/03/25 20:45:03 fenk Exp $
+;; $Id: bbdb-vm.el,v 1.87 2001/03/26 14:35:43 fenk Exp $
 ;;
 
 (eval-and-compile 
@@ -121,10 +121,8 @@ C-g again it will stop scanning."
 
     (if cache
         (setq records (if bbdb-get-only-first-address-p
-                          (if (cadr cache);; stop it from returning '(nil)
-                              (list (cadr cache))
-                            nil)
-                        (cdr cache)))
+                          (car cache)
+                        cache))
       
       (let ((bbdb-update-records-mode (or bbdb/vm-update-records-mode
                                           bbdb-update-records-mode)))

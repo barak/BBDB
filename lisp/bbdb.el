@@ -34,13 +34,13 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.154 2001/03/25 20:45:57 fenk Exp $
+;; $Id: bbdb.el,v 1.155 2001/03/26 14:35:42 fenk Exp $
 ;;
 
 (require 'timezone)
 
 (defconst bbdb-version "2.33")
-(defconst bbdb-version-date "$Date: 2001/03/25 20:45:57 $")
+(defconst bbdb-version-date "$Date: 2001/03/26 14:35:42 $")
 
 ;; File format
 (defconst bbdb-file-format 6)
@@ -2506,8 +2506,8 @@ If not present or when the records have been modified return nil."
           (mapcar (lambda (record)
                     (if (bbdb-record-deleted-p record)
                         (setq invalid t)))
-                  (cdr records))
-          (if invalid nil records)))))
+                  records))
+        (if invalid nil records))))
 
 (defun bbdb-encache-message (message-key bbdb-records)
   "Cache the BBDB-RECORDS for a message identified by MESSAGE-KEY and
