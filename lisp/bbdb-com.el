@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.150 2002/05/12 22:17:03 waider Exp $
+;; $Id: bbdb-com.el,v 1.151 2002/06/28 17:43:42 fenk Exp $
 ;;
 
 (require 'bbdb)
@@ -2646,7 +2646,7 @@ of all of those people."
           (if use-abbrev-p
               (define-mail-abbrev alias expansion)
             (define-mail-alias alias expansion))
-          (setq alias (or (intern-soft alias
+          (setq alias (or (intern-soft (downcase alias)
                                        (if use-abbrev-p
                                            mail-abbrevs mail-aliases))
                           (error "couldn't find the alias we just defined!")))
