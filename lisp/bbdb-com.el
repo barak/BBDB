@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.71 2000/05/29 22:47:50 waider Exp $
+;; $Id: bbdb-com.el,v 1.72 2000/06/14 16:46:27 waider Exp $
 ;;
 
 (require 'bbdb)
@@ -619,14 +619,22 @@ NOTES is a string, or an alist associating symbols with strings."
                      (bbdb-record-phones record)))
            (and (bbdb-field-shown-p 'address)
              (apply 'nconc
-               (mapcar (lambda (addr)
+               (mapcar (lambda (addr) ;; foreach address...
                 (let ((L (list 'address addr)))
                   (nconc
-                   (car
-                    (mapcar (lambda(street)
-                              (unless (string= "" street) (list L)))
-                            (bbdb-address-streets addr)))
-                   (list L)
+				   ;; count street lines
+				   (apply 'nconc (mapcar (lambda(street)
+										   (unless (string= "" street) 
+											 (list L)))
+										 (bbdb-address-streets addr)))
+
+				   ;; these are all on the same line
+				   (if (or (string= "" (bbdb-address-city addr))
+						   (string= "" (bbdb-address-state addr))
+						   (string= "" (bbdb-address-zip-string addr)))
+					   nil (list L))
+
+				   ;; separate line for country
                    (if (string= "" (bbdb-address-country addr))
                        nil (list L)))))
                    (bbdb-record-addresses record))))
