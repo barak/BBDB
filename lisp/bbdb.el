@@ -35,13 +35,13 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.78 2000/05/02 18:19:16 sds Exp $
+;; $Id: bbdb.el,v 1.79 2000/05/29 22:47:50 waider Exp $
 ;;
 
 (require 'timezone)
 
 (defconst bbdb-version "2.2")
-(defconst bbdb-version-date "$Date: 2000/05/02 18:19:16 $")
+(defconst bbdb-version-date "$Date: 2000/05/29 22:47:50 $")
 
 ;; File format
 (defconst bbdb-file-format 5)
@@ -1045,8 +1045,9 @@ The result looks like this:
 				 (> (length c) 0))
 			     (> (length s) 0)) ", " "")
 		  s "\n"))))
-  (if (= 0 (length (setq str (bbdb-address-country addr)))) nil
-    (indent-to 17) (insert str "\n")))
+  (let ((str (bbdb-address-country addr)))
+    (if (= 0 (length str)) nil
+      (indent-to 17) (insert str "\n"))))
 
 (defun bbdb-format-address-default (addr)
   "Insert formated address ADDR in current buffer.
@@ -1077,8 +1078,9 @@ The result looks like this:
 				 (> (length s) 0))
 			     (> (length z) 0)) "  " "")
 		  z "\n"))))
-  (if (= 0 (length (setq str (bbdb-address-country addr)))) nil
-    (indent-to 17) (insert str "\n")))
+  (let ((str (bbdb-address-country addr)))
+    (if (= 0 (length str)) nil
+      (indent-to 17) (insert str "\n"))))
 
 (defun bbdb-format-address (addr &optional printing)
   "Call appropriate formatting function for address ADDR.
