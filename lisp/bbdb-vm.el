@@ -19,7 +19,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-vm.el,v 1.93 2001/09/20 16:54:23 fenk Exp $
+;; $Id: bbdb-vm.el,v 1.94 2001/11/19 22:13:57 waider Exp $
 ;;
 
 (eval-and-compile
@@ -248,7 +248,7 @@ Respects vm-summary-uninteresting-senders."
 ;;;###autoload
 (defcustom bbdb/vm-set-auto-folder-alist-field 'vm-folder
   "*The field which `bbdb/vm-set-auto-folder-alist' searches for."
-  :group 'bbdb
+  :group 'bbdb-mua-specific-vm
   :type 'symbol)
 
 ;;;###autoload
@@ -268,7 +268,7 @@ parsed a lisp expression and consequently one may do his own tweaks
 in order to get a nice folder name.
 
 The only processing this defun does to the email address is to
-`regexp-quote' it; if you're email circle is small enough, you could
+`regexp-quote' it; if your email circle is small enough, you could
 consider using just the user part of the email address --- the part
 before the @."
   (interactive)
