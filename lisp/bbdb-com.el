@@ -20,20 +20,14 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.112 2001/06/11 18:34:38 waider Exp $
+;; $Id: bbdb-com.el,v 1.113 2001/07/07 23:23:31 waider Exp $
 ;;
 
 (require 'bbdb)
+;;(require 'bbdb-snarf) causes recursive compile!
+(require 'cl)
+(require 'mailabbrev)
 
-(eval-when-compile (require 'cl)) ; for `flet'
-
-(eval-when-compile              ; pacify the compiler
- ;; defined in mailabbrev.el
- (defvar mail-alias-separator-string)
- (defvar mail-abbrevs)
- (defvar mail-aliases))
-
-(autoload 'mail-abbrev-expand-hook "mailabbrev.el")
 
 ;;; Stuff for completion on label fields
 (defcustom bbdb-field-labels
@@ -2106,7 +2100,7 @@ Completion behaviour can be controlled with `bbdb-completion-type'."
              (rec (car (symbol-value sym)))
              (pattern (buffer-substring beg end))
              name the-net nets)
-        (setq the-net (bbdb-extract-address-components pattern t)
+        (setq the-net (funcall bbdb-extract-address-components-func pattern t)
               the-net (car the-net)
               name (car the-net)
               the-net (cadr the-net))
