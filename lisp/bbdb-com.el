@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.138 2002/01/22 12:52:19 fenk Exp $
+;; $Id: bbdb-com.el,v 1.139 2002/01/29 09:37:42 fenk Exp $
 ;;
 
 (require 'bbdb)
@@ -279,8 +279,9 @@ in either the name(s), company, network address, or notes."
 
 (defun bbdb-phones (string elidep)
   "Display all entries in BBDB matching the regexp STRING in the phones field."
-  (interactive "sRegular Expression for Phone Search: \nP"
-               current-prefix-arg)
+  (interactive
+   (list (bbdb-search-prompt "Search records with phone %m regexp: ")
+         current-prefix-arg))
   (let ((bbdb-display-layout (bbdb-grovel-elide-arg elidep)))
     (bbdb-display-records
      (bbdb-search (bbdb-records) nil nil nil nil string))))
@@ -3275,13 +3276,7 @@ C-g again it will stop scanning."
     ;; add-to-list adds at the front so we have to reverse the list in order
     ;; to reflect the order of the records as they appear in the headers.
     (setq records (nreverse records))
-
-    (if (not (or bbdb-silent-running
-                 bbdb-gag-messages
-                 (not records)
-                 (> (length records) 1)))
-        ;; maybe this should just be omitted, really.
-        (message "Updating of BBDB records finished"))
+    
     records))
 
 (defun bbdb-get-help-window (message)
