@@ -34,11 +34,14 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.61 1998/03/13 09:53:38 simmonmt Exp $
+;; $Id: bbdb.el,v 1.62 1998/03/16 07:48:00 simmonmt Exp $
 ;;
 ;; $Log: bbdb.el,v $
+;; Revision 1.62  1998/03/16 07:48:00  simmonmt
+;; Released 2.00
+;;
 ;; Revision 1.61  1998/03/13 09:53:38  simmonmt
-;; Colin's change for migration error message
+;; Colin's changes for the error message and for field size
 ;;
 ;; Revision 1.60  1998/03/10 07:45:44  simmonmt
 ;; Fixed defface standin.  Created widget (bbdb-alist-with-header) for
@@ -92,8 +95,8 @@
 
 (require 'timezone)
 
-(defconst bbdb-version "1.91")
-(defconst bbdb-version-date "$Date: 1998/03/13 09:53:38 $")
+(defconst bbdb-version "2.00")
+(defconst bbdb-version-date "$Date: 1998/03/16 07:48:00 $")
 
 ;; File format
 (defconst bbdb-file-format 3)
