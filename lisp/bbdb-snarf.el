@@ -2,7 +2,7 @@
 
 ;;;
 ;;; Copyright (C) 1997 by John Heidemann <johnh@isi.edu>.
-;;; $Id: bbdb-snarf.el,v 1.10 1999/01/01 02:59:09 simmonmt Exp $
+;;; $Id: bbdb-snarf.el,v 1.11 1999/01/25 06:20:28 simmonmt Exp $
 ;;;
 ;;; This file is free software; you can redistribute it and/or modify
 ;;; it under the terms of the GNU General Public License as published
@@ -126,6 +126,7 @@ patches to internationalize these assumptions are welcome.
    (progn (goto-char where) (forward-paragraph -1) (point))
    (progn (forward-paragraph 1) (point))))
 
+;;;###autoload
 (defun bbdb-snarf-region (begin end)
   "snarf up a bbdb record in the current region.  See `bbdb-snarf' for
 more details."
@@ -371,6 +372,3 @@ more details."
   new-record)
 
 (provide 'bbdb-snarf)
-
-
-
