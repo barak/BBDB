@@ -19,7 +19,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-gnus.el,v 1.68 2000/07/21 14:37:39 waider Exp $
+;; $Id: bbdb-gnus.el,v 1.69 2000/08/28 15:34:16 waider Exp $
 ;;
 
 (require 'bbdb)
@@ -512,10 +512,5 @@ Redefine `bbdb/gnus-summary-in-bbdb-format-letter' to a different letter."
 ;         (t 'bbdb/gnus-score))
 ;     'bbdb/gnus-score))
   )
-
-;;;###autoload
-(defun bbdb-insinuate-message ()
-  "Call this function to hook BBDB into `message-mode'."
-  (define-key message-mode-map "\M-\t" 'bbdb-complete-name))
 
 (provide 'bbdb-gnus)
