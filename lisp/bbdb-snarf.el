@@ -2,7 +2,7 @@
 
 ;;;
 ;;; Copyright (C) 1997 by John Heidemann <johnh@isi.edu>.
-;;; $Id: bbdb-snarf.el,v 1.8 1997/10/11 16:49:24 simmonmt Exp $
+;;; $Id: bbdb-snarf.el,v 1.9 1998/12/31 06:51:11 simmonmt Exp $
 ;;;
 ;;; This file is free software; you can redistribute it and/or modify
 ;;; it under the terms of the GNU General Public License as published
@@ -50,11 +50,14 @@
    "\\(-" digit digit digit digit "\\)?"
    "\\>$")
   "regexp matching zip.")
-(defvar bbdb-snarf-web-prop
-  (if (member (list "web") (bbdb-propnames))
-      "web"
+
+(defcustom bbdb-snarf-web-prop
+  (if (member (list "www") (bbdb-propnames))
+      'www
     nil)
-  "What property bbdb should use for the web, or nil to not detect web URLs.")
+  "What property bbdb should use for the web, or nil to not detect web URLs."
+  :group 'bbdb
+  :type 'symbol)
 
 (defun bbdb-snarf-address-lines ()
   (let
@@ -349,7 +352,7 @@ patches to internationalize these assumptions are welcome.
       (if (not (member (car old-notes) new-notes))
 	  (setq new-notes (append new-notes (list (car old-notes)))))
       (setq old-notes (cdr old-notes)))
-    (bbdb-record-set-notes new-record new-notes))
+    (bbdb-record-set-raw-notes new-record new-notes))
   ;; return
   new-record)
 
