@@ -34,13 +34,13 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.69 1999/01/01 03:01:10 simmonmt Exp $
+;; $Id: bbdb.el,v 1.70 1999/01/25 05:57:27 simmonmt Exp $
 ;;
 
 (require 'timezone)
 
-(defconst bbdb-version "2.00.05")
-(defconst bbdb-version-date "$Date: 1999/01/01 03:01:10 $")
+(defconst bbdb-version "2.00.06")
+(defconst bbdb-version-date "$Date: 1999/01/25 05:57:27 $")
 
 ;; File format
 (defconst bbdb-file-format 3)
@@ -1093,6 +1093,8 @@ bbdb-elided-display will be consulted instead by mail and news.")
 			    (list x bbdb-elided-display (make-marker))))
 			  records)))
   (let ((b (current-buffer))
+        (temp-buffer-setup-hook nil)
+        (temp-buffer-show-hook nil)
 	(first (car (car records))))
     (with-output-to-temp-buffer bbdb-buffer-name
       (set-buffer bbdb-buffer-name)
