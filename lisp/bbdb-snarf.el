@@ -2,7 +2,7 @@
 
 ;;;
 ;;; Copyright (C) 1997 by John Heidemann <johnh@isi.edu>.
-;;; $Id: bbdb-snarf.el,v 1.38 2003/03/07 22:12:41 fenk Exp $
+;;; $Id: bbdb-snarf.el,v 1.39 2004/02/01 11:30:48 waider Exp $
 ;;;
 ;;; This file is free software; you can redistribute it and/or modify
 ;;; it under the terms of the GNU General Public License as published
@@ -320,7 +320,7 @@ more details."
 ;       "some test cases")
 
 
-  
+
 (defun bbdb-merge-interactively (name company nets addrs phones notes)
   "Interactively add a new record; arguments same as \\[bbdb-create-internal]."
   (let*
@@ -329,8 +329,9 @@ more details."
        (lastname (nth 1 f-l-name))
        (aka nil)
        (new-record
-    (vector firstname lastname aka company phones addrs nets notes
-           (make-vector bbdb-cache-length nil)))
+        (vector firstname lastname aka company phones addrs
+                (if (listp nets) nets (list nets)) notes
+                (make-vector bbdb-cache-length nil)))
        (old-record (bbdb-search-simple name nets)))
     (if old-record
     (progn
