@@ -2,7 +2,7 @@
 
 ;;;
 ;;; Copyright (C) 1997 by John Heidemann <johnh@isi.edu>.
-;;; $Id: bbdb-snarf.el,v 1.20 2000/10/20 09:37:14 fenk Exp $
+;;; $Id: bbdb-snarf.el,v 1.21 2000/11/16 12:00:04 fenk Exp $
 ;;;
 ;;; This file is free software; you can redistribute it and/or modify
 ;;; it under the terms of the GNU General Public License as published
@@ -426,11 +426,14 @@ capitalize words and change order of names when separated by a comma."
       ;; name <address>
       ("\\(\\b[^<\",]*\\b\\)\\s-*<\\([^>]+\\)>"
        1 2)
-      ;; name <address>
+      ;; <address>
       ("<\\([^>]+\\)>" nil 2)
       ;; address (name)
       ("\\(\\b[^<\",()]+\\b\\)\\s-*(\\([^)]+\\))"
        2 1)
+      ;; firstname.lastname@host
+      ("\\b\\(\\([^@]+\\.[^@]+\\)@[0-9a-z._-]+\\)\\b"
+       (bbdb-snarf-nice-real-name (match-string 2 adstring)) 1)
       ;; user@host
       ("\\b\\(\\([0-9a-z._-]+\\)@[0-9a-z._-]+\\)\\b"
        nil 1)
