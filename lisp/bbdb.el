@@ -35,13 +35,13 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.98 2000/08/01 11:01:09 waider Exp $
+;; $Id: bbdb.el,v 1.99 2000/08/01 15:02:04 waider Exp $
 ;;
 
 (require 'timezone)
 
 (defconst bbdb-version "2.2")
-(defconst bbdb-version-date "$Date: 2000/08/01 11:01:09 $")
+(defconst bbdb-version-date "$Date: 2000/08/01 15:02:04 $")
 
 ;; File format
 (defconst bbdb-file-format 5)
@@ -2560,10 +2560,10 @@ before the record is created, otherwise it is created without confirmation
                                        (downcase tmp)))))))
           ;; have a message-name, not the same as old name.
           (cond (bbdb-readonly-p nil)
-                ((and (not bbdb-quiet-about-name-mismatches)
+                ((and bbdb-quiet-about-name-mismatches
                       (not bbdb-silent-running)
                       old-name)
-                 (message "name mismatch: \"%s\" changed to \"%s\""
+                 (message "name mismatch: \"%s\" has changed to \"%s\""
                           (bbdb-record-name record) name)
                  (sit-for 1))
                 ((or created-p
