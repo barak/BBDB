@@ -2,7 +2,7 @@
 
 ;;;
 ;;; Copyright (C) 1997 by John Heidemann <johnh@isi.edu>.
-;;; $Id: bbdb-snarf.el,v 1.28 2001/07/07 23:15:35 waider Exp $
+;;; $Id: bbdb-snarf.el,v 1.29 2001/08/03 20:31:09 waider Exp $
 ;;;
 ;;; This file is free software; you can redistribute it and/or modify
 ;;; it under the terms of the GNU General Public License as published
@@ -574,7 +574,7 @@ See `bbdb-extract-address-component-handler' for more information."
 
 ;;; alternative name parser
 ;;; ###autoload
-(defun bbdb-rfc822-addresses ( addrline )
+(defun bbdb-rfc822-addresses ( addrline &optional ignore-errors)
   "Split ADDRLINE into a list of parsed addresses.
 
 You can't do this with rfc822.el in any sort of useful way because it discards
