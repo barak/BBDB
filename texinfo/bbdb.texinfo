@@ -5,14 +5,17 @@
 @c %**end of header
 
 @c
-@c $Id: bbdb.texinfo,v 1.12 1997/12/01 05:23:09 simmonmt Exp $
+@c $Id: bbdb.texinfo,v 1.13 1997/12/01 14:51:57 simmonmt Exp $
 @c
 @c $Log: bbdb.texinfo,v $
+@c Revision 1.13  1997/12/01 14:51:57  simmonmt
+@c Documented new startup procedure
+@c
+@c Revision 1.13  1997/12/01 14:51:57  simmonmt
+@c Documented new startup procedure
+@c
 @c Revision 1.12  1997/12/01 05:23:09  simmonmt
 @c Removed `BBDB database' per jwz, added prerequisites section, more
-@c description of special fields, and dissection of record format in
-@c internals section
-@c
 @c description of special fields, and dissection of record format in
 @c internals section
 @c
@@ -25,7 +28,7 @@
 @c
 @c
 
-This is edition $Revision: 1.12 $ of the BBDB User Manual for BBDB version 1.55unoff.
+This is edition $Revision: 1.13 $ of the BBDB User Manual for BBDB version 1.55unoff.
 This file documents the Insidious Big Brother Database
 Copyright (c) 1991, 1992, 1993, 1994 Jamie Zawinski <jwz@@netscape.com>
 Copyright (c) 1997 Matt Simmons <simmonmt@@acm.org>
@@ -34,20 +37,20 @@ Copyright (c) 1991-1994 Jamie Zawinski <jwz@@netscape.com>
 Copyright (c) 1997-1998 Matt Simmons <simmonmt@@acm.org>
 @end ifinfo
 
-@subtitle Edition $Revision: 1.12 $, $Date: 1997/12/01 05:23:09 $
+@subtitle Edition $Revision: 1.13 $, $Date: 1997/12/01 14:51:57 $
 @title BBDB User Manual
 @subtitle A phone number and address database program for Emacs
-@subtitle Edition $Revision: 1.12 $, $Date: 1997/12/01 05:23:09 $
+@subtitle Edition $Revision: 1.13 $, $Date: 1997/12/01 14:51:57 $
 Copyright @copyright{} 1991, 1992, 1993, 1994 Jamie Zawinski <jwz@@netscape.com>
 @author by Jamie Zawinski and Matt Simmons
 Copyright @copyright{} 1997 Matt Simmons <simmonmt@@acm.org>
 Copyright @copyright{} 1991-1994 Jamie Zawinski <jwz@@netscape.com>
 
-This is edition $Revision: 1.12 $ of the @cite{BBDB User Manual} for BBDB
-version 1.55unoff, $Date: 1997/12/01 05:23:09 $.@refill
+This is edition $Revision: 1.13 $ of the @cite{BBDB User Manual} for BBDB
+version 1.55unoff, $Date: 1997/12/01 14:51:57 $.@refill
 @sp 2
-This is edition $Revision: 1.12 $ of the @cite{BBDB User Manual} for BBDB
-version 1.59unoff, $Date: 1997/12/01 05:23:09 $.@refill
+This is edition $Revision: 1.13 $ of the @cite{BBDB User Manual} for BBDB
+version 1.59unoff, $Date: 1997/12/01 14:51:57 $.@refill
 
 @sp 2
 
@@ -470,18 +473,13 @@ file@footnote{@file{.emacs} for FSF Emacs and XEmacs <= 20.3,
 @file{.xemacs/init.el} for XEmacs >= 20.3}:
 
 The simplest way to configure the @b{BBDB} is to include the following
-@exdent (autoload 'bbdb         "bbdb-com" "Insidious Big Brother Database" t)
-@exdent (autoload 'bbdb-name    "bbdb-com" "Insidious Big Brother Database" t)
-@exdent (autoload 'bbdb-company "bbdb-com" "Insidious Big Brother Database" t)
-@exdent (autoload 'bbdb-net     "bbdb-com" "Insidious Big Brother Database" t)
-@exdent (autoload 'bbdb-notes   "bbdb-com" "Insidious Big Brother Database" t)
-@exdent (autoload 'bbdb-insinuate-vm       "bbdb-vm"    "Hook BBDB into VM")
-@exdent (autoload 'bbdb-insinuate-rmail    "bbdb-rmail" "Hook BBDB into RMAIL")
-@exdent (autoload 'bbdb-insinuate-mh       "bbdb-mhe"   "Hook BBDB into MH-E")
-@exdent (autoload 'bbdb-insinuate-gnus     "bbdb-gnus"  "Hook BBDB into GNUS")
-@exdent (autoload 'bbdb-insinuate-sendmail "bbdb"       "Hook BBDB into sendmail")
+forms in your Emacs configuration file:
+
 @example
 @code{(require 'bbdb)}
+@code{(bbdb-initialize)}
+@end example
+
 Next, you need to add mailer-specific forms to your Emacs configuration
 file to configure your mailer(s) to use the @b{BBDB}.  The sections
 below describe the steps necessary to get the @b{BBDB} to work with each 
