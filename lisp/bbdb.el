@@ -35,13 +35,13 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.96 2000/07/27 16:40:11 sds Exp $
+;; $Id: bbdb.el,v 1.97 2000/08/01 10:42:05 waider Exp $
 ;;
 
 (require 'timezone)
 
 (defconst bbdb-version "2.2")
-(defconst bbdb-version-date "$Date: 2000/07/27 16:40:11 $")
+(defconst bbdb-version-date "$Date: 2000/08/01 10:42:05 $")
 
 ;; File format
 (defconst bbdb-file-format 5)
@@ -1461,9 +1461,9 @@ news interfaces.  If `bbdb-pop-up-elided-display' is unbound, then
 
 (defmacro bbdb-build-name (f l)
   (list 'downcase
-        (list 'if (list 'and f l)
-              (list 'concat f " " l)
-              (list 'or f l ""))))
+        (list 'if (list '= (list 'length f) 0) l
+              (list 'if (list '= (list 'length l) 0) f
+                    (list 'concat f " " l)))))
 
 (defun bbdb-remove! (e l)
   (if (null l) l
