@@ -5,7 +5,7 @@
 ;; Author: Kevin Davidson tkld@quadstone.com
 ;; Maintainer: Kevin Davidson tkld@quadstone.com
 ;; Created: 10 Nov 1997
-;; Version: $Revision: 1.2 $
+;; Version: $Revision: 1.3 $
 ;; Keywords: PGP BBDB message mailcrypt
 
  
@@ -27,7 +27,7 @@
 ;; LCD Archive Entry:
 ;; bbdb-pgp|Kevin Davidson|tkld@quadstone.com
 ;; |Use BBDB to store PGP preferences
-;; |$Date: 2002/10/18 10:54:34 $|$Revision: 1.2 $|~/packages/bbdb-pgp.el
+;; |$Date: 2002/10/20 18:03:42 $|$Revision: 1.3 $|~/packages/bbdb-pgp.el
 
 ;;; Commentary:
 ;;
@@ -69,6 +69,9 @@
 
 ;;; Change log:
 ;; $Log: bbdb-pgp.el,v $
+;; Revision 1.3  2002/10/20 18:03:42  waider
+;; *** empty log message ***
+;;
 ;; Revision 1.2  2002/10/18 10:54:34  waider
 ;; allows bbdb-pgp.el to be configured to use message.el MML tags to perform
 ;; the signing and encryption, instead of only plain Mailcrypt which is not
@@ -100,28 +103,55 @@
 (require 'bbdb)
 (require 'mailcrypt)
 
-(defconst bbdb/pgp-version (substring "$Revision: 1.2 $" 11 -2)
-  "$Id: bbdb-pgp.el,v 1.2 2002/10/18 10:54:34 waider Exp $
+(defconst bbdb/pgp-version (substring "$Revision: 1.3 $" 11 -2)
+  "$Id: bbdb-pgp.el,v 1.3 2002/10/20 18:03:42 waider Exp $
 
 Report bugs to: Kevin Davidson tkld@quadstone.com")
 
-(defvar bbdb/pgp-field 'pgp-mail
-  "*Field to use in BBDB to store PGP preferences.
-If this field's value in a record is \"encrypt\" then messages are
-encrypted. If it is \"sign\" then messages are signed.")
+;;;###autoload
+(defgroup bbdb-utilities-pgp nil
+  "Automatically sign and/or encrypt outgoing messages."
+  :link '(emacs-library-link :tag "Lisp Source File" "bbdb-pgp.el")
+  :group 'bbdb-utilities)
 
-(defvar bbdb/pgp-method 'mailcrypt
+
+(defcustom bbdb/pgp-field 'pgp-mail
+  "*Field to use in BBDB to store PGP preferences.
+
+If this field's value in a record is \"encrypt\" then messages are
+encrypted. If it is \"sign\" then messages are signed."
+  :type 'symbol
+  :tag "BBDB Field"
+  :require 'bbdb
+  :group 'bbdb-utilities-pgp)
+
+(defcustom bbdb/pgp-method 'mailcrypt
   "*How to sign or encrypt messages.
+
 'mailcrypt     means use Mailcrypt.
 'mml-pgp       means add MML tags for Message to use old PGP format
 'mml-pgpmime   means add MML tags for Message to use PGP/MIME
-'mml-smime     means add MML tags for Message to use S/MIME")
+'mml-smime     means add MML tags for Message to use S/MIME"
+  :type '(choice
+	  (const :tag "Mailcrypt" mailcrypt :require 'mailcrypt)
+	  (const :tag "MML PGP" mml-pgp :require 'mml)
+	  (const :tag "MML PGP/MIME" mml-pgpmime :require 'mml)
+	  (const :tag "MML S/MIME" mml-smime :require 'mml))
+  :tag "Signing/Encryption Method"
+  :group 'bbdb-utilities-pgp)
 
-(defvar bbdb/pgp-default-action nil
+(defcustom bbdb/pgp-default-action nil
   "*Default action when sending a message and the recipient is not in BBDB.
+
 nil         means do nothing.
 'encrypt    means encrypt message.
-'sign       means sign message.")
+'sign       means sign message."
+  :type '(choice
+	  (const :tag "Do Nothing")
+	  (const :tag "Encrypt" encrypt)
+	  (const :tag "Sign" sign))
+  :tag "Default Action"
+  :group 'bbdb-utilities-pgp)
 
 (defun bbdb/pgp-get-pgp (name address)
   "Look up user NAME and ADDRESS in BBDB and return the PGP preference."
