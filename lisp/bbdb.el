@@ -35,7 +35,7 @@
 ;;; |  information plus state information about how you have BBDB set up.    |
 ;;;  ------------------------------------------------------------------------
 ;;;
-;;; $Id: bbdb.el,v 1.180 2002/01/10 21:03:15 waider Exp $
+;;; $Id: bbdb.el,v 1.181 2002/01/15 22:53:47 waider Exp $
 
 (require 'timezone)
 (require 'cl)
@@ -58,8 +58,8 @@
  (require 'sendmail) ; for mail-mode-map
  )
 
-(defconst bbdb-version "2.33")
-(defconst bbdb-version-date "$Date: 2002/01/10 21:03:15 $")
+(defconst bbdb-version "2.34")
+(defconst bbdb-version-date "$Date: 2002/01/15 22:53:47 $")
 
 ;; File format
 (defconst bbdb-file-format 6)
