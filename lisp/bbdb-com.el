@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.63 1998/12/30 06:15:59 simmonmt Exp $
+;; $Id: bbdb-com.el,v 1.64 1999/01/25 06:03:10 simmonmt Exp $
 ;;
 
 (require 'bbdb)
@@ -2221,15 +2221,10 @@ standard place."
   (require 'info)
   (if bbdb-inside-electric-display
       (bbdb-electric-throw-to-execute '(bbdb-info))
-    (let ((file bbdb-info-file)
-	  (Info-directory (and (boundp 'Info-directory) Info-directory)))
-      (if file
-	  (setq file (expand-file-name file Info-directory))
-	(setq file (expand-file-name "bbdb" Info-directory))
-	(or (file-exists-p file)
-	    (setq file (concat file ".info"))))
-      (or (file-exists-p file) (error "Info file %s doesn't exist" file))
-      (let ((Info-directory (file-name-directory file)))
+    (let ((file (or bbdb-info-file "bbdb")))
+      (if (file-name-directory file)
+	  (let ((Info-directory (file-name-directory file)))
+	    (Info-goto-node (format "(%s)Top" file)))
 	(Info-goto-node (format "(%s)Top" file))))))
 
 ;;;###autoload
