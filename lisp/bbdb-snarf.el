@@ -2,7 +2,7 @@
 
 ;;;
 ;;; Copyright (C) 1997 by John Heidemann <johnh@isi.edu>.
-;;; $Id: bbdb-snarf.el,v 1.8.1.3 1997/10/12 00:11:06 simmonmt Exp $
+;;; $Id: bbdb-snarf.el,v 1.8.1.4 1997/10/26 05:00:46 simmonmt Exp $
 ;;;
 ;;; This file is free software; you can redistribute it and/or modify
 ;;; it under the terms of the GNU General Public License as published
@@ -19,9 +19,13 @@
 ;;;
 
 ;;
-;; $Id: bbdb-snarf.el,v 1.8.1.3 1997/10/12 00:11:06 simmonmt Exp $
+;; $Id: bbdb-snarf.el,v 1.8.1.4 1997/10/26 05:00:46 simmonmt Exp $
 ;;
 ;; $Log: bbdb-snarf.el,v $
+;; Revision 1.8.1.4  1997/10/26 05:00:46  simmonmt
+;; Zip code is assumed to be at EOL, so we strip trailing whitespace too
+;;
+;;
 ;; Revision 1.8.1.3  1997/10/12 00:11:06  simmonmt
 ;; Changed `web' field name default to `www'.  Patched name-finding
 ;; routine to look for first line that contains \sw.  Patched email
@@ -150,9 +154,12 @@ more details."
       (erase-buffer)
       (insert text)
 
-      ;; toss indentation
+      ;; toss beginning and trailing space
       (goto-char (point-min))
       (while (re-search-forward "^[ \t]+" (point-max) t)
+	(replace-match ""))
+      (goto-char (point-min))
+      (while (re-search-forward "\\s +$" (point-max) t)
 	(replace-match ""))
 
       ;; first, pick out phone numbers
