@@ -19,7 +19,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-vm.el,v 1.87 2001/03/26 14:35:43 fenk Exp $
+;; $Id: bbdb-vm.el,v 1.88 2001/05/17 17:16:30 fenk Exp $
 ;;
 
 (eval-and-compile 
@@ -81,9 +81,9 @@ the right net.
 The default is to annotate only new messages."
   :group 'bbdb-mua-specific-vm
   :type '(choice (const :tag "annotating all messages"
-                        'annotating)
+                        annotating)
                  (const :tag "annotating no messages"
-                        'searching)
+                        searching)
                  (const :tag "annotating only new messages"
                         (if (vm-new-flag msg) 'annotating 'searching))
                  (sexp  :tag "user defined")))
@@ -98,8 +98,11 @@ The default is to annotate only new messages."
 (defun bbdb/vm-update-records (&optional offer-to-create)
   "Returns the records corresponding to the current VM message,
 creating or modifying them as necessary.  A record will be created if
-bbdb/mail-auto-create-p is non-nil, or if OFFER-TO-CREATE is true and
+bbdb/mail-auto-create-p is non-nil or if OFFER-TO-CREATE is true, and
 the user confirms the creation.
+
+The variable `bbdb/vm-update-records-mode' controls what actions 
+are performed and it might override `bbdb-update-records-mode'.
 
 When hitting C-g once you will not be asked anymore for new people listed
 in this message, but it will search only for existing records.  When hitting
@@ -253,13 +256,13 @@ Respects vm-summary-uninteresting-senders."
 (defun bbdb/vm-alternate-full-name (address)
   (if address
       (let ((entry (bbdb-search-simple
-            nil
-            (if (and address bbdb-canonicalize-net-hook)
-            (bbdb-canonicalize-address address)
-              address))))
-    (if entry
-        (or (bbdb-record-getprop entry 'mail-name)
-        (bbdb-record-name entry))))))
+                    nil
+                    (if (and address bbdb-canonicalize-net-hook)
+                        (bbdb-canonicalize-address address)
+                      address))))
+        (if entry
+            (or (bbdb-record-getprop entry 'mail-name)
+                (bbdb-record-name entry))))))
 
 
 ;; From: Mark Thomas <mthomas@jprc.com>
