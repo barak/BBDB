@@ -32,7 +32,7 @@
 ;;; Read the docstrings; read the texinfo file.
 
 ;;
-;; $Id: bbdb-hooks.el,v 1.69 2002/01/13 22:13:34 waider Exp $
+;; $Id: bbdb-hooks.el,v 1.70 2002/01/14 21:55:54 waider Exp $
 ;;
 
 (require 'bbdb)
@@ -44,13 +44,15 @@
         (require 'gnus)
         (require 'bbdb-gnus))
     (error nil))
-  (condition-case ()
+  (condition-case()
       (progn
         (require 'vm)
         (require 'bbdb-vm))
     (error nil))
   (autoload 'mh-show "mh-e")
-  (require 'bbdb-rmail))
+  (condition-case()
+      (require 'bbdb-rmail)
+    (error nil)))
 
 (defvar rmail-buffer)
 (defvar mh-show-buffer)
