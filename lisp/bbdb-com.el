@@ -20,10 +20,20 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.79 2000/08/10 19:11:01 fenk Exp $
+;; $Id: bbdb-com.el,v 1.80 2000/08/14 15:24:11 sds Exp $
 ;;
 
 (require 'bbdb)
+
+(eval-when-compile (require 'cl)) ; for `flet'
+
+(eval-when-compile              ; pacify the compiler
+ ;; defined in mailabbrev.el
+ (defvar mail-alias-separator-string)
+ (defvar mail-abbrevs)
+ (defvar mail-aliases))
+
+(autoload 'mail-abbrev-expand-hook "mailabbrev.el")
 
 (defmacro bbdb-grovel-elide-arg (arg)
   (list 'if arg
@@ -1634,7 +1644,7 @@ the name is always included."
               (or (fboundp 'vm-mail-internal)
                   (load-library "vm-reply")))) ; 5.31 or earlier
       (vm-session-initialization)
-      (vm-mail-internal nil to subject)
+      (vm-mail-internal nil to subj)
       (run-hooks 'vm-mail-hook)
       (run-hooks 'vm-mail-mode-hook))
       ((eq type 'message)
@@ -2154,10 +2164,10 @@ of all of those people."
 					      bbdb-define-all-aliases-field)
 			 ","))
 	(if (not bbdb-silent-running)
-	    (warn "record \"\" unhas network addresses"
-		  (bbdb-record-name record)))
+	    (bbdb-warn "record \"\" unhas network addresses"
+                       (bbdb-record-name record)))
 	(setq aliases nil))
-      
+
       (while aliases
         (if (setq match (assoc (car aliases) result))
             (nconc match (cons record nil))
@@ -2203,7 +2213,7 @@ of all of those people."
 
 (defun bbdb-get-mail-aliases ()
   "Return a list of mail aliases used in the BBDB.
-The format is suitable for `completing-read'." 
+The format is suitable for `completing-read'."
   (let* ((target (cons bbdb-define-all-aliases-field "."))
 	 (records (bbdb-search (bbdb-records) nil nil nil target))
 	 result aliases)
@@ -2235,13 +2245,13 @@ The new alias will only be added if it isn't there yet."
 			((equal records 'one) (list (bbdb-current-record t)))
 			(t records))))
     (while records
-      (setq record (car records)
-	    oldaliases (bbdb-record-getprop record propsym))
-      (if oldaliases (setq oldaliases (bbdb-split oldaliases ",")))
-      (if delete (setq oldaliases (delete newalias oldaliases))
-	(add-to-list 'oldaliases newalias))
-      (setq oldaliases (bbdb-join oldaliases ", "))
-      (bbdb-record-putprop record propsym oldaliases)
+      (let* ((record (car records))
+             (oldaliases (bbdb-record-getprop record propsym)))
+        (if oldaliases (setq oldaliases (bbdb-split oldaliases ",")))
+        (if delete (setq oldaliases (delete newalias oldaliases))
+            (add-to-list 'oldaliases newalias))
+        (setq oldaliases (bbdb-join oldaliases ", "))
+        (bbdb-record-putprop record propsym oldaliases))
       (setq records (cdr records)))
   (if do-all-p
       (bbdb-redisplay-records)
