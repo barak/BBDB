@@ -32,7 +32,7 @@
 ;;; Read the docstrings; read the texinfo file.
 
 ;;
-;; $Id: bbdb-hooks.el,v 1.65 2001/05/17 17:14:11 fenk Exp $
+;; $Id: bbdb-hooks.el,v 1.66 2001/08/31 15:08:09 fenk Exp $
 ;;
 
 (require 'bbdb)
@@ -306,12 +306,27 @@ a different value when in mail as when in news.
 
 See also variables `bbdb-auto-notes-ignore' and `bbdb-auto-notes-ignore-all'."
   :group 'bbdb-noticing-records
-  :type '(repeat (bbdb-alist-with-header
-          (string :tag "Header name")
-          (repeat (cons
-               (regexp :tag "Regexp to match on header value")
-               (string :tag "String for notes if regexp matches")))
-          )))
+  :type '(repeat
+          (bbdb-alist-with-header
+           (string :tag "Header name")
+           (repeat (choice
+                    (const nil)
+                    (cons :tag "Value Pair"
+                          (regexp :tag "Regexp to match on header value")
+                          (string :tag "String for notes if regexp matches"))
+                    (list :tag "Replacement list"
+                          (regexp :tag "Regexp to match on header value")
+                          (choice :tag "Record field"
+                                  (const notes :tag "Notes")
+                                  (const company :tag "Company")
+                                  (symbol :tag "Other"))
+                          (choice :tag "Regexp match"
+                                  (string :tag "Replacement string")
+                                  (integer :tag "Subexpression match")
+                                  (function :tag "Callback Function"))
+                          (choice :tag "Replace previous contents"
+                                  (const :tag "No" nil)
+                                  (const :tag "Yes" t))))))))
 
 (defcustom bbdb-auto-notes-ignore nil
   "Alist of headers and regexps to ignore in `bbdb-auto-notes-hook'.
