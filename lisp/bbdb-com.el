@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.165 2003/04/02 08:16:16 fenk Exp $
+;; $Id: bbdb-com.el,v 1.166 2003/07/24 08:32:08 fenk Exp $
 ;;
 
 (require 'bbdb)
@@ -3380,7 +3380,10 @@ C-g again it will stop scanning."
       (condition-case nil
           (progn
             (setq hits
-                  (cond ((eq bbdb-update-records-mode 'annotating)
+                  (cond ((null (cadr bbdb-address))
+                         ;; ignore emtpy addrs, e.g. (??? nil)
+                         nil)
+                        ((eq bbdb-update-records-mode 'annotating)
                          (list;; search might return a list
                           (bbdb-annotate-message-sender
                            bbdb-address t
