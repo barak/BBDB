@@ -2,7 +2,7 @@
 
 ;;;
 ;;; Copyright (C) 1997 by John Heidemann <johnh@isi.edu>.
-;;; $Id: bbdb-snarf.el,v 1.8.1.2 1997/10/11 18:05:57 simmonmt Exp $
+;;; $Id: bbdb-snarf.el,v 1.8.1.3 1997/10/12 00:11:06 simmonmt Exp $
 ;;;
 ;;; This file is free software; you can redistribute it and/or modify
 ;;; it under the terms of the GNU General Public License as published
@@ -17,6 +17,17 @@
 ;;; along with GNU Emacs; see the file COPYING.  If not, write to
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 ;;;
+
+;;
+;; $Id: bbdb-snarf.el,v 1.8.1.3 1997/10/12 00:11:06 simmonmt Exp $
+;;
+;; $Log: bbdb-snarf.el,v $
+;; Revision 1.8.1.3  1997/10/12 00:11:06  simmonmt
+;; Changed `web' field name default to `www'.  Patched name-finding
+;; routine to look for first line that contains \sw.  Patched email
+;; routine to strip angle brackets from front and back of address.
+;;
+;;
 
 ;;;
 ;;; bbdb-snarf is code to pick addresses, phones, and such out of a
@@ -50,8 +61,8 @@
    "\\>$")
   "regexp matching zip.")
 (defvar bbdb-snarf-web-prop
-  (if (member (list "web") (bbdb-propnames))
-      "web"
+  (if (member (list "www") (bbdb-propnames))
+      "www"
     nil)
   "What property bbdb should use for the web, or nil to not detect web URLs.")
 
@@ -172,7 +183,7 @@ more details."
 
       ;; next e-mail
       (goto-char (point-min))
-      (while (re-search-forward "[^ \t\n]+@[^ \t\n]+" (point-max) t)
+      (while (re-search-forward "[^ \t\n<]+@[^ \t\n>]+" (point-max) t)
 	(setq nets (append nets (list (match-string 0))))
 	(replace-match ""))
 
@@ -180,9 +191,14 @@ more details."
 
       ;; name
       (goto-char (point-min))
-      (forward-line 1)
-      (setq name (buffer-substring (point-min) (1- (point))))
-      (delete-region (point-min) (point))
+      (let (namebegin)
+	;; This check is horribly english-centric (I think)
+	(while (/= (char-syntax (char-after (point))) ?w)
+	  (forward-line 1))
+	(setq namebegin (point))
+	(re-search-forward "\\(\\sw\\|[ -\.,]\\)*\\sw" nil t)
+	(setq name (match-string 0))
+	(delete-region (match-beginning 0) (match-end 0)))
       
       ;; address
       (goto-char (point-min))
