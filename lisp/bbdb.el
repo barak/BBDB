@@ -35,7 +35,7 @@
 ;;; |  information plus state information about how you have BBDB set up.    |
 ;;;  ------------------------------------------------------------------------
 ;;;
-;;; $Id: bbdb.el,v 1.208 2003/04/02 08:16:19 fenk Exp $
+;;; $Id: bbdb.el,v 1.209 2003/04/09 17:30:01 waider Exp $
 
 (require 'timezone)
 (eval-when-compile (require 'cl))
@@ -62,7 +62,7 @@
  )
 
 (defconst bbdb-version "2.35")
-(defconst bbdb-version-date "$Date: 2003/04/02 08:16:19 $")
+(defconst bbdb-version-date "$Date: 2003/04/09 17:30:01 $")
 
 (defcustom bbdb-gui (if (fboundp 'display-color-p) ; Emacs 21
             (display-color-p)
@@ -732,10 +732,15 @@ Database initialization function `bbdb-initialize' is run."
 (defvar bbdb-mode-search-map nil
   "Keymap for Insidious Big Brother Database searching")
 
-;; This value should be OK (but not optimal for Emacs, at least) with
-;; both Emacs and XEmacs.
-(defvar bbdb-file-coding-system 'iso-2022-7bit
-  "Coding system used for reading and writing `bbdb-file'.")
+;; iso-2022-7bit should be OK (but not optimal for Emacs, at least --
+;; emacs-mule would be better) with both Emacs 21 and XEmacs.  Emacs
+;; 22 will really need utf-8-emacs.
+(defconst bbdb-file-coding-system (if (fboundp 'coding-system-p)
+				      (if (coding-system-p 'utf-8-emacs)
+					  'utf-8-emacs
+					'iso-2022-7bit))
+  "Coding system used for reading and writing `bbdb-file'.
+This should not be changed by users.")
 
 (defvar bbdb-suppress-changed-records-recording nil
   "Whether to record changed records in variable `bbdb-changed-records'.
