@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.166 2003/07/24 08:32:08 fenk Exp $
+;; $Id: bbdb-com.el,v 1.167 2003/07/24 09:43:17 fenk Exp $
 ;;
 
 (require 'bbdb)
@@ -1914,6 +1914,7 @@ the name is always included."
                         ((featurep 'vm) 'vm)
                         ((featurep 'message) 'message)
                         ((featurep 'mew) 'mew)
+                        ((featurep 'gnus) 'gnus)
                         (t 'mail)))))
     (cond
      ((eq type 'mh)
@@ -1938,6 +1939,8 @@ the name is always included."
       (mew-send to nil subj))
      ((eq type 'compose-mail)
       (compose-mail to subj))
+     ((eq type 'gnus)
+      (gnus-msg-mail to subj))
      (t
       (error "bbdb-send-mail-style must be vm, mh, message, compose-mail, or rmail")))))
 
