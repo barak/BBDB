@@ -5,7 +5,7 @@
 @c %**end of header
 
 @c
-@c $Id: bbdb.texinfo,v 1.44 2001/11/19 23:40:19 waider Exp $
+@c $Id: bbdb.texinfo,v 1.45 2002/01/06 22:30:54 waider Exp $
 @c
 
 @ifinfo
@@ -15,7 +15,7 @@
 
 This file documents the Insidious Big Brother Database
 
-This is edition $Revision: 1.44 $ of the BBDB User Manual for BBDB
+This is edition $Revision: 1.45 $ of the BBDB User Manual for BBDB
 version 2.2.
 
 Copyright (c) 1991-1994 Jamie Zawinski <jwz@@netscape.com>
@@ -28,7 +28,7 @@ Copyright (c) 2000-2001 The BBDB Development Team
 @titlepage
 @title BBDB User Manual
 @subtitle A phone number and address database program for Emacs
-@subtitle Edition $Revision: 1.44 $, $Date: 2001/11/19 23:40:19 $
+@subtitle Edition $Revision: 1.45 $, $Date: 2002/01/06 22:30:54 $
 
 @author by Jamie Zawinski and Matt Simmons
 @page
@@ -39,8 +39,8 @@ Copyright @copyright{} 1997-1999 Matt Simmons <simmonmt@@acm.org>
 Copyright @copyright{} 2000-2001 The BBDB Development Team
 
 @sp 2
-This is edition $Revision: 1.44 $ of the @cite{BBDB User Manual} for BBDB
-version 2.2, $Date: 2001/11/19 23:40:19 $.@refill
+This is edition $Revision: 1.45 $ of the @cite{BBDB User Manual} for BBDB
+version 2.2, $Date: 2002/01/06 22:30:54 $.@refill
 
 @sp 2
 
@@ -1568,14 +1568,14 @@ Briefly, the forms for these functions are:
 
 @table @b
 @item Gnus
-@code{(setq gnus-Startup-hook 'bbdb-insinuate-gnus)} @i{for Gnus 3.14 or older}@*
-@code{(setq gnus-startup-hook 'bbdb-insinuate-gnus)} @i{for Gnus 3.15 or newer}
+@code{(add-hook 'gnus-Startup-hook 'bbdb-insinuate-gnus)} @i{for Gnus 3.14 or older}@*
+@code{(add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus)} @i{for Gnus 3.15 or newer}
 @item MH-E
-@code{(setq mh-folder-mode-hook 'bbdb-insinuate-mh)}
+@code{(add-hook 'mh-folder-mode-hook 'bbdb-insinuate-mh)}
 @item RMAIL
-@code{(setq rmail-mode-hook 'bbdb-insinuate-rmail)}
+@code{(add-hook 'rmail-mode-hook 'bbdb-insinuate-rmail)}
 @item sendmail
-@code{(setq mail-setup-hook 'bbdb-insinuate-sendmail)}
+@code{(add-hook 'mail-setup-hook 'bbdb-insinuate-sendmail)}
 @item VM
 @code{(bbdb-insinuate-vm)} @i{Add to @file{~/.vm} file}
 @end table
@@ -3654,9 +3654,9 @@ name (@samp{John} in this example).
 
 It is commonly known that there are no bugs in the @b{BBDB}. Bugs found
 in defiance of this rule should be submitted to the @code{bbdb-info}
-mailing list.  To assist the developers, please include the version
-numbers of the various programs used when the bug occurred.  An example
-report follows.
+mailing list (@pxref{Mailing Lists}).  To assist the developers, please
+include the version numbers of the various programs used when the bug
+occurred.  An example report follows.
 
 @example
 BBDB Version:
