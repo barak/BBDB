@@ -19,7 +19,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-gnus.el,v 1.62 1999/01/25 05:20:13 simmonmt Exp $
+;; $Id: bbdb-gnus.el,v 1.63 1999/01/25 05:21:31 simmonmt Exp $
 ;;
 
 (require 'bbdb)
@@ -430,7 +430,7 @@ addresses better than the traditionally static global scorefile."
 		       (if (not (and score net)) nil
 			 (mapconcat
 			  (lambda (addr)
-			    (concat "(\"" addr "\" " score ")\n"))
+			    (format "(\"%s\" %s)\n" addr score))
 			  net ""))))
 		   (bbdb-records) "")
 		  "))"))))
