@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.152 2002/06/29 23:49:15 waider Exp $
+;; $Id: bbdb-com.el,v 1.153 2002/06/30 00:20:41 waider Exp $
 ;;
 
 (require 'bbdb)
@@ -3056,12 +3056,14 @@ field `finger-host' (default value of `bbdb-finger-host-field')."
                           (copy-sequence (bbdb-record-finger-host
                                           (car record)))))))
       (setq record (cdr record)))
-    (save-excursion
-      (with-output-to-temp-buffer bbdb-finger-buffer-name
-        (set-buffer bbdb-finger-buffer-name)
-        (make-local-variable 'bbdb-remaining-addrs-to-finger)
-        (setq bbdb-remaining-addrs-to-finger (cdr addrs))
-        (bbdb-finger-internal (car addrs))))))
+    (if (car addrs)
+        (save-excursion
+          (with-output-to-temp-buffer bbdb-finger-buffer-name
+            (set-buffer bbdb-finger-buffer-name)
+            (make-local-variable 'bbdb-remaining-addrs-to-finger)
+            (setq bbdb-remaining-addrs-to-finger (cdr addrs))
+            (bbdb-finger-internal (car addrs))))
+      (error "Nothing to finger!"))))
 
 
 (defun bbdb-remove-duplicate-nets (records)
