@@ -19,9 +19,13 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-gnus.el,v 1.52 1997/09/28 06:00:17 simmonmt Exp $
+;; $Id: bbdb-gnus.el,v 1.53 1997/10/11 23:57:24 simmonmt Exp $
 ;;
 ;; $Log: bbdb-gnus.el,v $
+;; Revision 1.53  1997/10/11 23:57:24  simmonmt
+;; Created bbdb-insinuate-message to set M-t binding in message-mode so I
+;; don't have to load gnus first.
+;;
 ;; Revision 1.52  1997/09/28 06:00:17  simmonmt
 ;; Fix to accomodate nil gnus-single-article-buffer
 ;;
@@ -203,5 +207,9 @@ bbdb/gnus-lines-and-from.)")
 	 (bbdb-add-hook 'gnus-save-newsrc-hook 'bbdb-offer-save)
 	 (define-key gnus-summary-mode-map ":" 'bbdb/gnus-show-sender)
 	 (define-key gnus-summary-mode-map ";" 'bbdb/gnus-edit-notes))))
+
+(defun bbdb-insinuate-message ()
+  "Call this function to hook BBDB into message-mode."
+  (define-key message-mode-map "\M-\t" 'bbdb-complete-name))
 
 (provide 'bbdb-gnus)
