@@ -35,7 +35,7 @@
 ;;; |  information plus state information about how you have BBDB set up.    |
 ;;;  ------------------------------------------------------------------------
 ;;;
-;;; $Id: bbdb.el,v 1.213 2003/07/24 09:43:17 fenk Exp $
+;;; $Id: bbdb.el,v 1.214 2003/08/05 12:29:30 waider Exp $
 
 (require 'timezone)
 (eval-when-compile (require 'cl))
@@ -62,7 +62,7 @@
  )
 
 (defconst bbdb-version "2.35")
-(defconst bbdb-version-date "$Date: 2003/07/24 09:43:17 $")
+(defconst bbdb-version-date "$Date: 2003/08/05 12:29:30 $")
 
 (defcustom bbdb-gui (if (fboundp 'display-color-p) ; Emacs 21
                         (display-color-p)
@@ -355,6 +355,7 @@ This variable also affects dialing."
   :set (lambda( symb val )
          (if (or (and (stringp val)
                       (string-match "^[0-9]+$" val))
+                 (integerp val)
                  (null val))
              (set symb val)
            (error "%s must contain digits only." symb))))
@@ -3398,14 +3399,14 @@ You can also set this to a function returning a buffer name."
         buffer-list (append (list (current-buffer)
                                   (get-buffer-create new-name))
                             buffer-list))
-  
+
   (save-excursion
     (while buffer-list
       (set-buffer (car buffer-list))
       (make-local-variable 'bbdb-buffer-name)
       (setq bbdb-buffer-name new-name)
       (setq buffer-list (cdr buffer-list)))))
-      
+
 (defun bbdb-pop-up-bbdb-buffer (&optional horiz-predicate)
   "Find the largest window on the screen, and split it, displaying the
 *BBDB* buffer in the bottom 'bbdb-pop-up-target-lines' lines (unless
@@ -3426,7 +3427,7 @@ not clutter the buffer-list."
     (when (and bbdb-multiple-buffers (not (eq major-mode 'bbdb-mode)))
       (bbdb-multiple-buffers-set-name (list b)))
     (setq new-bbdb-buffer-name bbdb-buffer-name)
-    
+
     ;; now get the pop-up
     (if (get-buffer-window new-bbdb-buffer-name)
         nil
