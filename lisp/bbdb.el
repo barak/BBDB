@@ -35,13 +35,13 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.97 2000/08/01 10:42:05 waider Exp $
+;; $Id: bbdb.el,v 1.98 2000/08/01 11:01:09 waider Exp $
 ;;
 
 (require 'timezone)
 
 (defconst bbdb-version "2.2")
-(defconst bbdb-version-date "$Date: 2000/08/01 10:42:05 $")
+(defconst bbdb-version-date "$Date: 2000/08/01 11:01:09 $")
 
 ;; File format
 (defconst bbdb-file-format 5)
@@ -407,6 +407,7 @@ Should be 'vm, 'mh, 'mail, or 'message (or nil, meaning guess.)"
                  (const :tag "Use MH-E to send mail" mh)
                  (const :tag "Use send-mail mode to send mail" mail)
                  (const :tag "Use Message to send mail" message)
+                 (const :tag "Use compose-mail to send mail" compose-mail)
                  (const :tag "Guess which package to use" nil)))
 
 (defcustom bbdb-offer-save t
