@@ -35,7 +35,7 @@
 ;;; |  information plus state information about how you have BBDB set up.    |
 ;;;  ------------------------------------------------------------------------
 ;;;
-;;; $Id: bbdb.el,v 1.198 2002/12/25 15:06:00 kensanata Exp $
+;;; $Id: bbdb.el,v 1.199 2003/01/30 10:46:10 waider Exp $
 
 (require 'timezone)
 (eval-when-compile (require 'cl))
@@ -62,7 +62,7 @@
  )
 
 (defconst bbdb-version "2.35")
-(defconst bbdb-version-date "$Date: 2002/12/25 15:06:00 $")
+(defconst bbdb-version-date "$Date: 2003/01/30 10:46:10 $")
 
 (defcustom bbdb-gui (if (fboundp 'display-color-p) ; Emacs 21
             (display-color-p)
@@ -2963,7 +2963,7 @@ If not present or when the records have been modified return nil."
             (invalid nil))
         (when records
           (setq records (cdr records))
-          (mapc (lambda (record)
+          (bbdb-mapc (lambda (record)
                   (if (bbdb-record-deleted-p record)
                       (setq invalid t)))
                 records))

@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.158 2003/01/02 15:52:31 waider Exp $
+;; $Id: bbdb-com.el,v 1.159 2003/01/30 10:46:09 waider Exp $
 ;;
 
 (require 'bbdb)
@@ -2484,9 +2484,9 @@ Completion behaviour can be controlled with `bbdb-completion-type'."
             uniq nets net name akas)
         ;; Now collect all the dwim-addresses for each completion, but only
         ;; once for each record!  Add it if the net is part of the completions
-        (mapc
+        (bbdb-mapc
          (lambda (sym)
-           (mapc
+           (bbdb-mapc
             (lambda (rec)
               (when (not (member rec uniq))
                 (setq uniq (cons rec uniq)
