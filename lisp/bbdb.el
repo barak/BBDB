@@ -35,13 +35,13 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.79 2000/05/29 22:47:50 waider Exp $
+;; $Id: bbdb.el,v 1.80 2000/06/14 14:46:02 waider Exp $
 ;;
 
 (require 'timezone)
 
 (defconst bbdb-version "2.2")
-(defconst bbdb-version-date "$Date: 2000/05/29 22:47:50 $")
+(defconst bbdb-version-date "$Date: 2000/06/14 14:46:02 $")
 
 ;; File format
 (defconst bbdb-file-format 5)
@@ -291,8 +291,8 @@ to a record already in the database with the same network address.  As in,
 \"John Smith <jqs@frob.com>\" versus \"John Q. Smith <jqs@frob.com>\".
 Normally you will be asked if you want to change it."
   :group 'bbdb-noticing-records
-  :type '(choice (const :tag "Prompt for name changes" t)
-		 (const :tag "Do not prompt for name changes" nil)))
+  :type '(choice (const :tag "Prompt for name changes" nil)
+				 (const :tag "Do not prompt for name changes" t)))
 
 (defcustom bbdb-use-alternate-names t
   "*If this is true, then when bbdb notices a name change, it will ask you
