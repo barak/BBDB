@@ -35,7 +35,7 @@
 ;;; |  information plus state information about how you have BBDB set up.    |
 ;;;  ------------------------------------------------------------------------
 ;;;
-;;; $Id: bbdb.el,v 1.219 2005/02/22 13:28:22 waider Exp $
+;;; $Id: bbdb.el,v 1.220 2005/03/19 12:01:56 waider Exp $
 
 (require 'timezone)
 (eval-when-compile (require 'cl))
@@ -62,7 +62,7 @@
  )
 
 (defconst bbdb-version "2.35")
-(defconst bbdb-version-date "$Date: 2005/02/22 13:28:22 $")
+(defconst bbdb-version-date "$Date: 2005/03/19 12:01:56 $")
 
 (defcustom bbdb-gui (if (fboundp 'display-color-p) ; Emacs 21
                         (display-color-p)
@@ -746,9 +746,11 @@ Database initialization function `bbdb-initialize' is run."
 ;; emacs-mule would be better) with both Emacs 21 and XEmacs.  Emacs
 ;; 22 will really need utf-8-emacs.
 (defconst bbdb-file-coding-system (if (fboundp 'coding-system-p)
-                      (if (coding-system-p 'utf-8-emacs)
-                      'utf-8-emacs
-                    'iso-2022-7bit))
+                      (cond ((coding-system-p 'utf-8-emacs)
+			     'utf-8-emacs)
+			    ((coding-system-p 'mule-utf-8)
+			     'mule-utf-8)
+			    (t 'iso-2022-7bit)))
   "Coding system used for reading and writing `bbdb-file'.
 This should not be changed by users.")
 
