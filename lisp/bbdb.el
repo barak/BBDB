@@ -34,13 +34,13 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.119 2000/11/01 17:31:38 sds Exp $
+;; $Id: bbdb.el,v 1.120 2000/11/02 22:58:23 sds Exp $
 ;;
 
 (require 'timezone)
 
 (defconst bbdb-version "2.2")
-(defconst bbdb-version-date "$Date: 2000/11/01 17:31:38 $")
+(defconst bbdb-version-date "$Date: 2000/11/02 22:58:23 $")
 
 ;; File format
 (defconst bbdb-file-format 5)
@@ -276,7 +276,8 @@ you should reload `bbdb-file'."
          (unless (primep val)
            (error "`%s' must be prime, not %s" symb val))
          (set symb val)
-         (bbdb-records)
+         (when (fboundp 'bbdb-records)
+           (bbdb-records))
          val))
 
 (defcustom bbdb-default-area-code nil
