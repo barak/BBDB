@@ -1,9 +1,12 @@
 # Makefile for the Insidious Big Brother Database.
 # Original Author: Jamie Zawinski (jwz@netscape.com)
 #
-# $Id: Makefile,v 1.4 1998/01/06 06:45:39 simmonmt Exp $
+# $Id: Makefile,v 1.5 1998/01/06 06:48:50 simmonmt Exp $
 #
 # $Log: Makefile,v $
+# Revision 1.5  1998/01/06 06:48:50  simmonmt
+# Fixed bug
+#
 # Revision 1.4  1998/01/06 06:45:39  simmonmt
 # Added deploy target.  Added migrate.el
 #
@@ -128,10 +131,11 @@ deploy:
 	    exit 1 ; \
 	  fi ; \
 	done ; \
-	if [ -z "$REVTAG" ] ; then \
+	if [ -z "$(REVTAG)" ] ; then \
 	  echo "REVTAG needs to be set" ; \
+	  exit 1 ; \
 	fi ; \
-	rcs "-n$REVTAG": RCS/* ; \
+	rcs "-n$(REVTAG)": RCS/* ; \
 	co -kv RCS/*
 
 clean:
