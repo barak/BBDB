@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.164 2003/03/28 10:26:15 waider Exp $
+;; $Id: bbdb-com.el,v 1.165 2003/04/02 08:16:16 fenk Exp $
 ;;
 
 (require 'bbdb)
@@ -2730,14 +2730,13 @@ of all of those people."
 
 (defun bbdb-mail-abbrev-expand-hook (records)
   (mail-abbrev-expand-hook)
-  (save-excursion
-    (when bbdb-completion-display-record
-      (if bbdb-use-pop-up
-          (bbdb-pop-up-bbdb-buffer))
-      (let ((bbdb-gag-messages t))
-        (bbdb-display-records-1
-         (mapcar (lambda (x) (bbdb-search-simple nil x)) records)
-         t)))))
+  (when bbdb-completion-display-record
+    (if bbdb-use-pop-up
+        (bbdb-pop-up-bbdb-buffer))
+    (let ((bbdb-gag-messages t))
+      (bbdb-display-records-1
+       (mapcar (lambda (x) (bbdb-search-simple nil x)) records)
+       t))))
 
 (defun bbdb-get-mail-aliases ()
   "Return a list of mail aliases used in the BBDB.
