@@ -3,7 +3,7 @@ dnl configure.ac --- configuration setup for BBDB
 dnl Author:        Didier Verna <didier@xemacs.org>
 dnl Maintainer:    Didier Verna <didier@xemacs.org>, Waider <waider@waider.ie>
 dnl Created:       Tue Nov 14 18:28:52 2000
-dnl Last Revision: $Date: 2002/01/18 18:11:31 $
+dnl Last Revision: $Date: 2002/03/20 20:10:03 $
 
 dnl Copyright (C) 2000-2001 Didier Verna
 
@@ -30,7 +30,7 @@ BBDB_PRE_INIT
 AC_INIT([BBDB], [BBDB_VERSION], [bbdb-info@lists.sourceforge.net])
 
 AC_COPYRIGHT([Copyright (C) 2000-2001 Didier Verna <didier@xemacs.org>.])
-AC_REVISION([$Revision: 2.3 $])
+AC_REVISION([$Revision: 2.4 $])
 
 AC_CONFIG_SRCDIR([configure.ac])
 dnl We only have install-sh right now, so it's not worth adding an aux
@@ -42,7 +42,8 @@ AC_CONFIG_FILES([Makefile
                  lisp/Makefile
                  texinfo/Makefile
                  tex/Makefile
-                 utils/Makefile])
+                 utils/Makefile
+                 testing/Makefile])
 
 dnl Common system utilities checking:
 AC_PROG_MAKE_SET
