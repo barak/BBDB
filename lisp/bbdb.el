@@ -34,13 +34,13 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.161 2001/06/10 00:28:03 waider Exp $
+;; $Id: bbdb.el,v 1.162 2001/06/28 21:12:20 waider Exp $
 ;;
 
 (require 'timezone)
 
 (defconst bbdb-version "2.33")
-(defconst bbdb-version-date "$Date: 2001/06/10 00:28:03 $")
+(defconst bbdb-version-date "$Date: 2001/06/28 21:12:20 $")
 
 ;; File format
 (defconst bbdb-file-format 6)
@@ -1639,7 +1639,8 @@ the raw field content and return a string."
                          (while recs
                            (let ((n-rec (car recs)))
                              (if (string= (downcase name)
-                                          (downcase (bbdb-record-name n-rec)))
+                                          (downcase
+                                           (or (bbdb-record-name n-rec) "")))
                                  (setq answer (append recs (list n-rec))))
                              (setq recs (cdr recs))))
                          answer)))
