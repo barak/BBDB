@@ -35,7 +35,7 @@
 ;;; |  information plus state information about how you have BBDB set up.    |
 ;;;  ------------------------------------------------------------------------
 ;;;
-;;; $Id: bbdb.el,v 1.217 2004/03/22 15:23:33 waider Exp $
+;;; $Id: bbdb.el,v 1.218 2004/05/28 14:47:14 fenk Exp $
 
 (require 'timezone)
 (eval-when-compile (require 'cl))
@@ -62,7 +62,7 @@
  )
 
 (defconst bbdb-version "2.35")
-(defconst bbdb-version-date "$Date: 2004/03/22 15:23:33 $")
+(defconst bbdb-version-date "$Date: 2004/05/28 14:47:14 $")
 
 (defcustom bbdb-gui (if (fboundp 'display-color-p) ; Emacs 21
                         (display-color-p)
@@ -875,6 +875,13 @@ that holds the number of slots."
   phones addresses net raw-notes
   cache
   )
+
+;; HACKHACK
+(defmacro bbdb-record-set-net (vector value)
+  "We redefine the set-binding for 'net to detect changes"
+  (list 'progn
+        (list 'aset vector 6 value)
+        (list 'setq 'bbdb-define-all-aliases-needs-rebuilt t)))
 
 (put 'company 'field-separator "; ")
 (put 'notes 'field-separator "\n")
@@ -3691,8 +3698,13 @@ passed as arguments to initiate the appropriate insinuations.
   (define-key bbdb-mode-map [(=)]          'delete-other-windows)
   (define-key bbdb-mode-map [(c)]          'bbdb-create)
   (define-key bbdb-mode-map [(C)]          'bbdb-changed)
-  (define-key bbdb-mode-map [(b)]          'bbdb))
+  (define-key bbdb-mode-map [(b)]          'bbdb)
 
+  (define-key bbdb-mode-map [delete]       'scroll-down)
+  (define-key bbdb-mode-map " "            'scroll-up)
+  )
+
+ 
 ;;; Support for the various Emacsen.  This is for features that the
 ;;; BBDB adds to itself for different Emacsen.  For definitions of
 ;;; functions that aren't present in various Emacsen (for example,
