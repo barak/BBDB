@@ -5,7 +5,7 @@
 @c %**end of header
 
 @c
-@c $Id: bbdb.texinfo,v 1.41 2001/03/17 17:28:48 fenk Exp $
+@c $Id: bbdb.texinfo,v 1.42 2001/04/19 10:59:11 fenk Exp $
 @c
 
 @ifinfo
@@ -15,7 +15,7 @@
 
 This file documents the Insidious Big Brother Database
 
-This is edition $Revision: 1.41 $ of the BBDB User Manual for BBDB
+This is edition $Revision: 1.42 $ of the BBDB User Manual for BBDB
 version 2.2.
 
 Copyright (c) 1991-1994 Jamie Zawinski <jwz@@netscape.com>
@@ -28,7 +28,7 @@ Copyright (c) 2000-2001 The BBDB Development Team
 @titlepage
 @title BBDB User Manual
 @subtitle A phone number and address database program for Emacs
-@subtitle Edition $Revision: 1.41 $, $Date: 2001/03/17 17:28:48 $
+@subtitle Edition $Revision: 1.42 $, $Date: 2001/04/19 10:59:11 $
 
 @author by Jamie Zawinski and Matt Simmons
 @page
@@ -39,8 +39,8 @@ Copyright @copyright{} 1997-1999 Matt Simmons <simmonmt@@acm.org>
 Copyright @copyright{} 2000-2001 The BBDB Development Team
 
 @sp 2
-This is edition $Revision: 1.41 $ of the @cite{BBDB User Manual} for BBDB
-version 2.2, $Date: 2001/03/17 17:28:48 $.@refill
+This is edition $Revision: 1.42 $ of the @cite{BBDB User Manual} for BBDB
+version 2.2, $Date: 2001/04/19 10:59:11 $.@refill
 
 @sp 2
 
@@ -2269,6 +2269,24 @@ tastefully. @refill
 @vindex bbdb-pop-up-target-lines
 Desired number of lines in a @b{VM/MH/RMAIL/GNUS} pop-up @b{BBDB} window,
 default 5. @refill
+
+@item bbdb-pop-up-elided-display-fields
+@vindex bbdb-pop-up-elided-display-fields
+A the list of fields which should be displayed in elided display.
+E.g. set this to @code{'(phones net addresses)} in order to get the list of
+phone numbers, net addresses and addresses listed.
+
+You may use any valid BBDB field and write your own functions for formating
+them.  The formating functions should be named according to the following
+pattern @code{bbdb-format-popup-<field>}.  They should take one argument which
+is the raw field content and return a string.
+@refill
+
+@item bbdb-pop-up-elided-display-name-end
+@vindex bbdb-pop-up-elided-display-name-end
+Set this to the column where name and company should end in elided
+display.
+@refill
 
 @item bbdb-completion-type
 @vindex bbdb-completion-type
