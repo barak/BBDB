@@ -22,9 +22,12 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-mhe.el,v 1.52 1997/11/02 07:41:52 simmonmt Exp $
+;; $Id: bbdb-mhe.el,v 1.53 1998/02/23 07:09:59 simmonmt Exp $
 ;;
 ;; $Log: bbdb-mhe.el,v $
+;; Revision 1.53  1998/02/23 07:09:59  simmonmt
+;; Use add-hook
+;;
 ;; Revision 1.52  1997/11/02 07:41:52  simmonmt
 ;; bbdb/mh-annotate-sender now takes REPLACE argument
 ;;
@@ -211,7 +214,7 @@ displaying the record corresponding to the sender of the current message."
   "Call this function to hook BBDB into MH-E."
   (define-key mh-folder-mode-map ":" 'bbdb/mh-show-sender)
   (define-key mh-folder-mode-map ";" 'bbdb/mh-edit-notes)
-  (bbdb-add-hook 'mh-show-hook 'bbdb/mh-update-record)
+  (add-hook 'mh-show-hook 'bbdb/mh-update-record)
   (define-key mh-letter-mode-map "\e\t" 'bbdb-complete-name))
 
 (provide 'bbdb-mhe)
