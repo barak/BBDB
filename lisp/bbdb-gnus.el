@@ -19,7 +19,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-gnus.el,v 1.75 2001/03/20 13:17:45 waider Exp $
+;; $Id: bbdb-gnus.el,v 1.76 2001/03/23 15:51:17 fenk Exp $
 ;;
 
 (require 'bbdb)
@@ -193,7 +193,6 @@ This buffer will be in `bbdb-mode', with associated keybindings."
   (gnus-summary-select-article)
   (let ((bbdb-get-addresses-headers (or headers bbdb-get-addresses-headers))
         (bbdb/gnus-update-records-mode 'annotating)
-        (bbdb/news-auto-create-p t)
         (bbdb-message-cache nil)
         records)
     (setq records (bbdb/gnus-update-records t))
