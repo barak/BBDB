@@ -35,7 +35,7 @@
 ;;; |  information plus state information about how you have BBDB set up.    |
 ;;;  ------------------------------------------------------------------------
 ;;;
-;;; $Id: bbdb.el,v 1.177 2002/01/04 15:07:17 fenk Exp $
+;;; $Id: bbdb.el,v 1.178 2002/01/04 16:43:26 fenk Exp $
 
 (require 'timezone)
 (require 'cl)
@@ -59,7 +59,7 @@
  )
 
 (defconst bbdb-version "2.33")
-(defconst bbdb-version-date "$Date: 2002/01/04 15:07:17 $")
+(defconst bbdb-version-date "$Date: 2002/01/04 16:43:26 $")
 
 ;; File format
 (defconst bbdb-file-format 6)
@@ -2847,10 +2847,6 @@ function `y-or-n-p-with-timeout' is defined."
   (if (string-match "[@%!]" string)  ; ain't no user name!  It's an address!
       (bbdb-string-trim string)
    (let ((case-fold-search t))
-     ;; swap Lastname, Firstname
-     (when (string-match "^\\([^,]+\\)\\s-*,\\s-*\\([^,]+\\)$" string)
-       (setq string (concat (match-string 2 string) " "
-                            (match-string 1 string))))
      ;; Take off leading and trailing non-alpha chars \(quotes, parens,
      ;; digits, etc) and things which look like phone extensions \(like
      ;; "x1234" and "ext. 1234". \)
