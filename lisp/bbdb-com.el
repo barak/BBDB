@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.154 2002/08/19 23:23:34 waider Exp $
+;; $Id: bbdb-com.el,v 1.155 2002/12/24 00:27:05 kensanata Exp $
 ;;
 
 (require 'bbdb)
@@ -1498,6 +1498,7 @@ Like `bbdb-toggle-records-display-layout' but for all visible records."
                  (caar layout-alist))
                 (t
                  (caadr (memq desired-state layout-alist)))))
+    (message "Using %S layout" desired-state)
     (bbdb-change-records-state-and-redisplay desired-state records)))
 
 ;;;###autoload
@@ -1548,6 +1549,19 @@ The display layout `full-multi-line' is used for this."
    arg
    (if (not (bbdb-do-all-records-p))
        (list (assq (bbdb-current-record) bbdb-records)))))
+
+;;;###autoload
+(defun bbdb-display-record-with-layout (layout &optional records)
+  "Show all the fields of the current record using LAYOUT."
+  (interactive (list (completing-read "Layout: "
+				      (mapcar (lambda (i)
+						(list (symbol-name (car i))))
+					      bbdb-display-layout-alist))))
+  (when (stringp layout)
+    (setq layout (intern layout)))
+  (when (null records)
+    (setq records bbdb-records))
+  (bbdb-change-records-state-and-redisplay layout records))
 
 ;;;###autoload
 (defun bbdb-omit-record (n)
