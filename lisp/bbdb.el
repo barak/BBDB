@@ -34,9 +34,12 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.60 1998/03/10 07:45:44 simmonmt Exp $
+;; $Id: bbdb.el,v 1.61 1998/03/13 09:53:38 simmonmt Exp $
 ;;
 ;; $Log: bbdb.el,v $
+;; Revision 1.61  1998/03/13 09:53:38  simmonmt
+;; Colin's change for migration error message
+;;
 ;; Revision 1.60  1998/03/10 07:45:44  simmonmt
 ;; Fixed defface standin.  Created widget (bbdb-alist-with-header) for
 ;; bbdb-auto-notes-alist customization fix.  Changed defaults for
@@ -89,8 +92,8 @@
 
 (require 'timezone)
 
-(defconst bbdb-version "1.90")
-(defconst bbdb-version-date "$Date: 1998/03/10 07:45:44 $")
+(defconst bbdb-version "1.91")
+(defconst bbdb-version-date "$Date: 1998/03/13 09:53:38 $")
 
 ;; File format
 (defconst bbdb-file-format 3)
@@ -144,7 +147,7 @@ version.")
       nil)
     (defmacro defcustom (var value doc &rest args) 
       (` (defvar (, var) (, value) (, doc))))
-    (defmacro defface (face spec doc &rest args)
+    (defmacro defface (var value doc &rest args)
       (` (make-face (, var))))
     (defmacro define-widget (&rest args)
       nil)))
@@ -1548,7 +1551,7 @@ optional arg DONT-CHECK-DISK is non-nil (which is faster, but hazardous.)"
 		    (cons v (bbdb-migration-query v)))))
 	   ((> v bbdb-file-format)
 	    (error "BBDB version %s doesn't understand file format version %s."
-		   bbdb-version bbdb-file-format))
+		   bbdb-version v))
 	   (t
 	    (setq bbdb-file-format-migration (cons bbdb-file-format
 						   bbdb-file-format)))))
