@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.147 2002/03/13 12:09:13 fenk Exp $
+;; $Id: bbdb-com.el,v 1.148 2002/04/18 12:10:56 fenk Exp $
 ;;
 
 (require 'bbdb)
@@ -512,34 +512,50 @@ ensure that there will not be name collisions."
                   (or firstname "") (or lastname "")))))
     (let ((company (bbdb-read-string "Company: "))
           (net (bbdb-split (bbdb-read-string "Network Address: ") ","))
-          (addrs (let (L L-tail str addr)
-                   (while (not (string= ""
-                                        (setq str (bbdb-read-string "Address Description [RET when no more addrs]: "))))
-                     (setq addr (make-vector bbdb-address-length nil))
-                     (bbdb-record-edit-address addr str)
-                     (if L
-                         (progn (setcdr L-tail (cons addr nil))
-                                (setq L-tail (cdr L-tail)))
-                       (setq L (cons addr nil)
-                             L-tail L)))
-                   L))
-          (phones (let (L L-tail str)
-                    (while (not (string= ""
-                                         (setq str
-                                               (bbdb-read-string "Phone Location [RET when no more phones]: "))))
-                      (let* ((phonelist
-                              (bbdb-error-retry
-                               (bbdb-parse-phone-number
-                                (read-string "Phone: "
-                                             (and (integerp bbdb-default-area-code)
-                                                  (format "(%03d) " bbdb-default-area-code))))))
-                             (phone (apply 'vector str
-                                           (if (= 3 (length phonelist))
-                                               (nconc phonelist '(0))
-                                             phonelist))))
-                        (if L
-                            (progn (setcdr L-tail (cons phone nil))
-                                   (setq L-tail (cdr L-tail)))
+          (addrs
+           (let (L L-tail str addr)
+             (while (not (string=
+                          ""
+                          (setq str
+                                (bbdb-read-string
+                                 "Address Description [RET when no more]: "
+                                 ""
+                                 (mapcar (function (lambda(x) (list x)))
+                                         (bbdb-label-completion-list
+                                          "addresses"))))))
+               (setq addr (make-vector bbdb-address-length nil))
+               (bbdb-record-edit-address addr str)
+               (if L
+                   (progn (setcdr L-tail (cons addr nil))
+                          (setq L-tail (cdr L-tail)))
+                 (setq L (cons addr nil)
+                       L-tail L)))
+             L))
+          (phones
+           (let (L L-tail str)
+             (while (not (string=
+                          ""
+                          (setq str
+                                (bbdb-read-string
+                                 "Phone Location [RET when no more]: "
+                                 ""
+                                 (mapcar (function (lambda(x) (list x)))
+                                         (bbdb-label-completion-list
+                                          "phones"))))))
+               (let* ((phonelist
+                       (bbdb-error-retry
+                        (bbdb-parse-phone-number
+                         (read-string "Phone: "
+                                      (and (integerp bbdb-default-area-code)
+                                           (format "(%03d) "
+                                                   bbdb-default-area-code))))))
+                      (phone (apply 'vector str
+                                    (if (= 3 (length phonelist))
+                                        (nconc phonelist '(0))
+                                      phonelist))))
+                 (if L
+                     (progn (setcdr L-tail (cons phone nil))
+                            (setq L-tail (cdr L-tail)))
                           (setq L (cons phone nil)
                                 L-tail L))))
                     L))
@@ -553,7 +569,7 @@ ensure that there will not be name collisions."
 
 ;;;###autoload
 (defun bbdb-create (record)
-  "Add a new entry to the bbdb database; prompts for all relevant info
+  "Add a new entry to the bbdb database ; prompts for all relevant info
 using the echo area, inserts the new record in the db, sorted alphabetically,
 and offers to save the db file.  DO NOT call this from a program.  Call
 bbdb-create-internal instead."
