@@ -34,13 +34,13 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.120 2000/11/02 22:58:23 sds Exp $
+;; $Id: bbdb.el,v 1.121 2000/11/02 23:30:20 waider Exp $
 ;;
 
 (require 'timezone)
 
 (defconst bbdb-version "2.2")
-(defconst bbdb-version-date "$Date: 2000/11/02 22:58:23 $")
+(defconst bbdb-version-date "$Date: 2000/11/02 23:30:20 $")
 
 ;; File format
 (defconst bbdb-file-format 5)
@@ -68,6 +68,9 @@ prompt the users on how to merge records when duplicates are detected.")
 (unless (fboundp 'with-current-buffer)
   (defmacro with-current-buffer (buf &rest body)
     `(save-current-buffer (set-buffer ,buf) ,@body)))
+
+(unless (fboundp 'characterp)
+  (defmacro characterp(c) `(char-or-string-p ,c))) ;; XXX close
 
 (unless (fboundp 'defvaralias)
   (defun defvaralias (&rest args)))
