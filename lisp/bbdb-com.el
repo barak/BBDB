@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.103 2001/03/21 14:35:17 fenk Exp $
+;; $Id: bbdb-com.el,v 1.104 2001/03/21 15:54:49 fenk Exp $
 ;;
 
 (require 'bbdb)
@@ -2995,7 +2995,7 @@ proceed the processing of records."
         (while (not event)
           (setq event (read-key-sequence prompt))
           (if (featurep 'xemacs)
-              (setq event (char-int (event-to-character event)))
+              (setq event (char-int (event-to-character (aref event 0))))
             (setq event (if (stringp event) (aref event 0)))))
           
         (setq bbdb-offer-to-create event))
