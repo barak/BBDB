@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.142 2002/03/03 21:44:35 waider Exp $
+;; $Id: bbdb-com.el,v 1.143 2002/03/03 21:57:48 waider Exp $
 ;;
 
 (require 'bbdb)
@@ -47,6 +47,7 @@
   (autoload 'mew-send "mew")
   (autoload 'bbdb-header-start "bbdb-hooks")
   (autoload 'bbdb-extract-field-value "bbdb-hooks")
+  (autoload 'bbdb-fontify-buffer "bbdb-gui")
   (autoload 'Info-goto-node "info")
   ;; this is very unpleasant, but saves me doing a lot of rewriting
   ;; for now. a big cleanup will happen for the next release, maybe.
@@ -2831,8 +2832,8 @@ a pause in the dial sequence."
           ((eq ?  d)
            ;; if we use sit-for, the user can interrupt!
            (sleep-for 1)) ;; configurable?
-          ((memq d '(0 1 2 3 4 5 6 7 8 9)
-                 (bbdb-play-sound d)))
+          ((memq d '(0 1 2 3 4 5 6 7 8 9))
+           (bbdb-play-sound d))
           (t)))) phone-string)
 
     ;; tell the user that we're dialed, if we're using the modem
