@@ -2,7 +2,7 @@
 
 ;;;
 ;;; Copyright (C) 1997 by John Heidemann <johnh@isi.edu>.
-;;; $Id: bbdb-snarf.el,v 1.36 2002/05/12 22:17:03 waider Exp $
+;;; $Id: bbdb-snarf.el,v 1.37 2002/06/29 23:48:12 waider Exp $
 ;;;
 ;;; This file is free software; you can redistribute it and/or modify
 ;;; it under the terms of the GNU General Public License as published
@@ -40,8 +40,8 @@
 (defconst digit "[0-9]")
 (defvar bbdb-snarf-phone-regexp
   (concat
-   "\\(([2-9][0-9][0-9])[-\\. ]?\\|[2-9][0-9][0-9][-\\. ]\\)?"
-   "[0-9][0-9][0-9][-\\. ][0-9][0-9][0-9][0-9]"
+   "\\(([2-9][0-9][0-9])[-. ]?\\|[2-9][0-9][0-9][-. ]\\)?"
+   "[0-9][0-9][0-9][-. ][0-9][0-9][0-9][0-9]"
    "\\( *\\(x\\|ext\\.?\\) *[0-9]+\\)?"
    )
   "regexp to match phones.")
