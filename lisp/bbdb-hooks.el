@@ -32,7 +32,7 @@
 ;;; Read the docstrings; read the texinfo file.
 
 ;;
-;; $Id: bbdb-hooks.el,v 1.71 2002/01/20 12:53:43 fenk Exp $
+;; $Id: bbdb-hooks.el,v 1.72 2002/05/12 22:17:03 waider Exp $
 ;;
 
 (require 'bbdb)
@@ -82,6 +82,12 @@ which is the current time string."
 
 ;;; Determining whether to create a record based on the content of the
 ;;; current message.
+
+(eval-when-compile
+  (defvar vm-mail-buffer)
+  (defvar vm-message-pointer)
+  (autoload 'vm-start-of "vm")
+  (autoload 'bbdb/vm-pop-up-bbdb-buffer "bbdb-vm"))
 
 ;;;###autoload
 (defun bbdb-header-start ()

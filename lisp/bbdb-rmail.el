@@ -19,7 +19,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-rmail.el,v 1.62 2002/03/12 17:40:28 fenk Exp $
+;; $Id: bbdb-rmail.el,v 1.63 2002/05/12 22:17:03 waider Exp $
 ;;
 
 (eval-and-compile
@@ -160,17 +160,17 @@ Leaves original message, deleted, before the undigestified messages."
   ;; message invalidates the cache (which is based on message numbers).
   ;; Same for undigestifying.
   (or (fboundp 'bbdb-orig-rmail-expunge)
-      (fset 'bbdb-orig-rmail-expunge (symbol-function 'rmail-expunge)))
-  (fset 'rmail-expunge 'bbdb/rmail-expunge)
+      (defalias 'bbdb-orig-rmail-expunge (symbol-function 'rmail-expunge)))
+  (defalias 'rmail-expunge 'bbdb/rmail-expunge)
 
   (or (fboundp 'undigestify-rmail-message)
       (autoload 'undigestify-rmail-message "undigest" nil t))
   (if (eq (car-safe (symbol-function 'undigestify-rmail-message)) 'autoload)
       (load (nth 1 (symbol-function 'undigestify-rmail-message))))
   (or (fboundp 'bbdb-orig-undigestify-rmail-message)
-      (fset 'bbdb-orig-undigestify-rmail-message
+      (defalias 'bbdb-orig-undigestify-rmail-message
             (symbol-function 'undigestify-rmail-message)))
-  (fset 'undigestify-rmail-message 'bbdb/undigestify-rmail-message)
+  (defalias 'undigestify-rmail-message 'bbdb/undigestify-rmail-message)
   )
 
 (provide 'bbdb-rmail)

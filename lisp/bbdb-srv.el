@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-srv.el,v 1.60 2002/01/06 22:22:28 waider Exp $
+;; $Id: bbdb-srv.el,v 1.61 2002/05/12 22:17:04 waider Exp $
 
 ;;; This requires the `gnuserv' and `itimer' packages.
 ;;;
@@ -225,7 +225,9 @@ requested for a couple of seconds."
     nil))
 
 ;;;###autoload
-(fset 'bbdb-srv 'bbdb/srv-handle-headers-with-delay)
+(defalias 'bbdb-srv 'bbdb/srv-handle-headers-with-delay)
+
+(autoload 'bbdb-header-start "bbdb-hooks")
 
 ;;;###autoload
 (defun bbdb/srv-auto-create-mail-news-dispatcher ()

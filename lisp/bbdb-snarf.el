@@ -2,7 +2,7 @@
 
 ;;;
 ;;; Copyright (C) 1997 by John Heidemann <johnh@isi.edu>.
-;;; $Id: bbdb-snarf.el,v 1.35 2002/03/12 17:40:43 fenk Exp $
+;;; $Id: bbdb-snarf.el,v 1.36 2002/05/12 22:17:03 waider Exp $
 ;;;
 ;;; This file is free software; you can redistribute it and/or modify
 ;;; it under the terms of the GNU General Public License as published
@@ -412,7 +412,16 @@ See bbdb-extract-address-components for an example."
   :type 'function)
 
 (defcustom bbdb-extract-address-component-regexps
-    '(;; "name" <address>
+    '(
+;; This was part of Dave Love's patch. Alas, it appears to break the
+;; very thing it is supposed to handle, viz. unwrapping "Last, First"
+;; into "First Last". Thusly, commented out for now. The unwrapping
+;; seems to work fine without it?
+;;
+;; "surname, firstname" <address>  from Outlookers
+;;      ("\"\\([^\"]*\\)\"\\s-*<\\([^>]+\\)>"
+;;       (bbdb-clean-username (match-string 1 adstring)) 2)
+      ;; "name" <address>
       ("\"\\([^\"]*\\)\"\\s-*<\\([^>]+\\)>"
        (car (mail-extract-address-components
              (concat "\"" (match-string 1 adstring) "\"")))
@@ -506,8 +515,8 @@ If extracting fails one probably has to adjust the variable
             nomatch t)
       (while adcom-regexp
         (let ((regexp (caar adcom-regexp))
-              (fn (cadar adcom-regexp))
-              (ad (caddar adcom-regexp)))
+              (fn (car (cdar adcom-regexp)))
+              (ad (cadr (cdar adcom-regexp))))
           (cond ((string-match
                   (concat "^[^,]*\\("
                           bbdb-extract-address-component-ignore-regexp
