@@ -2,7 +2,7 @@
 
 ;;;
 ;;; Copyright (C) 1997 by John Heidemann <johnh@isi.edu>.
-;;; $Id: bbdb-snarf.el,v 1.8.1.5 1998/01/06 06:14:36 simmonmt Exp $
+;;; $Id: bbdb-snarf.el,v 1.8.1.6 1998/04/11 07:17:06 simmonmt Exp $
 ;;;
 ;;; This file is free software; you can redistribute it and/or modify
 ;;; it under the terms of the GNU General Public License as published
@@ -19,9 +19,12 @@
 ;;;
 
 ;;
-;; $Id: bbdb-snarf.el,v 1.8.1.5 1998/01/06 06:14:36 simmonmt Exp $
+;; $Id: bbdb-snarf.el,v 1.8.1.6 1998/04/11 07:17:06 simmonmt Exp $
 ;;
 ;; $Log: bbdb-snarf.el,v $
+;; Revision 1.8.1.6  1998/04/11 07:17:06  simmonmt
+;; Colin Rafferty's patch adding autoload cookies back
+;;
 ;; Revision 1.8.1.5  1998/01/06 06:14:36  simmonmt
 ;; Customized variables and removed autoloads
 ;;
@@ -120,6 +123,7 @@ For (800) 555-1212 it returns a three element list."
 	(nconc try '(0)))
     try))
 
+;;;###autoload
 (defun bbdb-snarf (where)
   "snarf up a bbdb record WHERE the point is.
 We assume things are line-broken and paragraph-bounded.
