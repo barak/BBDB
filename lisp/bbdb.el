@@ -35,7 +35,7 @@
 ;;; |  information plus state information about how you have BBDB set up.    |
 ;;;  ------------------------------------------------------------------------
 ;;;
-;;; $Id: bbdb.el,v 1.184 2002/01/18 17:49:03 fenk Exp $
+;;; $Id: bbdb.el,v 1.185 2002/01/22 12:32:36 fenk Exp $
 
 (require 'timezone)
 (require 'cl)
@@ -59,7 +59,7 @@
  )
 
 (defconst bbdb-version "2.35")
-(defconst bbdb-version-date "$Date: 2002/01/18 17:49:03 $")
+(defconst bbdb-version-date "$Date: 2002/01/22 12:32:36 $")
 
 (defcustom bbdb-gui (not (null window-system))
   "*Should the *BBDB* buffer be fontified?
@@ -3466,6 +3466,7 @@ passed as arguments to initiate the appropriate insinuations.
 
   (define-key bbdb-mode-map [(*)]          'bbdb-apply-next-command-to-all-records)
   (define-key bbdb-mode-map [(+)]          'bbdb-append-records)
+  (define-key bbdb-mode-map [(!)]          'bbdb-search-invert-set)
   (define-key bbdb-mode-map [(a)]          'bbdb-add-or-remove-mail-alias)
   (define-key bbdb-mode-map [(e)]          'bbdb-edit-current-field)
   (define-key bbdb-mode-map [(n)]          'bbdb-next-record)
