@@ -5,7 +5,7 @@
 @c %**end of header
 
 @c
-@c $Id: bbdb.texinfo,v 1.43 2001/04/19 11:12:34 fenk Exp $
+@c $Id: bbdb.texinfo,v 1.44 2001/11/19 23:40:19 waider Exp $
 @c
 
 @ifinfo
@@ -15,7 +15,7 @@
 
 This file documents the Insidious Big Brother Database
 
-This is edition $Revision: 1.43 $ of the BBDB User Manual for BBDB
+This is edition $Revision: 1.44 $ of the BBDB User Manual for BBDB
 version 2.2.
 
 Copyright (c) 1991-1994 Jamie Zawinski <jwz@@netscape.com>
@@ -28,7 +28,7 @@ Copyright (c) 2000-2001 The BBDB Development Team
 @titlepage
 @title BBDB User Manual
 @subtitle A phone number and address database program for Emacs
-@subtitle Edition $Revision: 1.43 $, $Date: 2001/04/19 11:12:34 $
+@subtitle Edition $Revision: 1.44 $, $Date: 2001/11/19 23:40:19 $
 
 @author by Jamie Zawinski and Matt Simmons
 @page
@@ -39,8 +39,8 @@ Copyright @copyright{} 1997-1999 Matt Simmons <simmonmt@@acm.org>
 Copyright @copyright{} 2000-2001 The BBDB Development Team
 
 @sp 2
-This is edition $Revision: 1.43 $ of the @cite{BBDB User Manual} for BBDB
-version 2.2, $Date: 2001/04/19 11:12:34 $.@refill
+This is edition $Revision: 1.44 $ of the @cite{BBDB User Manual} for BBDB
+version 2.2, $Date: 2001/11/19 23:40:19 $.@refill
 
 @sp 2
 
@@ -1634,8 +1634,10 @@ retained the group aliases in your @code{.mailrc}.
 
 To actually define the aliases which are stored in the BBDB, call the
 function @code{bbdb-define-all-aliases} from your
-@code{mail-setup-hook}.  This will search the database, and call
-@code{define-mail-alias} to define each of the resulting aliases.@refill
+@code{mail-setup-hook} (or @code{message-setup-hook} if you use
+Message mode coming with Gnus).  This will search the database, and
+call @code{define-mail-alias} to define each of the resulting
+aliases.@refill
 
 @node Reader-specific Features, Other Packages, Interfaces, Top
 @section Reader-specific Features
