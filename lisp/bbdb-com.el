@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.90 2001/01/24 02:07:18 waider Exp $
+;; $Id: bbdb-com.el,v 1.91 2001/01/24 19:19:28 waider Exp $
 ;;
 
 (require 'bbdb)
@@ -331,6 +331,9 @@ is nil...\)"
         (t (error "phone number unparsable."))))
 
 ;;; Parsing other things
+
+(defvar bbdb-expand-mail-aliases t
+  "If non-nil, expand mail aliases in bbdb-complete-name")
 
 (defvar bbdb-check-zip-codes-p t
   "If non-nil, require legal zip codes when entering an address.
@@ -2028,7 +2031,9 @@ Completion behaviour can be controlled with `bbdb-completion-type'."
      ;; No match
      ((null completion)
       (bbdb-complete-name-cleanup)
-      (ding))
+      (if bbdb-expand-mail-aliases ;; maybe check for mail alias
+          (expand-abbrev)
+        (ding)))
 
       ;; Perfect match...
       ((eq completion t)
