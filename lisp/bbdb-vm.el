@@ -19,7 +19,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-vm.el,v 1.83 2001/03/17 17:22:58 fenk Exp $
+;; $Id: bbdb-vm.el,v 1.84 2001/03/22 09:21:02 fenk Exp $
 ;;
 
 (eval-and-compile 
@@ -169,6 +169,7 @@ This buffer will be in bbdb-mode, with associated keybindings."
   (vm-follow-summary-cursor)
   (let ((bbdb-get-addresses-headers headers)
         (bbdb/vm-update-records-mode 'annotating)
+        (bbdb/mail-auto-create-p t)
         (bbdb-message-cache nil)
         records)
     (setq records (bbdb/vm-update-records t))
