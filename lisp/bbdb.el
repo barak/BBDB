@@ -35,13 +35,13 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.81 2000/06/30 19:13:55 sds Exp $
+;; $Id: bbdb.el,v 1.82 2000/06/30 19:15:05 sds Exp $
 ;;
 
 (require 'timezone)
 
 (defconst bbdb-version "2.2")
-(defconst bbdb-version-date "$Date: 2000/06/30 19:13:55 $")
+(defconst bbdb-version-date "$Date: 2000/06/30 19:15:05 $")
 
 ;; File format
 (defconst bbdb-file-format 5)
@@ -1009,10 +1009,10 @@ This is a possible identifying function for
   "Insert street subfields of address ADDR in current buffer.
 This may be used by formatting functions listed in
 `bbdb-address-formatting-alist'."
-  (mapcar (lambda(str)
-            (indent-to 17)
-            (insert str "\n"))
-          (bbdb-address-streets addr)))
+  (mapc (lambda(str)
+          (indent-to 17)
+          (insert str "\n"))
+        (bbdb-address-streets addr)))
 
 (defun bbdb-format-address-continental (addr)
   "Insert formated continental address ADDR in current buffer.
