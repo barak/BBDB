@@ -19,7 +19,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-vm.el,v 1.67 2000/10/15 17:13:36 waider Exp $
+;; $Id: bbdb-vm.el,v 1.68 2000/10/27 15:28:02 waider Exp $
 ;;
 
 (require 'cl)
@@ -149,7 +149,7 @@ in this message."
            (let ((addrs (bbdb/vm-get-from msg bbdb/vm-get-only-first-from-p))
                  (bbdb-records (bbdb-records))
                  rec
-                 (create-p offer-to-create))
+                 (create-p t))
              (mapc (lambda (address)
                      (condition-case nil
                          (setq rec
