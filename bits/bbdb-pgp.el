@@ -1,14 +1,14 @@
-;;; BBDB-PGP.EL --- use BBDB to store PGP preferences
+;;; bbdb-pgp.el --- use BBDB to store PGP preferences
 
 ;; Copyright (C) 1997,1999 Kevin Davidson
 
 ;; Author: Kevin Davidson tkld@quadstone.com
 ;; Maintainer: Kevin Davidson tkld@quadstone.com
 ;; Created: 10 Nov 1997
-;; Version: $Revision: 1.4 $
+;; Version: $Revision: 1.5 $
 ;; Keywords: PGP BBDB message mailcrypt
 
-
+ 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
 ;; the Free Software Foundation; either version 2, or (at your option)
@@ -27,7 +27,7 @@
 ;; LCD Archive Entry:
 ;; bbdb-pgp|Kevin Davidson|tkld@quadstone.com
 ;; |Use BBDB to store PGP preferences
-;; |$Date: 2003/08/05 12:43:46 $|$Revision: 1.4 $|~/packages/bbdb-pgp.el
+;; |$Date: 2003/08/08 11:49:05 $|$Revision: 1.5 $|~/packages/bbdb-pgp.el
 
 ;;; Commentary:
 ;;
@@ -53,7 +53,7 @@
 ;;
 ;; and possibly (if you do not want the PGP field printed out)
 ;; (add-hook 'bbdb-print-elide bbdb-pgp-field)
-;;
+;; 
 ;; The variable bbdb/pgp-default-action defines what to do if the recipient
 ;; is not in the BBDB.
 
@@ -67,14 +67,15 @@
 ;; eg http://www.pgp.net/pgpnet/
 ;; Fingerprint: 1F A9 3F 3E 90 F7 85 64  55 35 32 C8 75 91 3A E3
 
+
 ;;; Code:
 
 (require 'message)
 (require 'bbdb)
 (condition-case nil (require 'mailcrypt) (error nil))
 
-(defconst bbdb/pgp-version (substring "$Revision: 1.4 $" 11 -2)
-  "$Id: bbdb-pgp.el,v 1.4 2003/08/05 12:43:46 waider Exp $
+(defconst bbdb/pgp-version (substring "$Revision: 1.5 $" 11 -2)
+  "$Id: bbdb-pgp.el,v 1.5 2003/08/08 11:49:05 waider Exp $
 
 Report bugs to: Kevin Davidson tkld@quadstone.com")
 
@@ -103,10 +104,10 @@ encrypted. If it is \"sign\" then messages are signed."
 'mml-pgpmime   means add MML tags for Message to use PGP/MIME
 'mml-smime     means add MML tags for Message to use S/MIME"
   :type '(choice
-      (const :tag "Mailcrypt" mailcrypt :require 'mailcrypt)
-      (const :tag "MML PGP" mml-pgp :require 'mml)
-      (const :tag "MML PGP/MIME" mml-pgpmime :require 'mml)
-      (const :tag "MML S/MIME" mml-smime :require 'mml))
+	  (const :tag "Mailcrypt" mailcrypt :require 'mailcrypt)
+	  (const :tag "MML PGP" mml-pgp :require 'mml)
+	  (const :tag "MML PGP/MIME" mml-pgpmime :require 'mml)
+	  (const :tag "MML S/MIME" mml-smime :require 'mml))
   :tag "Signing/Encryption Method"
   :group 'bbdb-utilities-pgp)
 
@@ -117,19 +118,28 @@ nil         means do nothing.
 'encrypt    means encrypt message.
 'sign       means sign message."
   :type '(choice
-      (const :tag "Do Nothing")
-      (const :tag "Encrypt" encrypt)
-      (const :tag "Sign" sign))
+	  (const :tag "Do Nothing")
+	  (const :tag "Encrypt" encrypt)
+	  (const :tag "Sign" sign))
   :tag "Default Action"
   :group 'bbdb-utilities-pgp)
 
 (defcustom bbdb/pgp-quiet nil
   "*Do not ask for confirmation on pgp-action.
+
+nil         means normal messages/questions.
+'t          means to be quiet."
+  :type '(choice
+	  (const :tag "normal")
+	  (const :tag "quiet" t))
+  :tag "Quietness"
+  :group 'bbdb-utilities-pgp)
+
 (defun bbdb/pgp-get-pgp (name address)
   "Look up user NAME and ADDRESS in BBDB and return the PGP preference."
   (let* ((record (bbdb-search-simple name address))
-     (pgp (and record
-           (bbdb-record-getprop record bbdb/pgp-field))))
+	 (pgp (and record
+		   (bbdb-record-getprop record bbdb/pgp-field))))
     pgp))
 
 (defun bbdb/pgp-sign ()
@@ -171,37 +181,37 @@ The user is prompted before encryption or signing."
     (save-excursion
       (message-narrow-to-headers)
       (and (featurep 'mailalias)
-       (not (featurep 'mailabbrev))
-       mail-aliases
-       (expand-mail-aliases (point-min) (point-max)))
+	   (not (featurep 'mailabbrev))
+	   mail-aliases
+	   (expand-mail-aliases (point-min) (point-max)))
       (let* ((to-field (mail-fetch-field "To" nil t))
-         (address (mail-extract-address-components (or to-field ""))))
-    (widen)
-    (if (not (equal address '(nil nil)))
-        (let ((pgp-p (bbdb/pgp-get-pgp (car address) (car (cdr address)))))
-          (cond
-           ((string= "encrypt" pgp-p)
+	     (address (mail-extract-address-components (or to-field ""))))
+	(widen)
+	(if (not (equal address '(nil nil)))
+	    (let ((pgp-p (bbdb/pgp-get-pgp (car address) (car (cdr address)))))
+	      (cond
+	       ((string= "encrypt" pgp-p) 
                 (and (or bbdb/pgp-quiet
                          (y-or-n-p "Encrypt message? "))
                      (bbdb/pgp-encrypt)))
-           ((string= "sign" pgp-p)
-        (and (or bbdb/pgp-quiet
+	       ((string= "sign" pgp-p)
+		(and (or bbdb/pgp-quiet
                          (y-or-n-p "Encrypt message? "))
                      (bbdb/pgp-sign)))
-           (t
-        (cond
-         ((eq bbdb/pgp-default-action 'encrypt)
-          (and (y-or-n-p "Encrypt message? ")
-               (bbdb/pgp-encrypt)))
-         ((eq bbdb/pgp-default-action 'sign)
-          (and (y-or-n-p "Sign message? ")
-               (bbdb/pgp-sign)))
-         (t
-          nil))))))))))
+	       (t
+		(cond
+		 ((eq bbdb/pgp-default-action 'encrypt)
+		  (and (y-or-n-p "Encrypt message? ")
+		       (bbdb/pgp-encrypt)))
+		 ((eq bbdb/pgp-default-action 'sign)
+		  (and (y-or-n-p "Sign message? ")
+		       (bbdb/pgp-sign)))
+		 (t
+		  nil))))))))))
 
 (add-hook 'message-send-hook 'bbdb/pgp-hook-fun)
 (add-hook 'mail-send-hook 'bbdb/pgp-hook-fun)
 
 (provide 'bbdb-pgp)
 
-;;; BBDB-PGP.EL ends here
+;;; bbdb-pgp.el ends here
