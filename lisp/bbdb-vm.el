@@ -19,7 +19,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-vm.el,v 1.97 2002/10/30 20:43:54 fenk Exp $
+;; $Id: bbdb-vm.el,v 1.98 2003/03/07 22:13:25 fenk Exp $
 ;;
 
 (eval-and-compile
@@ -281,6 +281,7 @@ e.g. define you own function `my-folder-name' and set it to
   (let* (;; we add the email-address/vm-folder-name pair to this
          ;; sublist of the vm-auto-folder-alist variable
          (headers (reverse bbdb/vm-set-auto-folder-alist-headers))
+         header
          ;; grab the folder list from the vm-auto-folder-alist
          folder-list
          ;; the raw-notes and vm-folder attributes of the current bbdb
@@ -312,7 +313,6 @@ e.g. define you own function `my-folder-name' and set it to
         (setq vm-auto-folder-alist (cons (list header)
                                          vm-auto-folder-alist)
               folder-list (assoc header vm-auto-folder-alist)))
-      (setq record records)
       (mapcar
        (lambda (r) 
          (setq notes-field (bbdb-record-raw-notes r))
