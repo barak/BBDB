@@ -34,13 +34,13 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.106 2000/08/10 23:17:09 sds Exp $
+;; $Id: bbdb.el,v 1.107 2000/08/11 16:16:39 waider Exp $
 ;;
 
 (require 'timezone)
 
 (defconst bbdb-version "2.2")
-(defconst bbdb-version-date "$Date: 2000/08/10 23:17:09 $")
+(defconst bbdb-version-date "$Date: 2000/08/11 16:16:39 $")
 
 ;; File format
 (defconst bbdb-file-format 5)
@@ -932,7 +932,7 @@ If the note is absent, returns a zero length string."
 (defun bbdb-buffer ()
   (if (and bbdb-buffer (buffer-live-p bbdb-buffer))
       bbdb-buffer
-    (when (file-newer-than-file-p bbdb-file-remote bbdb-file)
+    (if (and bbdb-file-remote (file-newer-than-file-p bbdb-file-remote bbdb-file))
       (copy-file bbdb-file-remote bbdb-file t t))
     (setq bbdb-buffer
           (find-file-noselect bbdb-file 'nowarn))))
