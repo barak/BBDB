@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.82 2000/09/20 10:30:01 waider Exp $
+;; $Id: bbdb-com.el,v 1.83 2000/10/15 16:51:27 waider Exp $
 ;;
 
 (require 'bbdb)
@@ -1633,6 +1633,7 @@ the name is always included."
                   (cond ((featurep 'mh-e) 'mh)
                         ((featurep 'vm) 'vm)
                         ((featurep 'message) 'message)
+                        ((featurep 'compose-mail) 'compose-mail)
                         (t 'mail)))))
     (cond
       ((eq type 'mh)
@@ -1652,8 +1653,10 @@ the name is always included."
        (message-mail to subj))
       ((or (eq type 'mail) (eq type 'rmail))
        (mail nil to subj))
+      ((eq type 'compose-mail)
+       (compose-mail to subj))
       (t
-       (error "bbdb-send-mail-style must be vm, mh, message, or rmail")))))
+       (error "bbdb-send-mail-style must be vm, mh, message, compose-mail, or rmail")))))
 
 ;;;###autoload
 (defun bbdb-send-mail (bbdb-record &optional subject)
