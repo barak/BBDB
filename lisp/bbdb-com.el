@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.62 1998/12/05 16:55:42 simmonmt Exp $
+;; $Id: bbdb-com.el,v 1.63 1998/12/30 06:15:59 simmonmt Exp $
 ;;
 
 (require 'bbdb)
@@ -587,7 +587,7 @@ NOTES is a string, or an alist associating symbols with strings."
     ;; get to beginning of this record
     (beginning-of-line)
     (let ((p (point)))
-      (while (not (or (eobp) (looking-at "^[^ \t\n]")))
+      (while (not (or (eobp) (bobp) (looking-at "^[^ \t\n]")))
 	(forward-line -1))
       (let* ((record (or (bbdb-current-record planning-on-modifying)
 			 (error "unperson")))
