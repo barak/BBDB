@@ -2,7 +2,7 @@
 
 ;;;
 ;;; Copyright (C) 1997 by John Heidemann <johnh@isi.edu>.
-;;; $Id: bbdb-snarf.el,v 1.23 2001/02/11 02:09:05 shenghuo Exp $
+;;; $Id: bbdb-snarf.el,v 1.24 2001/02/19 00:20:20 waider Exp $
 ;;;
 ;;; This file is free software; you can redistribute it and/or modify
 ;;; it under the terms of the GNU General Public License as published
@@ -122,7 +122,7 @@ We assume things are line-broken and paragraph-bounded.
 The name comes first and other fields (address,
 phone, email, web pages) are recognized by context.
 
-Requred context:
+Required context:
     addresses end with \"City, State ZIP\" or \"City, State\"
     phones match bbdb-snarf-phone-regexp
         (currently US-style phones)
@@ -548,7 +548,7 @@ If extracting fails one probably has to adjust the variable
 
       ;; Now handle problems
       (if (and nomatch (not ignore-errors))
-	  (cond ((equal bbdb-extract-address-component-handler nil))
+      (cond ((equal bbdb-extract-address-component-handler nil))
                 ((equal bbdb-extract-address-component-handler 'warn)
                  (bbdb-warn "Cannot extract an address component at \"%s\".
 See `bbdb-extract-address-component-handler' for more information."
