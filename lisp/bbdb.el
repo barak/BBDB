@@ -35,13 +35,13 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.76 2000/04/13 22:49:36 kuepper Exp $
+;; $Id: bbdb.el,v 1.77 2000/04/15 17:11:49 kuepper Exp $
 ;;
 
 (require 'timezone)
 
 (defconst bbdb-version "2.2")
-(defconst bbdb-version-date "$Date: 2000/04/13 22:49:36 $")
+(defconst bbdb-version-date "$Date: 2000/04/15 17:11:49 $")
 
 ;; File format
 (defconst bbdb-file-format 5)
@@ -997,11 +997,11 @@ This is a possible identifying function for
 This may be used by formatting functions listed in 
 `bbdb-address-formatting-alist'."
   (mapcar (function (lambda(str) 
-					  (if (= 0 (length (bbdb-string-trim str)))
-						  ()
-						(indent-to 17) 
-						(insert str "\n"))))
-		  (bbdb-address-streets addr)))
+                      (if (= 0 (length (bbdb-string-trim str)))
+                          ()
+                        (indent-to 17) 
+                        (insert str "\n"))))
+          (bbdb-address-streets addr)))
 
 (defun bbdb-format-address-continental (addr)
   "Insert formated continental address ADDR in current buffer.
