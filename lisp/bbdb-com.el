@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.143 2002/03/03 21:57:48 waider Exp $
+;; $Id: bbdb-com.el,v 1.144 2002/03/11 20:55:58 waider Exp $
 ;;
 
 (require 'bbdb)
@@ -3254,7 +3254,7 @@ treat updates in the right way.")
 (defun bbdb-update-records (addrs auto-create-p offer-to-create)
   "Returns the records corresponding to the list of addresses ADDRS,
 creating or modifying them as necessary.  A record will be created if
-AUOT-CREATE-P is non-nil or if OFFER-TO-CREATE is true and the user
+AUTO-CREATE-P is non-nil or if OFFER-TO-CREATE is true and the user
 confirms the creation.
 
 The variable `bbdb/gnus-update-records-mode' controls what actions
