@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-srv.el,v 1.58 2001/08/03 20:29:15 waider Exp $
+;; $Id: bbdb-srv.el,v 1.59 2001/08/31 15:07:47 fenk Exp $
 
 ;;; This requires the `gnuserv' and `itimer' packages.
 ;;;
@@ -160,10 +160,9 @@ the various hooks (like `bbdb-notice-hook' and `bbdb/news-auto-create-p')."
        (let ((bbdb-gag-messages t)
          (bbdb-use-pop-up nil)
          (bbdb-electric-p nil)
-         (bbdb-elided-display (bbdb-pop-up-elided-display))
          (b (current-buffer)))
          (save-window-excursion ;; needed to get around XEmacs 19.15 bug?
-           (bbdb-display-records (list record)))
+           (bbdb-display-records (list record)) bbdb-pop-up-display-layout)
          (set-buffer b)))
       ((and from (not create-p) bbdb/srv-pending-map)
        (setq bbdb/srv-pending-headers headers)

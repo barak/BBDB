@@ -22,7 +22,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-mhe.el,v 1.59 2001/06/28 22:44:24 waider Exp $
+;; $Id: bbdb-mhe.el,v 1.60 2001/08/31 15:07:47 fenk Exp $
 ;;
 
 (eval-and-compile
@@ -153,9 +153,9 @@ displaying the record corresponding to the sender of the current message."
   (let ((bbdb-gag-messages t)
         (bbdb-use-pop-up nil)
         (bbdb-electric-p nil))
-    (let ((record (bbdb/mh-update-record offer-to-create))
-          (bbdb-elided-display (bbdb-pop-up-elided-display)))
-      (bbdb-display-records (if record (list record) nil))
+    (let ((record (bbdb/mh-update-record offer-to-create)))
+      (bbdb-display-records (if record (list record) nil)
+                            bbdb-pop-up-display-layout)
       record)))
 
 
@@ -220,6 +220,7 @@ displaying the record corresponding to the sender of the current message."
   "Call this function to hook BBDB into MH-E."
   (define-key mh-folder-mode-map ":" 'bbdb/mh-show-sender)
   (define-key mh-folder-mode-map ";" 'bbdb/mh-edit-notes)
+  (define-key mh-letter-mode-map "\M-;" 'bbdb-complete-name)
   (add-hook 'mh-show-hook 'bbdb/mh-update-record)
   (define-key mh-letter-mode-map "\e\t" 'bbdb-complete-name))
 

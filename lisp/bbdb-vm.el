@@ -19,7 +19,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-vm.el,v 1.91 2001/07/07 23:19:32 waider Exp $
+;; $Id: bbdb-vm.el,v 1.92 2001/08/31 15:07:47 fenk Exp $
 ;;
 
 (eval-and-compile
@@ -212,7 +212,6 @@ configuration of what is being displayed."
     (let ((bbdb-gag-messages t)
           (bbdb-electric-p nil)
           (records (bbdb/vm-update-records offer-to-create))
-          (bbdb-elided-display (bbdb-pop-up-elided-display))
           (bbdb-buffer-name bbdb-buffer-name))
 
       (when (and bbdb-use-pop-up records)
@@ -225,7 +224,7 @@ configuration of what is being displayed."
 
         ;; Always update the records; if there are no records, empty the
         ;; BBDB window. This should be generic, not VM-specific.
-        (bbdb-display-records records))
+        (bbdb-display-records records bbdb-pop-up-display-layout))
 
       (when (not records)
         (bbdb-undisplay-records)
