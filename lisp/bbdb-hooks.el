@@ -32,7 +32,7 @@
 ;;; Read the docstrings; read the texinfo file.
 
 ;;
-;; $Id: bbdb-hooks.el,v 1.76 2003/07/23 07:38:33 fenk Exp $
+;; $Id: bbdb-hooks.el,v 1.77 2005/02/22 13:53:40 waider Exp $
 ;;
 
 (require 'bbdb)
@@ -125,24 +125,29 @@ beginning of the message headers."
   ;; we can't special-case VM here to use its cache, because the cache has
   ;; divided real-names from addresses; the actual From: and Subject: fields
   ;; exist only in the message.
-  (setq field-name (concat (regexp-quote field-name) "[ \t]*:[ \t]*"))
-  (let ((case-fold-search t)
-    done)
-    (while (not (or done
-            (looking-at "\n") ; we're at BOL
-            (eobp)))
-      (if (looking-at field-name)
-      (progn
-        (goto-char (match-end 0))
-        (setq done (buffer-substring (point)
-                     (progn (end-of-line) (point))))
-        (while (looking-at "\n[ \t]")
-          (setq done (concat done " "
-               (buffer-substring (match-end 0)
-                 (progn (end-of-line 2) (point))))))))
-      (forward-line 1))
-    done))
-
+  (save-excursion
+    (if (memq major-mode
+              '(gnus-summary-mode gnus-article-mode gnus-tree-mode))
+        (progn
+          (set-buffer (get-buffer gnus-original-article-buffer))
+          (goto-char (point-min))))
+    (setq field-name (concat (regexp-quote field-name) "[ \t]*:[ \t]*"))
+    (let ((case-fold-search t)
+          done)
+      (while (not (or done
+              (looking-at "\n") ; we're at BOL
+              (eobp)))
+        (if (looking-at field-name)
+        (progn
+          (goto-char (match-end 0))
+          (setq done (buffer-substring (point)
+                       (progn (end-of-line) (point))))
+          (while (looking-at "\n[ \t]")
+            (setq done (concat done " "
+                 (buffer-substring (match-end 0)
+                   (progn (end-of-line 2) (point))))))))
+        (forward-line 1))
+      done)))
 
 (defcustom bbdb-ignore-most-messages-alist '()
   "*An alist describing which messages to automatically create BBDB
