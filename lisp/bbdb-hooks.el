@@ -32,7 +32,7 @@
 ;;; Read the docstrings; read the texinfo file.
 
 ;;
-;; $Id: bbdb-hooks.el,v 1.73 2003/03/07 22:15:35 fenk Exp $
+;; $Id: bbdb-hooks.el,v 1.74 2003/03/13 21:55:58 fenk Exp $
 ;;
 
 (require 'bbdb)
@@ -94,8 +94,9 @@ which is the current time string."
   "Returns a marker at the beginning of the header block of the current
 message.  This will not necessarily be in the current buffer."
   (cond ((memq major-mode
-	       '(gnus-group-mode gnus-subject-mode gnus-article-mode))
-	 (set-buffer gnus-original-article-buffer)
+	       '(gnus-group-mode gnus-summary-mode gnus-article-mode))
+	 (set-buffer (or gnus-original-article-buffer
+                         gnus-article-buffer))
 	 (point-min-marker))
         ((memq major-mode '(vm-presentation-mode vm-mode vm-summary-mode))
          (if vm-mail-buffer (set-buffer vm-mail-buffer))
