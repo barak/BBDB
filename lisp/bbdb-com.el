@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.170 2004/03/22 15:18:33 waider Exp $
+;; $Id: bbdb-com.el,v 1.171 2004/10/13 13:17:34 waider Exp $
 ;;
 
 (require 'bbdb)
@@ -224,10 +224,15 @@ in either the name(s), company, network address, or notes."
   (interactive
    (list (bbdb-search-prompt "Search records %m regexp: ")
          current-prefix-arg))
-  (let ((bbdb-display-layout (bbdb-grovel-elide-arg elidep))
-        (notes (cons '* string)))
-    (bbdb-display-records
-     (bbdb-search (bbdb-records) string string string notes nil))))
+  (let* ((bbdb-display-layout (bbdb-grovel-elide-arg elidep))
+         (notes (cons '* string))
+         (records
+          (bbdb-search (bbdb-records) string string string notes
+                       nil)))
+    (if records
+        (bbdb-display-records records)
+      ;; we could use error here, but it's not really an error.
+      (message "No records matching '%s'" string))))
 
 ;;;###autoload
 (defun bbdb-name (string elidep)
