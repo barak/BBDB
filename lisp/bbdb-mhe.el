@@ -22,9 +22,14 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-mhe.el,v 1.54 1998/04/11 07:20:03 simmonmt Exp $
+;; $Id: bbdb-mhe.el,v 1.55 2000/10/27 18:32:06 fenk Exp $
 ;;
 ;; $Log: bbdb-mhe.el,v $
+;; Revision 1.55  2000/10/27 18:32:06  fenk
+;; The new variable `bbdb/prompt-for-create-p' can be set to `t' in
+;; order to force VM, Gnus, MHE, RMAIL to ask the user before adding a
+;; new BBBD record, caused by the automatic update of the popup buffer.
+;;
 ;; Revision 1.54  1998/04/11 07:20:03  simmonmt
 ;; Colin Rafferty's patch adding autoload cookies back
 ;;
@@ -88,7 +93,9 @@ the user confirms the creation."
 		    (bbdb-annotate-message-sender from t
 		      (or (bbdb-invoke-hook-for-value bbdb/mail-auto-create-p)
 			  offer-to-create)
-		      offer-to-create)))))))))
+		      (or (bbdb-invoke-hook-for-value
+			   bbdb/prompt-for-create-p)
+			  offer-to-create))))))))))
 
 
 ;;;###autoload

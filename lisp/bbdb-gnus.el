@@ -19,7 +19,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-gnus.el,v 1.70 2000/10/15 16:59:44 waider Exp $
+;; $Id: bbdb-gnus.el,v 1.71 2000/10/27 18:32:06 fenk Exp $
 ;;
 
 (require 'bbdb)
@@ -69,7 +69,9 @@ the user confirms the creation."
                     (or (bbdb-invoke-hook-for-value
                          bbdb/news-auto-create-p)
                         offer-to-create)
-                    offer-to-create)))))
+		    (or (bbdb-invoke-hook-for-value
+			 bbdb/prompt-for-create-p)
+			offer-to-create))))))
 
 ;;;###autoload
 (defun bbdb/gnus-annotate-sender (string &optional replace)
