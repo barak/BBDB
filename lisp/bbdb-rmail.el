@@ -19,16 +19,19 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-rmail.el,v 1.64 2002/07/03 21:28:50 waider Exp $
+;; $Id: bbdb-rmail.el,v 1.65 2004/04/29 21:38:28 fenk Exp $
 ;;
 
-(eval-and-compile
+(eval-when-compile
   (require 'bbdb)
   (require 'bbdb-com)
   (require 'rmail)
   ;(require 'rmailsum)   ; not provided, dammit!
-  (defvar rmail-buffer nil)
-  (if (not (fboundp 'rmail-make-summary-line)) (load-library "rmailsum")))
+  (if (not (fboundp 'rmail-make-summary-line))
+      (load-library "rmailsum"))
+  ;; just to avoid a warning 
+  (if (not (boundp 'rmail-buffer))
+      (defvar rmail-buffer nil)))
 
 ;;;###autoload
 (defun bbdb/rmail-update-record (&optional offer-to-create)
