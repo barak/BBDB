@@ -34,13 +34,13 @@
 ;;;  ------------------------------------------------------------------------
 
 ;;
-;; $Id: bbdb.el,v 1.150 2001/03/04 20:27:21 waider Exp $
+;; $Id: bbdb.el,v 1.151 2001/03/04 20:46:47 waider Exp $
 ;;
 
 (require 'timezone)
 
-(defconst bbdb-version "2.32")
-(defconst bbdb-version-date "$Date: 2001/03/04 20:27:21 $")
+(defconst bbdb-version "2.33")
+(defconst bbdb-version-date "$Date: 2001/03/04 20:46:47 $")
 
 ;; File format
 (defconst bbdb-file-format 6)
