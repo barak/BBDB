@@ -35,7 +35,7 @@
 ;;; |  information plus state information about how you have BBDB set up.    |
 ;;;  ------------------------------------------------------------------------
 ;;;
-;;; $Id: bbdb.el,v 1.215 2003/10/13 08:38:53 fenk Exp $
+;;; $Id: bbdb.el,v 1.216 2004/01/23 00:08:32 waider Exp $
 
 (require 'timezone)
 (eval-when-compile (require 'cl))
@@ -62,7 +62,7 @@
  )
 
 (defconst bbdb-version "2.35")
-(defconst bbdb-version-date "$Date: 2003/10/13 08:38:53 $")
+(defconst bbdb-version-date "$Date: 2004/01/23 00:08:32 $")
 
 (defcustom bbdb-gui (if (fboundp 'display-color-p) ; Emacs 21
                         (display-color-p)
@@ -359,6 +359,13 @@ This variable also affects dialing."
                  (null val))
              (set symb val)
            (error "%s must contain digits only." symb))))
+
+(defcustom bbdb-lastname-prefixes
+ '("von" "Von" "de" "De")
+  "*List of lastname prefixes recognized in name fields. Used to
+enhance dividing name strings into firstname and lastname parts."
+  :group 'bbdb-record-creation
+  :type '(repeat string))
 
 (defcustom bbdb-default-domain nil
   "*The default domain to append when prompting for a new net address.
@@ -3020,7 +3027,15 @@ return them."
     (if gubbish
         (setq gubbish (substring str gubbish)
               str (substring string 0 (match-beginning 0))))
-    (if (string-match " +\\(\\([^ ]+ *- *\\)?[^ ]+\\)\\'" str)
+    (if (string-match
+	 (concat " +\\("
+		 ;; start recognize some prefixes to lastnames
+		 (if bbdb-lastname-prefixes
+		     (concat "\\("
+			     (regexp-opt bbdb-lastname-prefixes t)
+			     "[ ]+\\)?"))
+		 ;; end recognize some prefixes to lastnames
+		 "\\([^ ]+ *- *\\)?[^ ]+\\)\\'") str)
         (list (substring str 0 (match-beginning 0))
               (concat
                (substring str (match-beginning 1))
