@@ -26,8 +26,7 @@
 ;;; for improvements and to Michael D. Carney  <carney@ltx-tr.com>
 ;;; for testing and feedback.
 
-;;; $Date: 2002/01/29 09:38:26 $ by $Author: fenk $
-;;; $Revision: 1.15 $
+;;; $Id: bbdb-sc.el,v 1.16 2005/07/23 15:06:46 waider Exp $
 
 ;;; This file adds the ability to define attributions for Supercite in
 ;;; a BBDB, enables you to retrieve your standard attribution from
