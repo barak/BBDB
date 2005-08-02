@@ -35,7 +35,7 @@
 ;;; |  information plus state information about how you have BBDB set up.    |
 ;;;  ------------------------------------------------------------------------
 ;;;
-;;; $Id: bbdb.el,v 1.223 2005/08/02 19:37:07 kuepper Exp $
+;;; $Id: bbdb.el,v 1.224 2005/08/02 19:47:24 waider Exp $
 
 (require 'timezone)
 (eval-when-compile (require 'cl))
@@ -62,7 +62,7 @@
  )
 
 (defconst bbdb-version "2.35")
-(defconst bbdb-version-date "$Date: 2005/08/02 19:37:07 $")
+(defconst bbdb-version-date "$Date: 2005/08/02 19:47:24 $")
 
 (defcustom bbdb-gui (if (fboundp 'display-color-p) ; Emacs 21
                         (display-color-p)
@@ -2431,11 +2431,13 @@ optional arg DONT-CHECK-DISK is non-nil (which is faster, but hazardous.)"
   (save-restriction
     (widen)
     (goto-char (point-min))
-    ;; Fixme: probably this should check any existing cookie for
-    ;; consistency with bbdb-file-coding-system.
-    (unless (looking-at ";; *-\\*-coding:")
-      (insert-before-markers (format ";; -*-coding: %s;-*-\n"
-                     bbdb-file-coding-system))))
+
+    ;; this always rewrites the coding cookie, which is a bit
+    ;; wasteful, but safer than alternatives
+    (if (looking-at ";; *-\\*-coding:")
+        (delete-region (point) (progn (forward-line) (point))))
+    (insert-before-markers (format ";; -*-coding: %s;-*-\n"
+                                   bbdb-file-coding-system))))
   (setq bbdb-modified-p nil
         bbdb-changed-records nil)
   (let ((buf (get-buffer bbdb-buffer-name)))
