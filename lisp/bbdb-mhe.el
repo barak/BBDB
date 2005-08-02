@@ -22,7 +22,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-mhe.el,v 1.61 2003/03/07 22:13:02 fenk Exp $
+;; $Id: bbdb-mhe.el,v 1.62 2005/08/02 18:11:21 waider Exp $
 ;;
 
 (eval-and-compile
@@ -85,9 +85,11 @@ the user confirms the creation."
                        from t
                        (or (bbdb-invoke-hook-for-value bbdb/mail-auto-create-p)
                            offer-to-create)
-                       offer-to-create)))
-            (if (and msg record) (bbdb-encache-message msg (list record)))
-            ;; return one record
+		       ;; ugh. what the hell?
+                       (or offer-to-create
+			   (bbdb-invoke-hook-for-value bbdb/mail-auto-create-p)))))
+	    (if (and msg record) (bbdb-encache-message msg (list record)))
+	    ;; return one record
             record))))))
 
 ;;;###autoload
