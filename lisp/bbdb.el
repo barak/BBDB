@@ -35,7 +35,7 @@
 ;;; |  information plus state information about how you have BBDB set up.    |
 ;;;  ------------------------------------------------------------------------
 ;;;
-;;; $Id: bbdb.el,v 1.224 2005/08/02 19:47:24 waider Exp $
+;;; $Id: bbdb.el,v 1.225 2005/08/02 19:54:52 waider Exp $
 
 (require 'timezone)
 (eval-when-compile (require 'cl))
@@ -62,7 +62,7 @@
  )
 
 (defconst bbdb-version "2.35")
-(defconst bbdb-version-date "$Date: 2005/08/02 19:47:24 $")
+(defconst bbdb-version-date "$Date: 2005/08/02 19:54:52 $")
 
 (defcustom bbdb-gui (if (fboundp 'display-color-p) ; Emacs 21
                         (display-color-p)
@@ -2437,7 +2437,7 @@ optional arg DONT-CHECK-DISK is non-nil (which is faster, but hazardous.)"
     (if (looking-at ";; *-\\*-coding:")
         (delete-region (point) (progn (forward-line) (point))))
     (insert-before-markers (format ";; -*-coding: %s;-*-\n"
-                                   bbdb-file-coding-system))))
+                                   bbdb-file-coding-system)))
   (setq bbdb-modified-p nil
         bbdb-changed-records nil)
   (let ((buf (get-buffer bbdb-buffer-name)))
