@@ -19,7 +19,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-rmail.el,v 1.65 2004/04/29 21:38:28 fenk Exp $
+;; $Id: bbdb-rmail.el,v 1.66 2005/08/02 20:25:31 waider Exp $
 ;;
 
 (eval-when-compile
@@ -66,7 +66,7 @@ the user confirms the creation."
                               (or (bbdb-invoke-hook-for-value
                                    bbdb/mail-auto-create-p)
                                   offer-to-create)
-                              offer-to-create)))
+                              (or offer-to-create bbdb/mail-auto-create-p))))
                   ;; return a list of records 
                   (if record
                       (bbdb-encache-message
