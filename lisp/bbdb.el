@@ -35,7 +35,7 @@
 ;;; |  information plus state information about how you have BBDB set up.    |
 ;;;  ------------------------------------------------------------------------
 ;;;
-;;; $Id: bbdb.el,v 1.225 2005/08/02 19:54:52 waider Exp $
+;;; $Id: bbdb.el,v 1.226 2005/08/11 23:40:16 waider Exp $
 
 (require 'timezone)
 (eval-when-compile (require 'cl))
@@ -62,7 +62,7 @@
  )
 
 (defconst bbdb-version "2.35")
-(defconst bbdb-version-date "$Date: 2005/08/02 19:54:52 $")
+(defconst bbdb-version-date "$Date: 2005/08/11 23:40:16 $")
 
 (defcustom bbdb-gui (if (fboundp 'display-color-p) ; Emacs 21
                         (display-color-p)
@@ -744,14 +744,12 @@ Database initialization function `bbdb-initialize' is run."
   "Keymap for Insidious Big Brother Database searching")
 
 ;; iso-2022-7bit should be OK (but not optimal for Emacs, at least --
-;; emacs-mule would be better) with both Emacs 21 and XEmacs.  Emacs
-;; 22 will really need utf-8-emacs.
-(defconst bbdb-file-coding-system (if (fboundp 'coding-system-p)
-                      (cond ((coding-system-p 'utf-8-emacs)
-                 'utf-8-emacs)
-                ((coding-system-p 'mule-utf-8)
-                 'mule-utf-8)
-                (t 'iso-2022-7bit)))
+;; emacs-mule would be better) with both Emacs 21 and XEmacs.
+(defconst bbdb-file-coding-system
+  (if (fboundp 'coding-system-p)
+      (cond ((coding-system-p 'utf-8-emacs)
+             'utf-8-emacs)
+            (t 'iso-2022-7bit)))
   "Coding system used for reading and writing `bbdb-file'.
 This should not be changed by users.")
 
