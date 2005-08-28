@@ -20,14 +20,12 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.172 2004/11/09 11:17:28 waider Exp $
+;; $Id: bbdb-com.el,v 1.173 2005/08/28 20:24:56 waider Exp $
 ;;
 
+(require 'cl)
 (require 'bbdb)
-;;(require 'bbdb-snarf) causes recursive compile!
-(eval-when-compile
-  (require 'cl)
-  (defvar bbdb-extract-address-components-func)) ;; bbdb-snarf
+;;(require 'bbdb-snarf) causes recursive compile, which I should fix.
 
 ;; ARGH. fmh, dammit.
 (require
@@ -65,6 +63,13 @@
     (fset 'bbdb-event-to-character 'ignore)))
 
 (defvar bbdb-define-all-aliases-needs-rebuilt nil)
+
+(defcustom bbdb-extract-address-components-func
+  'bbdb-rfc822-addresses
+  "Function called to parse one or more email addresses.
+See bbdb-extract-address-components for an example."
+  :group 'bbdb-noticing-records
+  :type 'function)
 
 (defcustom bbdb-default-country
   '"Emacs";; what do you mean, it's not a country?

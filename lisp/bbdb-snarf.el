@@ -2,7 +2,7 @@
 
 ;;;
 ;;; Copyright (C) 1997 by John Heidemann <johnh@isi.edu>.
-;;; $Id: bbdb-snarf.el,v 1.41 2004/03/22 21:05:48 waider Exp $
+;;; $Id: bbdb-snarf.el,v 1.42 2005/08/28 20:24:56 waider Exp $
 ;;;
 ;;; This file is free software; you can redistribute it and/or modify
 ;;; it under the terms of the GNU General Public License as published
@@ -411,28 +411,12 @@ more details."
     (defun bbdb-replace-in-string (string regexp newtext &optional literal)
       (bbdb-replace-regexp-in-string regexp newtext string nil literal))))
 
-(defcustom bbdb-extract-address-components-func
-  'bbdb-rfc822-addresses
-  "Function called to parse one or more email addresses.
-See bbdb-extract-address-components for an example."
-  :group 'bbdb-noticing-records
-  :type 'function)
-
 (defcustom bbdb-extract-address-component-regexps
     '(
-;; This was part of Dave Love's patch. Alas, it appears to break the
-;; very thing it is supposed to handle, viz. unwrapping "Last, First"
-;; into "First Last". Thusly, commented out for now. The unwrapping
-;; seems to work fine without it?
-;;
-;; "surname, firstname" <address>  from Outlookers
-;;      ("\"\\([^\"]*\\)\"\\s-*<\\([^>]+\\)>"
-;;       (bbdb-clean-username (match-string 1 adstring)) 2)
-      ;; "name" <address>
+      ;; "surname, firstname" <address>  from Outlookers
       ("\"\\([^\"]*\\)\"\\s-*<\\([^>]+\\)>"
-       (car (mail-extract-address-components
-             (concat "\"" (match-string 1 adstring) "\"")))
-       2)
+       (bbdb-clean-username (match-string 1 adstring)) 2)
+
       ;; name <address>
       ("\\([^<>,\t][^<>,]+[^<>, \t]\\)\\s-*<\\([^>]+\\)>"
        1 2)
