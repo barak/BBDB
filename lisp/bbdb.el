@@ -35,7 +35,7 @@
 ;;; |  information plus state information about how you have BBDB set up.    |
 ;;;  ------------------------------------------------------------------------
 ;;;
-;;; $Id: bbdb.el,v 1.226 2005/08/11 23:40:16 waider Exp $
+;;; $Id: bbdb.el,v 1.227 2005/09/06 21:39:51 waider Exp $
 
 (require 'timezone)
 (eval-when-compile (require 'cl))
@@ -49,20 +49,23 @@
  (autoload 'bbdb-migrate-rewrite-all "bbdb-migrate")
  (autoload 'bbdb-migrate-update-file-version "bbdb-migrate")
  (autoload 'bbdb-unmigrate-record "bbdb-migrate")
- (autoload 'bbdb-redisplay-records "bbdb-com")
  (autoload 'bbdb-create-internal "bbdb-com")
  (autoload 'bbdb-append-records-p "bbdb-com")
+ (autoload 'bbdb-redisplay-records "bbdb-com")
  (autoload 'y-or-n-p-with-timeout "timer")
  (autoload 'mail-position-on-field "sendmail")
  (autoload 'bbdb-fontify-buffer "bbdb-gui")
- ;; autoload doesn't work for these
- (condition-case nil (require 'message)
-   (error (message "Warning: message not found.  Ensure it is in your `load-path'"))); for message-mode-map
- (require 'sendmail); for mail-mode-map
+ (autoload 'vm-select-folder-buffer "vm-folder")
+
+ ;; can't use autoload for variables...
+ (defvar bbdb-define-all-aliases-needs-rebuilt) ;; bbdb-com
+ (defvar message-mode-map) ;; message.el
+ (defvar mail-mode-map) ;; sendmail.el
+ (defvar gnus-article-buffer) ;; gnus-art.el
  )
 
 (defconst bbdb-version "2.35")
-(defconst bbdb-version-date "$Date: 2005/08/11 23:40:16 $")
+(defconst bbdb-version-date "$Date: 2005/09/06 21:39:51 $")
 
 (defcustom bbdb-gui (if (fboundp 'display-color-p) ; Emacs 21
                         (display-color-p)
@@ -738,6 +741,15 @@ Database initialization function `bbdb-initialize' is run."
   :group 'bbdb-hooks
   :type 'hook)
 
+;;;###autoload
+(defcustom bbdb-multiple-buffers nil
+  "When non-nil we create a new buffer of every buffer causing pop-ups.
+You can also set this to a function returning a buffer name."
+  :group 'bbdb-record-display
+  :type '(choice (const :tag "Disabled" nil)
+                 (function :tag "Enabled" bbdb-multiple-buffers-default)
+                 (function :tag "User defined function")))
+
 (defvar bbdb-mode-map nil
   "Keymap for Insidious Big Brother Database listings.")
 (defvar bbdb-mode-search-map nil
@@ -851,6 +863,9 @@ that holds the number of slots."
               (list 'defmacro readname '(vector)
                     (list 'list ''aref 'vector i))
               (list 'defmacro setname '(vector value)
+                    (if (string= setname "bbdb-record-set-net")
+                        (list 'setq
+                              'bbdb-define-all-aliases-needs-rebuilt t))
                     (list 'list ''aset 'vector i 'value))
               ;(list 'put (list 'quote readname) ''edebug-form-hook ''(form))
               ;(list 'put (list 'quote setname) ''edebug-form-hook ''(form form))
@@ -877,11 +892,11 @@ that holds the number of slots."
   )
 
 ;; HACKHACK
-(defmacro bbdb-record-set-net (vector value)
-  "We redefine the set-binding for 'net to detect changes"
-  (list 'progn
-        (list 'aset vector 6 value)
-        (list 'setq 'bbdb-define-all-aliases-needs-rebuilt t)))
+;;(defmacro bbdb-record-set-net (vector value)
+;;  "We redefine the set-binding for 'net to detect changes"
+;;  (list 'progn
+;;        (list 'aset vector 6 value)
+;;        (list 'setq 'bbdb-define-all-aliases-needs-rebuilt t)))
 
 (put 'company 'field-separator "; ")
 (put 'notes 'field-separator "\n")
@@ -3406,15 +3421,6 @@ before the record is created, otherwise it is created without confirmation
 
 
 ;;; window configuration hackery
-;;;###autoload
-(defcustom bbdb-multiple-buffers nil
-  "When non-nil we create a new buffer of every buffer causing pop-ups.
-You can also set this to a function returning a buffer name."
-  :group 'bbdb-record-display
-  :type '(choice (const :tag "Disabled" nil)
-                 (function :tag "Enabled" bbdb-multiple-buffers-default)
-                 (function :tag "User defined function")))
-
 (defun bbdb-multiple-buffers-default ()
   "Default function for guessing a better name for new *BBDB* buffers."
   (cond ((memq major-mode '(vm-mode vm-summary-mode
