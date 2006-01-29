@@ -3,7 +3,7 @@ dnl configure.ac --- configuration setup for BBDB
 dnl Author:        Didier Verna <didier@xemacs.org>
 dnl Maintainer:    Didier Verna <didier@xemacs.org>, Waider <waider@waider.ie>
 dnl Created:       Tue Nov 14 18:28:52 2000
-dnl Last Revision: $Date: 2006/01/29 20:27:19 $
+dnl Last Revision: $Date: 2006/01/29 20:28:31 $
 
 dnl Copyright (C) 2000-2001 Didier Verna
 
@@ -30,7 +30,7 @@ BBDB_PRE_INIT
 AC_INIT([BBDB], [BBDB_VERSION], [bbdb-info@lists.sourceforge.net])
 
 AC_COPYRIGHT([Copyright (C) 2000-2001 Didier Verna <didier@xemacs.org>.])
-AC_REVISION([$Revision: 2.10 $])
+AC_REVISION([$Revision: 2.11 $])
 
 AC_CONFIG_SRCDIR([configure.ac])
 dnl We only have install-sh right now, so it's not worth adding an aux
@@ -131,16 +131,16 @@ BBDB_LOADPATH="${ac_confdir}/loadpath.el"
 
 dnl if VM was requested, make sure we have access to the source
 if test "x$enable_vm" != "x"; then
-   BBDB_VM=`${EMACS_PROG} --no-site-file --no-init-file -batch -q -l ${BBDB_LOADPATH} -eval "(if (locate-library \"vm-autoload\") (message \"vm\"))"`
+   BBDB_VM=`${EMACS_PROG} --no-site-file --no-init-file -batch -q -l ${BBDB_LOADPATH} -eval "(if (locate-library \"vm-autoload\") (message \"vm\"))" 2>&1`
    if test "x$BBDB_VM" = "x"; then
 	  AC_MSG_ERROR([*** Cannot build VM support without VM's source.])
    fi
 fi
 
 dnl Now go looking for auxilliary packages (supercite, reportmail and gnuserv)
-BBDB_SC=`${EMACS_PROG} -no-site-file -no-init-file -batch -q -l ${BBDB_LOADPATH} -eval "(if (locate-library \"supercite\") (message \"bbdb-sc.elc\"))"`
-BBDB_REPORTMAIL=`${EMACS_PROG} -no-site-file -no-init-file -batch -q -l ${BBDB_LOADPATH} -eval "(if (locate-library \"reportmail\") (message \"bbdb-reportmail.elc\"))"`
-BBDB_SRV=`${EMACS_PROG} -no-site-file -no-init-file -batch -q -l ${BBDB_LOADPATH} -eval "(progn (or (fboundp (quote define-obsolete-variable-alias)) (if (locate-library \"gnuserv-compat\") (load \"gnuserv-compat\" t t))) (if (and (locate-library \"gnuserv\") (locate-library \"itimer\")) (message \"bbdb-srv.el\")))"`
+BBDB_SC=`${EMACS_PROG} -no-site-file -no-init-file -batch -q -l ${BBDB_LOADPATH} -eval "(if (locate-library \"supercite\") (message \"bbdb-sc.elc\"))" 2>&1`
+BBDB_REPORTMAIL=`${EMACS_PROG} -no-site-file -no-init-file -batch -q -l ${BBDB_LOADPATH} -eval "(if (locate-library \"reportmail\") (message \"bbdb-reportmail.elc\"))" 2>&1`
+BBDB_SRV=`${EMACS_PROG} -no-site-file -no-init-file -batch -q -l ${BBDB_LOADPATH} -eval "(progn (or (fboundp (quote define-obsolete-variable-alias)) (if (locate-library \"gnuserv-compat\") (load \"gnuserv-compat\" t t))) (if (and (locate-library \"gnuserv\") (locate-library \"itimer\")) (message \"bbdb-srv.el\")))" 2>&1`
 
 dnl XEmacsery
 dnl is there a sane way to set this to a useful default?
