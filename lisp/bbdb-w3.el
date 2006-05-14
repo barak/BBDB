@@ -17,7 +17,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-w3.el,v 1.9 2002/01/06 22:09:16 waider Exp $
+;; $Id: bbdb-w3.el,v 1.10 2006/05/14 13:36:59 waider Exp $
 ;;
 
 (require 'bbdb-com)
@@ -35,7 +35,9 @@ means to try all records currently visible.
 Non-interactively, do all records if arg is nonnil."
   (interactive (list (bbdb-get-record "Visit (WWW): ")
                      (or current-prefix-arg 0)))
-  (browse-url (read-string "fetch: " (bbdb-get-field rec 'www which))))
+  (browse-url (read-string "fetch: "
+                           (or (bbdb-get-field rec 'www which)
+                               (bbdb-get-field rec 'ftp which)))))
 
 ;;;###autoload
 (defun bbdb-www-grab-homepage (record)
