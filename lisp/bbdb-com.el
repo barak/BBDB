@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.174 2006/01/07 06:49:39 waider Exp $
+;; $Id: bbdb-com.el,v 1.175 2006/05/25 23:26:21 fenk Exp $
 ;;
 
 (require 'cl)
@@ -1947,9 +1947,11 @@ the name is always included.  If `bbdb-dwim-net-address-allow-redundancy' is
              (or (fboundp 'vm-mail-internal)
                  (load-library "vm-reply")))) ; 5.31 or earlier
       (vm-session-initialization)
-      (vm-mail-internal nil to subj)
-      (run-hooks 'vm-mail-hook)
-      (run-hooks 'vm-mail-mode-hook))
+      (if (not subj)
+          (vm-mail to)
+        (vm-mail-internal nil to subj)
+        (run-hooks 'vm-mail-hook)
+        (run-hooks 'vm-mail-mode-hook)))
      ((eq type 'message)
       (or (fboundp 'message-mail) (autoload 'message-mail "message"))
       (message-mail to subj))
