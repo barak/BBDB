@@ -2,7 +2,7 @@
 
 ;;;
 ;;; Copyright (C) 1997 by John Heidemann <johnh@isi.edu>.
-;;; $Id: bbdb-snarf.el,v 1.42 2005/08/28 20:24:56 waider Exp $
+;;; $Id: bbdb-snarf.el,v 1.43 2006/05/25 23:32:00 fenk Exp $
 ;;;
 ;;; This file is free software; you can redistribute it and/or modify
 ;;; it under the terms of the GNU General Public License as published
@@ -203,11 +203,12 @@ more details."
       ;; name
       (goto-char (point-min))
       ;; This check is horribly english-centric (I think)
-      (while (/= (char-syntax (char-after (point))) ?w)
+      (while (and (not (eobp)) (/= (char-syntax (char-after (point))) ?w))
         (forward-line 1))
-      (re-search-forward "\\(\\sw\\|[ -\.,]\\)*\\sw" nil t)
-      (setq name (match-string 0))
-      (delete-region (match-beginning 0) (match-end 0))
+      (if (re-search-forward "\\(\\sw\\|[ -\.,]\\)*\\sw" nil t)
+          (progn 
+            (setq name (match-string 0))
+            (delete-region (match-beginning 0) (match-end 0))))
 
       ;; address
       (goto-char (point-min))
@@ -281,6 +282,12 @@ more details."
                                         ;         "city: " city "\n"
                                         ;         "state: " state "\n"
                                         ;         "zip: " zip "\n")
+
+      (if (not name)
+          (setq name (if nets
+                         (car (car (bbdb-rfc822-addresses (car nets))))
+                       "?")))
+      
       (bbdb-merge-interactively name
                                 nil
                                 nets
