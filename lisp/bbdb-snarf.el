@@ -2,7 +2,7 @@
 
 ;;;
 ;;; Copyright (C) 1997 by John Heidemann <johnh@isi.edu>.
-;;; $Id: bbdb-snarf.el,v 1.43 2006/05/25 23:32:00 fenk Exp $
+;;; $Id: bbdb-snarf.el,v 1.44 2006/05/26 21:20:07 fenk Exp $
 ;;;
 ;;; This file is free software; you can redistribute it and/or modify
 ;;; it under the terms of the GNU General Public License as published
@@ -283,10 +283,9 @@ more details."
                                         ;         "state: " state "\n"
                                         ;         "zip: " zip "\n")
 
-      (if (not name)
-          (setq name (if nets
-                         (car (car (bbdb-rfc822-addresses (car nets))))
-                       "?")))
+      (setq name (or name
+                     (and nets (car (car (bbdb-rfc822-addresses (car nets)))))
+                     "?"))
       
       (bbdb-merge-interactively name
                                 nil
