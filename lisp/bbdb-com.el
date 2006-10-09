@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.175 2006/05/25 23:26:21 fenk Exp $
+;; $Id: bbdb-com.el,v 1.176 2006/10/09 23:11:27 fenk Exp $
 ;;
 
 (require 'cl)
@@ -2745,7 +2745,8 @@ of all of those people."
       (setq result (cdr result)))
 
     (when (not use-abbrev-p)
-      (modify-syntax-entry ?* "w" mail-mode-header-syntax-table)
+      (if (boundp 'mail-mode-header-syntax-table)
+          (modify-syntax-entry ?* "w" mail-mode-header-syntax-table))
       (sendmail-pre-abbrev-expand-hook))))
 
 ;; We should be cleverer here and instead of rebuilding all aliases we should
