@@ -19,7 +19,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-vm.el,v 1.98 2003/03/07 22:13:25 fenk Exp $
+;; $Id: bbdb-vm.el,v 1.99 2006/10/09 22:54:12 fenk Exp $
 ;;
 
 (eval-and-compile
@@ -297,12 +297,8 @@ e.g. define you own function `my-folder-name' and set it to
           (delete
            nil
            (mapcar (lambda (r)
-                     (let ((notes (bbdb-record-raw-notes r)))
-                       (if (and notes
-                                (assq bbdb/vm-set-auto-folder-alist-field
-                                      notes))
-                           r
-                         nil)))
+                     (if (bbdb-record-getprop r bbdb/vm-set-auto-folder-alist-field)
+                         r))
                    (bbdb-records))))
     
     (while headers
