@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.176 2006/10/09 23:11:27 fenk Exp $
+;; $Id: bbdb-com.el,v 1.177 2006/12/15 20:38:30 fenk Exp $
 ;;
 
 (require 'cl)
@@ -2245,8 +2245,16 @@ be a marker for the start of the region being completed."
     (if data
         (save-excursion
           (set-buffer standard-output)
-          (setq completion-base-size
-                (- (marker-position (nth 1 data)) 1))))))
+	  (setq bbdb-complete-callback-data data)))))
+
+(defadvice choose-completion-string (before bbdb-complete-fix activate)
+  "Deletes the completed string before replacing.
+We need to do this as we are abusing completion and it was not meant to work
+in buffer other than the mini buffer."
+  (when (boundp 'bbdb-complete-callback-data)
+     (save-excursion
+       (set-buffer (car bbdb-complete-callback-data))
+       (apply 'delete-region (cdr  bbdb-complete-callback-data)))))
 
 (defun bbdb-complete-clicked-name (event extent user-data)
   "Find the record for a name clicked in a completion buffer.
