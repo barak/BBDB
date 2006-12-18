@@ -35,7 +35,7 @@
 ;;; |  information plus state information about how you have BBDB set up.    |
 ;;;  ------------------------------------------------------------------------
 ;;;
-;;; $Id: bbdb.el,v 1.230 2006/10/09 22:57:28 fenk Exp $
+;;; $Id: bbdb.el,v 1.231 2006/12/18 20:09:54 fenk Exp $
 
 (require 'timezone)
 (eval-when-compile (require 'cl))
@@ -65,7 +65,7 @@
  )
 
 (defconst bbdb-version "2.35")
-(defconst bbdb-version-date "$Date: 2006/10/09 22:57:28 $")
+(defconst bbdb-version-date "$Date: 2006/12/18 20:09:54 $")
 
 (defcustom bbdb-gui (if (fboundp 'display-color-p) ; Emacs 21
                         (display-color-p)
@@ -2147,11 +2147,14 @@ The inverse function of `bbdb-split'."
   "Insert the record in the appropriate hashtables.  This must be called
 while the .bbdb buffer is selected."
   (let ((name    (bbdb-record-name-1  record))  ; faster version
+        (lastname (bbdb-record-lastname record))
         (company (bbdb-record-company record))
         (aka     (bbdb-record-aka     record))
         (net     (bbdb-record-net     record)))
     (if (> (length name) 0)
         (bbdb-puthash (downcase name)    record bbdb-hashtable))
+    (if (> (length lastname) 0)
+        (bbdb-puthash (downcase lastname)    record bbdb-hashtable))
     (if (> (length company) 0)
         (bbdb-puthash (downcase company) record bbdb-hashtable))
     (while aka
