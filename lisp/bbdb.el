@@ -35,7 +35,7 @@
 ;;; |  information plus state information about how you have BBDB set up.    |
 ;;;  ------------------------------------------------------------------------
 ;;;
-;;; $Id: bbdb.el,v 1.232 2006/12/18 21:14:31 fenk Exp $
+;;; $Id: bbdb.el,v 1.233 2006/12/20 23:40:39 fenk Exp $
 
 (require 'timezone)
 (eval-when-compile (require 'cl))
@@ -65,7 +65,7 @@
  )
 
 (defconst bbdb-version "2.35")
-(defconst bbdb-version-date "$Date: 2006/12/18 21:14:31 $")
+(defconst bbdb-version-date "$Date: 2006/12/20 23:40:39 $")
 
 (defcustom bbdb-gui (if (fboundp 'display-color-p) ; Emacs 21
                         (display-color-p)
@@ -1070,7 +1070,7 @@ If the note is absent, returns a zero length string."
                  (list 'bbdb-record-sortkey record2)))
 
 (defmacro bbdb-subint (string match-number)
-  (list 'string-to-int
+  (list 'string-to-number
         (list 'substring string
               (list 'match-beginning match-number)
               (list 'match-end match-number))))
@@ -1223,9 +1223,9 @@ determined by FORMAT (or `bbdb-time-display-format' if FORMAT not
 present).  Returns a string containing the date in the new format."
   (let ((parts (bbdb-split date "-")))
     (format-time-string (or format bbdb-time-display-format)
-                        (encode-time 0 0 0 (string-to-int (caddr parts))
-                                     (string-to-int (cadr parts))
-                                     (string-to-int (car parts))))))
+                        (encode-time 0 0 0 (string-to-number (caddr parts))
+                                     (string-to-number (cadr parts))
+                                     (string-to-number (car parts))))))
 
 (defalias 'bbdb-format-record-timestamp 'bbdb-time-convert)
 (defalias 'bbdb-format-record-creation-date 'bbdb-time-convert)

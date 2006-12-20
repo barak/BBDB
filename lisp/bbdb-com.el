@@ -20,7 +20,7 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;
-;; $Id: bbdb-com.el,v 1.178 2006/12/18 20:09:54 fenk Exp $
+;; $Id: bbdb-com.el,v 1.179 2006/12/20 23:40:39 fenk Exp $
 ;;
 
 (require 'cl)
@@ -2941,7 +2941,7 @@ try to use internal sound if available."
              (condition-case nil
                  (play-sound (list 'sound
                                    :file (aref bbdb-sound-files
-                                               (string-to-int num))
+                                               (string-to-number num))
                                    :volume (or volume bbdb-sound-volume)))
                (error nil)))
         (if (and bbdb-sound-player
