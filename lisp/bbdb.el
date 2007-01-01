@@ -35,7 +35,7 @@
 ;;; |  information plus state information about how you have BBDB set up.    |
 ;;;  ------------------------------------------------------------------------
 ;;;
-;;; $Id: bbdb.el,v 1.233 2006/12/20 23:40:39 fenk Exp $
+;;; $Id: bbdb.el,v 1.234 2007/01/01 21:06:02 waider Exp $
 
 (require 'timezone)
 (eval-when-compile (require 'cl))
@@ -65,7 +65,7 @@
  )
 
 (defconst bbdb-version "2.35")
-(defconst bbdb-version-date "$Date: 2006/12/20 23:40:39 $")
+(defconst bbdb-version-date "$Date: 2007/01/01 21:06:02 $")
 
 (defcustom bbdb-gui (if (fboundp 'display-color-p) ; Emacs 21
                         (display-color-p)
@@ -326,11 +326,13 @@ When nil, you will be asked."
 
 (unless (fboundp 'primep)
   (defun primep (num)
-    (let ((lim (sqrt num)) (nu 2) (prime t))
-      (while (and prime (< nu lim))
-        (setq prime (/= 0 (mod num nu))
-              nu (1+ nu)))
-      prime)))
+    "Return t if NUM is a prime number."
+    (and (numberp num) (> num 1) (= num (floor num))
+         (let ((lim (sqrt num)) (nu 2) (prime t))
+           (while (and prime (<= nu lim))
+             (setq prime (/= 0 (mod num nu))
+                   nu (1+ nu)))
+           prime))))
 
 (defcustom bbdb-hashtable-size 1021
   "*The size of the bbdb hashtable.
