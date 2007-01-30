@@ -35,7 +35,7 @@
 ;;; |  information plus state information about how you have BBDB set up.    |
 ;;;  ------------------------------------------------------------------------
 ;;;
-;;; $Id: bbdb.el,v 1.234 2007/01/01 21:06:02 waider Exp $
+;;; $Id: bbdb.el,v 1.235 2007/01/30 22:38:06 fenk Exp $
 
 (require 'timezone)
 (eval-when-compile (require 'cl))
@@ -64,8 +64,8 @@
  (defvar gnus-article-buffer) ;; gnus-art.el
  )
 
-(defconst bbdb-version "2.35")
-(defconst bbdb-version-date "$Date: 2007/01/01 21:06:02 $")
+(defconst bbdb-version "2.36 devo")
+(defconst bbdb-version-date "$Date: 2007/01/30 22:38:06 $")
 
 (defcustom bbdb-gui (if (fboundp 'display-color-p) ; Emacs 21
                         (display-color-p)
