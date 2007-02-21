@@ -26,8 +26,6 @@
 ;;; for improvements and to Michael D. Carney  <carney@ltx-tr.com>
 ;;; for testing and feedback.
 
-;;; $Id: bbdb-sc.el,v 1.16 2005/07/23 15:06:46 waider Exp $
-
 ;;; This file adds the ability to define attributions for Supercite in
 ;;; a BBDB, enables you to retrieve your standard attribution from
 ;;; BBDB. If the from header in the mail to which you are replying

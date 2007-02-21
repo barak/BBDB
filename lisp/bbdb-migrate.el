@@ -20,10 +20,6 @@
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 ;;;
 
-;;
-;; $Id: bbdb-migrate.el,v 1.22 2006/12/20 23:40:39 fenk Exp $
-;;
-
 (require 'bbdb)
 
 ;;; Migrating the BBDB

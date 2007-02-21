@@ -19,10 +19,6 @@
 ;;; along with GNU Emacs; see the file COPYING.  If not, write to
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-;;
-;; $Id: bbdb-com.el,v 1.182 2007/02/14 21:52:17 fenk Exp $
-;;
-
 (require 'cl)
 (require 'bbdb)
 ;;(require 'bbdb-snarf) causes recursive compile, which I should fix.

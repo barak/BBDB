@@ -31,10 +31,6 @@
 ;;;
 ;;; Read the docstrings; read the texinfo file.
 
-;;
-;; $Id: bbdb-hooks.el,v 1.79 2006/10/09 22:35:41 fenk Exp $
-;;
-
 (require 'bbdb)
 (require 'bbdb-com)
 (require 'mail-parse)

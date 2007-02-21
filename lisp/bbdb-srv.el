@@ -19,9 +19,6 @@
 ;;; along with GNU Emacs; see the file COPYING.  If not, write to
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-;;
-;; $Id: bbdb-srv.el,v 1.62 2003/12/12 14:35:57 waider Exp $
-
 ;;; This requires the `gnuserv' and `itimer' packages.
 ;;;
 ;;; To use:

@@ -21,10 +21,6 @@
 ;;; along with GNU Emacs; see the file COPYING.  If not, write to
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-;;
-;; $Id: bbdb-mhe.el,v 1.62 2005/08/02 18:11:21 waider Exp $
-;;
-
 (eval-and-compile
   (require 'bbdb)
   (require 'bbdb-com)

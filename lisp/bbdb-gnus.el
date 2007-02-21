@@ -18,10 +18,6 @@
 ;;; along with GNU Emacs; see the file COPYING.  If not, write to
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-;;
-;; $Id: bbdb-gnus.el,v 1.99 2005/08/02 19:37:09 kuepper Exp $
-;;
-
 (require 'bbdb)
 (require 'bbdb-snarf)
 (require 'gnus)

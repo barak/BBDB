@@ -16,10 +16,6 @@
 ;;; along with GNU Emacs; see the file COPYING.  If not, write to
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-;;
-;; $Id: bbdb-w3.el,v 1.10 2006/05/14 13:36:59 waider Exp $
-;;
-
 (require 'bbdb-com)
 (require 'browse-url)
 
