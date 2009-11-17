@@ -21,10 +21,6 @@
 ;;; along with GNU Emacs; see the file COPYING.  If not, write to
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-;;
-;; $Id: bbdb-mhe.el,v 1.62 2005/08/02 18:11:21 waider Exp $
-;;
-
 (eval-and-compile
   (require 'bbdb)
   (require 'bbdb-com)
@@ -150,7 +146,7 @@ displaying the record corresponding to the sender of the current message."
     (function (lambda (w)
       (let ((b (current-buffer)))
         (set-buffer (window-buffer w))
-        (prog1 (eq major-mode 'mh-folder-mode)
+        (prog1 (eq major-mode 'mh-show-mode)
           (set-buffer b))))))
   (let ((bbdb-gag-messages t)
         (bbdb-use-pop-up nil)

@@ -17,14 +17,11 @@
 ;;; You should have received a copy of the GNU General Public License
 ;;; along with GNU Emacs; see the file COPYING.  If not, write to
 ;;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
-;;
-;; $Id: bbdb-rmail.el,v 1.68 2005/09/05 17:13:18 waider Exp $
-;;
 
 (require 'bbdb)
 (require 'bbdb-com)
 (require 'rmail)
-(require 'rmailsum)
+(load-library "rmailsum")
 (require 'mailheader)
 
 

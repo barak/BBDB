@@ -52,10 +52,6 @@
 ;;; are controlled by the variable bbdb-print-alist. See its
 ;;; documentation for the allowed options.
 
-;;
-;; $Id: bbdb-print.el,v 1.69 2005/08/11 03:23:48 waider Exp $
-;;
-
 ;;; Installation:
 ;;;
 ;;; Put this file somewhere on your load-path.  Put bbdb-print.tex and
