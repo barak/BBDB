@@ -1,3 +1,23 @@
+bbdb (2.35.cvs20060204-1.2ubuntu1) lucid; urgency=low
+
+  * Merge from debian, remaining changes:
+  * debian/control:
+    - Folow Ubuntu Maintainer spec.
+    - (Build-Depends): Move debhelper here.
+    - (Standards-Version): Update to 3.7.2.
+  * debian/copyright: Update FSF address.
+  * debian/emacsen-startup:
+    - Handle case where package is removed but not purged.
+  * debian/emacsen-install:
+    - Fix typo.
+    - Install symlinks for files that are compiled but do not have source
+      files in the same directory.  This makes `find-function' and
+      `find-library' work as expected.
+  * debian/rules:
+    - (build): Remove .cvsignore to silence lintian.
+
+ -- Reinhard Tartler <siretart@tauware.de>  Tue, 03 Nov 2009 18:12:21 +0100
+
 bbdb (2.35.cvs20060204-1.2) unstable; urgency=low
 
   * NMU with the permission of the maintainer to adjust the dependencies
@@ -6,6 +26,27 @@ bbdb (2.35.cvs20060204-1.2) unstable; urgency=low
     Thanks to Sven Joachim <svenjoac@gmx.de>.  (Closes: #478799)
 
  -- Rob Browning <rlb@defaultvalue.org>  Sat, 01 Aug 2009 12:16:02 -0700
+
+bbdb (2.35.cvs20060204-1.1ubuntu1) gutsy; urgency=low
+
+  * LP: #123896
+  * debian/control:
+    - Folow Ubuntu Maintainer spec.
+    - (Build-Depends): Move debhelper here.
+    - (Build-Depends-Indep, Depends): Add emacs22.
+    - (Standards-Version): Update to 3.7.2.
+  * debian/copyright: Update FSF address.
+  * debian/emacsen-startup:
+    - Handle case where package is removed but not purged.
+  * debian/emacsen-install:
+    - Fix typo.
+    - Install symlinks for files that are compiled but do not have source
+      files in the same directory.  This makes `find-function' and
+      `find-library' work as expected.
+  * debian/rules:
+    - (build): Remove .cvsignore to silence lintian.
+
+ -- Michael W. Olson (GNU address) <mwolson@gnu.org>  Tue, 03 Jul 2007 21:27:09 -0400
 
 bbdb (2.35.cvs20060204-1.1) unstable; urgency=low
 

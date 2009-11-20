@@ -64,6 +64,7 @@ install: build
 
 	cp -a Makefile debian/bbdb-pilot-jwz.el lisp \
          ${t}/usr/share/emacs/site-lisp/${PACKAGE}/
+	rm -f ${t}/usr/share/emacs/site-lisp/${PACKAGE}/lisp/.cvsignore
 	cp -a debian/bbdb-pilot-jwz.el ${t}/usr/share/emacs/site-lisp/${PACKAGE}/lisp/
 	mkdir -p ${t}/usr/share/emacs/site-lisp/${PACKAGE}/tex/
 	cp -a tex/*.tex ${t}/usr/share/emacs/site-lisp/${PACKAGE}/tex/

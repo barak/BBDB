@@ -1,9 +1,10 @@
 Source: bbdb
 Section: mail
 Priority: optional
-Maintainer: Joerg Jaspert <joerg@debian.org>
+Maintainer: Ubuntu MOTU Developers <ubuntu-motu@lists.ubuntu.com>
+XSBC-Original-Maintainer: Joerg Jaspert <joerg@debian.org>
+Build-Depends: debhelper (>> 4.2.0)
 Build-Depends-Indep: debhelper (>> 4.2.0), emacs22 | emacs23, texinfo, texi2html
-Standards-Version: 3.6.2.0
 
 Package: bbdb
 Architecture: all
