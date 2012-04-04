@@ -21,6 +21,7 @@
 ;;;
 
 (require 'bbdb)
+(require 'bbdb-uuid)
 
 ;;; Migrating the BBDB
 
@@ -31,7 +32,10 @@
   from \"dd mmm yy\" (ex: 25 Sep 97) to \"yyyy-mm-dd\" (ex: 1997-09-25).")
     (4 . "* Country field added.")
     (5 . "* More flexible street address.")
-    (6 . "* Zip codes are stored as plain strings.")))
+    (6 . "* Zip codes are stored as plain strings.")
+    (7 . "* Unique ID (RFC compliant UUID) is assigned to each entry
+* Creation date for new entries will capture exact time
+* Updation timestamp will now store the exact time and time zone info")))
 
 ;;;###autoload
 (defun bbdb-migration-query (ondisk)
@@ -105,7 +109,9 @@ changes introduced after version %d is shown below:\n\n" ondisk ondisk))
     (4 (bbdb-record-addresses bbdb-record-set-addresses
         bbdb-migrate-streets-to-list))
     (5 (bbdb-record-addresses bbdb-record-set-addresses
-        bbdb-migrate-zip-codes-to-strings)))
+        bbdb-migrate-zip-codes-to-strings))
+    (6 (bbdb-record-raw-notes bbdb-record-set-raw-notes
+        bbdb-migrate-change-timestamps-and-insert-uuid)))
   "The alist of (version . migration-spec-list).
 See `bbdb-migrate-record-lambda' for details.")
 
@@ -117,7 +123,9 @@ See `bbdb-migrate-record-lambda' for details.")
     (4 (bbdb-record-addresses bbdb-record-set-addresses
         bbdb-unmigrate-streets-to-list))
     (5 (bbdb-record-addresses bbdb-record-set-addresses
-        bbdb-unmigrate-zip-codes-to-strings)))
+        bbdb-unmigrate-zip-codes-to-strings))
+    (6 (bbdb-record-raw-notes bbdb-record-set-raw-notes
+        bbdb-unmigrate-change-timestamps-and-insert-uuid)))
   "The alist of (version . migration-spec-list).
 See `bbdb-migrate-record-lambda' for details.")
 
@@ -241,6 +249,55 @@ This uses the code that used to be in bbdb-parse-zip-string."
               (bbdb-address-set-zip addr zip)
               addr))
           addrs))
+
+(defun bbdb-migrate-change-timestamps-and-insert-uuid (notes)
+  "Does three things, really: 1. Insert a UUID field in the notes section
+  2. Append a time portion to the creation-date so that all entries look like
+     they were created at midnight UTC, and 3. Append time art to the
+     timestamp so all entires look like they were last modified at midnight
+     UTC as well"""
+
+  (unless (stringp notes)
+    ;; First fix the timestamps
+    (setq notes (mapcar (lambda (rr)
+                          (if (memq (car rr) '(creation-date timestamp))
+                              (cons (car rr) (concat (cdr rr)
+                                                     "T00:00:00+0000"))
+                            rr))
+                          notes))
+    (cons (cons 'bbdb-id (bbdb-genuuid)) notes)))
+
+(defun bbdb-unmigrate-change-timestamps-and-insert-uuid (notes)
+  "Does three things, really: 1. Remove the UUID field in the notes section
+  2. Remote thetime portion from creation-date and timestamp field so both of
+     them like yyyy-mm-dd"""
+
+  (unless (stringp notes)
+    ;; First fix the timestamps
+    (setq notes
+          (mapcar
+           (lambda (rr)
+             (let ((key (car rr))
+                   (val (cdr rr)))
+               (if (memq key '(creation-date timestamp))
+                   (cons key (if (string-match "\\([-0-9]+\\)T.*"
+                                               val)
+                                 (match-string 1 val)
+                               val))
+                 rr)))
+           notes))
+
+    ;; Now remove the bbdb-id field
+    (bbdb-migrate-remove-bbdbid notes)))
+
+(defun bbdb-migrate-remove-bbdbid (lis)
+    (if (or (not (listp lis))
+            (not (cdr lis)))
+        nil
+      (if (eq 'bbdb-id (car (car lis)))
+          (cdr lis)
+        (cons (car lis)
+              (bbdb-migrate-remove-bbdbid (cdr lis))))))
 
 (defun bbdb-migrate-change-dates (rec)
   "Change date formats.

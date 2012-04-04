@@ -1822,7 +1822,8 @@ Completion behaviour is as dictated by the variable `bbdb-completion-type'."
 ;; sort the notes
 (defcustom bbdb-notes-sort-order
   '((notes . 0) (www . 1) (ftp . 2) (gopher . 3) (telnet . 4) (mail-alias . 5)
-    (mail-folder . 6) (lpr . 7) (creation-date . 1000) (timestamp . 1001))
+    (mail-folder . 6) (lpr . 7) (creation-date . 1000) (timestamp . 1001) 
+    (bbdb-id . 1002))
   "*The order for sorting the notes.
 If a note is not in the alist, it is assigned weight 100, so all notes
 with weights less then 100 will be in the beginning, and all notes with

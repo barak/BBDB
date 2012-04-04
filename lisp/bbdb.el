@@ -83,7 +83,7 @@
   :type 'boolean)
 
 ;; File format
-(defconst bbdb-file-format 6)
+(defconst bbdb-file-format 7)
 (defvar bbdb-file-format-migration nil
   "A cons of two elements: the version read, and the version to write.
 nil if the database was read in and is to be written in the current
@@ -1315,7 +1315,7 @@ present).  Returns a string containing the date in the new format."
   '((one-line   (order     . (phones mail-alias net notes))
                 (name-end  . 24)
                 (toggle    . t))
-    (multi-line (omit      . (creation-date timestamp))
+    (multi-line (omit      . (creation-date timestamp bbdb-id))
                 (toggle    . t))
     (pop-up-multi-line)
     (full-multi-line))

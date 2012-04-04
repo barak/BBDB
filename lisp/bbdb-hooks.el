@@ -34,6 +34,7 @@
 (require 'bbdb)
 (require 'bbdb-com)
 (require 'bbdb-autoloads)
+(require 'bbdb-uuid)
 (require 'mail-parse)
 
 (eval-when-compile
@@ -60,7 +61,7 @@
 (defvar mh-show-buffer)
 
 
-(defvar bbdb-time-internal-format "%Y-%m-%d"
+(defvar bbdb-time-internal-format "%Y-%m-%dT%T%z"
   "The internal date format.")
 
 ;;;###autoload
@@ -70,7 +71,7 @@ for the given record which contains the time when it was last modified.  If
 there is such a field there already, it is changed, otherwise it is added."
   (bbdb-record-putprop record 'timestamp (format-time-string
                       bbdb-time-internal-format
-                      (current-time))))
+                      (current-time) t)))
 
 ;;;###autoload
 (defun bbdb-creation-date-hook (record)
@@ -79,7 +80,13 @@ which is the current time string."
   ;; hey buddy, we've known about your antics since the eighties...
   (bbdb-record-putprop record 'creation-date (format-time-string
                           bbdb-time-internal-format
-                          (current-time))))
+                          (current-time) t)))
+
+;;;###autoload
+(defun bbdb-uuid-hook (record)
+  "For use as a `bbdb-create-hook'; adds a notes-field called `id' with a
+  freshly created UUID"
+  (bbdb-record-putprop record 'bbdb-id (bbdb-genuuid)))
 
 
 ;;; Determining whether to create a record based on the content of the
