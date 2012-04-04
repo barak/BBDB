@@ -1,0 +1,10 @@
+*~
+*.elc
+Makefile
+configure
+bbdb-autoloads.el
+config.log
+config.status
+bbdb.info
+loadpath.el
+autom4te.cache
