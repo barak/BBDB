@@ -83,12 +83,12 @@ The default value is nil.")
   (condition-case err
       (progn
 	(bbdb-create-internal name company net addrs phones notes)
-	(message \"%s %s added.\" name (if net (concat \"<\" net \">\") \"\"))
+	(message \"%s %s added.\" name (if net (concat \"<\" (car net) \">\") \"\"))
 	(sleep-for 1))    
     (error (ding)
 	   (message \"%s %s skipped. (%s)\"
 		    name
-		    (if net (concat \"<\" net \">\") \"\")
+		    (if net (concat \"<\" (car net) \">\") \"\")
 		    (car (cdr err)))
 	   (sleep-for 1))))\n\n")
   (normal-mode))
@@ -133,7 +133,7 @@ The default value is nil.")
 	  (goto-char begin)
 	  (replace-string "] [" "]\n[")
 	  (goto-char (point-max))
-	  (lisp-indent-region begin (point))
+;	  (lisp-indent-region begin (point))
 	  (widen)))
     ))
 
