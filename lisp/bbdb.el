@@ -685,7 +685,7 @@ Invoked with no arguments."
   :group 'bbdb-hooks
   :type 'hook)
 
-(defcustom bbdb-create-hook 'bbdb-creation-date-hook
+(defcustom bbdb-create-hook '(bbdb-creation-date-hook bbdb-uuid-hook)
   "*Hook or hooks invoked each time a new BBDB record is created.  Invoked
 with one argument, the new record.  This is called *before* the record is
 added to the database.  Note that `bbdb-change-hook' will be called as well.
