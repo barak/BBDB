@@ -74,6 +74,11 @@ case "${FLAVOR}" in
 
 	# at ELCDIR
 	( cd ${ELCDIR}
+
+	    # Prevent epg from manipulating /root/.gnupg (#694417)
+	    TMPGNUPGHOME=`mktemp -d --tmpdir gnupg.XXXXXXXXXX`
+	    export GNUPGHOME=${TMPGNUPGHOME}
+
 	    echo "Generating bbdb-autoloads..."
             echo "Generating bbdb-autoloads" >> $LOG
 	    make autoloads >> $LOG 2>&1
@@ -86,7 +91,7 @@ case "${FLAVOR}" in
 		GNUSDIR=${GNUSDIR} \
 		MHEDIR=${MHEDIR} >> $LOG 2>&1
 	    mv lisp/*.elc utils/*.el .
-	    rm -rf tex utils lisp Makefile
+	    rm -rf tex utils lisp Makefile ${TMPGNUPGHOME}
 	    ${FLAVOR} ${COMPILE} *.el >> $LOG 2>&1
 	)
 	cat > ${ELCDIR}/load-path.el <<EOF 
