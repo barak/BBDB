@@ -1,11 +1,11 @@
-bbdb (2.36-2.1) unstable; urgency=low
+bbdb (2.36-3) unstable; urgency=low
 
-  * Non-maintainer upload.
+  [ Sébastien Villemot ]
   * debian/bbdb.emacsen-install: no longer create /root/.gnupg during
     installation of the package. This is achieved by binding GNUPGHOME to a
     temporary directory during bytecode compilation (Closes: #694417)
 
- -- Sébastien Villemot <sebastien@debian.org>  Tue, 27 Nov 2012 14:32:04 +0100
+ -- Barak A. Pearlmutter <bap@debian.org>  Fri, 30 Nov 2012 11:52:46 +0000
 
 bbdb (2.36-2) unstable; urgency=low
 
