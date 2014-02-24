@@ -7,7 +7,7 @@ Build-Depends: debhelper (>= 8),
     dh-autoreconf
 Build-Depends-Indep: texinfo, texi2html, ghostscript,
     texlive-base, texlive-latex-base,
-    emacs23-nox | emacs23 | emacs
+    emacs24-nox | emacs24 | emacs23-nox | emacs23 | emacs
 Standards-Version: 3.9.5
 Vcs-Git: git://github.com/barak/BBDB.git
 Vcs-Browser: http://github.com/barak/BBDB
@@ -15,7 +15,7 @@ Homepage: http://bbdb.sourceforge.net/
 
 Package: bbdb
 Architecture: all
-Depends: make, emacs23 | emacsen, ${misc:Depends}, ${perl:Depends}
+Depends: make, emacs24 | emacs23 | emacsen, ${misc:Depends}, ${perl:Depends}
 Suggests: vm, w3m-el, gnuserv, gnus|t-gnus, perl
 Description: The Insidious Big Brother Database (email rolodex) for Emacs
  BBDB is a rolodex-like database program for GNU Emacs.  BBDB stands
