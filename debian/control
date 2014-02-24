@@ -8,7 +8,7 @@ Build-Depends: debhelper (>= 8),
 Build-Depends-Indep: texinfo, texi2html, ghostscript,
     texlive-base, texlive-latex-base,
     emacs23-nox | emacs23 | emacs
-Standards-Version: 3.9.1
+Standards-Version: 3.9.5
 Vcs-Git: git://github.com/barak/BBDB.git
 Vcs-Browser: http://github.com/barak/BBDB
 Homepage: http://bbdb.sourceforge.net/
