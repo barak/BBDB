@@ -1,8 +1,16 @@
-bbdb (2.36-4) unstable; urgency=low
+bbdb (2.36-4) unstable; urgency=medium
 
-  * dh autoreconf
+  * engage dh autoreconf, rm ./configure, relax regarding ./configure +x bit
+  * updates to debian/README.Debian and debian/README.source
+  * remove CVS keyword expansion artifacts
+  * add savannah repo pointers to bbdb.texinfo
+  * remove PHONY stuff in debian/rules
+  * remove stray old-style quasiquote in macro
+  * allow emacs24 to satisfy dependencies
+  * bump standards version, dh version
+  * single debian patch source option
 
- -- Barak A. Pearlmutter <bap@debian.org>  Mon, 21 Nov 2011 15:46:29 +0000
+ -- Barak A. Pearlmutter <bap@debian.org>  Mon, 24 Feb 2014 12:17:32 +0000
 
 bbdb (2.36-3) unstable; urgency=low
   
