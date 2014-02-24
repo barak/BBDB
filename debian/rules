@@ -3,10 +3,6 @@
 %:
 	dh $@ --with autoreconf --parallel
 
-override_dh_auto_configure:
-	if [ ! -x configure ]; then chmod +x configure; fi # debian.diff fails to +x
-	dh_auto_configure
-
 override_dh_auto_build: bits.tar.gz
 	$(MAKE) -C texinfo bbdb.info bbdb.pdf
 	texi2html --split=chapter --output=texinfo/bbdb texinfo/bbdb.texinfo
