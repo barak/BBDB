@@ -33,37 +33,20 @@
 
 (defmacro bbdb/mh-cache-key (message)
   "Return a (numeric) key for MESSAGE"
-  (if (> emacs-major-version 23)
-    ;; New-style backticks
-    `(let* ((attrs (file-attributes , message))
-	     (status-time (nth 6 attrs))
-	     (status-time-2 (cdr status-time))
-	     (inode (nth 10 attrs)))
-	(logxor (if (integerp inode) ;; if inode is larger than an emacs int,
-		    inode               ;; it's returned as a dotted pair
-		  (car inode))
-		(car status-time)
-		;; We need the following test because XEmacs returns the
-		;; status time as a dotted pair, whereas FSF and Epoch
-		;; return it as list.
-		(if (integerp status-time-2)
-		    status-time-2
-		  (car status-time-2))))
-    ;; Old-style backticks
-    (`(let* ((attrs (file-attributes (, message)))
-	     (status-time (nth 6 attrs))
-	     (status-time-2 (cdr status-time))
-	     (inode (nth 10 attrs)))
-	(logxor (if (integerp inode) ;; if inode is larger than an emacs int,
-		    inode               ;; it's returned as a dotted pair
-		  (car inode))
-		(car status-time)
-		;; We need the following test because XEmacs returns the
-		;; status time as a dotted pair, whereas FSF and Epoch
-		;; return it as list.
-		(if (integerp status-time-2)
-		    status-time-2
-		  (car status-time-2)))))))
+  `(let* ((attrs (file-attributes , message))
+	  (status-time (nth 6 attrs))
+	  (status-time-2 (cdr status-time))
+	  (inode (nth 10 attrs)))
+     (logxor (if (integerp inode) ;; if inode is larger than an emacs int,
+		 inode		  ;; it's returned as a dotted pair
+	       (car inode))
+	     (car status-time)
+	     ;; We need the following test because XEmacs returns the
+	     ;; status time as a dotted pair, whereas FSF and Epoch
+	     ;; return it as list.
+	     (if (integerp status-time-2)
+		 status-time-2
+	       (car status-time-2)))))
 
 ;;;###autoload
 (defun bbdb/mh-update-record (&optional offer-to-create)
