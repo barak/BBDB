@@ -1,3 +1,9 @@
+bbdb (2.36-5) UNRELEASED; urgency=medium
+
+  * Use secure URI in Vcs-Browser control header.
+
+ -- Jelmer Vernooĳ <jelmer@debian.org>  Wed, 12 Sep 2018 03:36:57 +0100
+
 bbdb (2.36-4) unstable; urgency=medium
 
   * engage dh autoreconf, rm ./configure, relax regarding ./configure +x bit
